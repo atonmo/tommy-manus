@@ -1,0 +1,286 @@
+.page-home {
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-top: clamp(122px, calc(11vh + 50px), 170px);
+  padding-bottom: clamp(12px, 2vh, 24px);
+  background: transparent;
+  height: 100svh;
+  height: 100dvh;
+  max-height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Entrance: occupy same slots, only animate paint/transform */
+.home-enter {
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-enter {
+    opacity: 1;
+    animation: none;
+    filter: none;
+    transform: none;
+  }
+
+  .home-signature-wrap {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.home-hero {
+  width: 100%;
+  max-width: none;
+  margin: clamp(8px, 3vh, 40px) 0 0;
+  padding: 0 var(--content-inset);
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.home-copy {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: clamp(22px, 2.2vw + 1.2vh, 48px);
+  font-weight: 300;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--text-strong);
+}
+
+.home-typewriter {
+  display: inline;
+  white-space: pre-wrap;
+}
+
+.home-typewriter br {
+  display: block;
+  content: '';
+  margin-top: 10px;
+}
+
+.home-caret {
+  display: inline-block !important;
+  position: relative !important;
+  width: 4px !important;
+  height: 0.92em !important;
+  margin-left: 4px !important;
+  color: transparent !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  vertical-align: text-bottom !important;
+  overflow: visible !important;
+}
+
+.home-caret:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0.14em;
+  width: 4px;
+  height: 0.92em;
+  background-color: #ffcc33;
+  display: block;
+  animation: homeCaretBlink 1s steps(1, end) infinite;
+}
+
+@keyframes homeCaretBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  to {
+    opacity: 0;
+  }
+}
+
+.home-copy.is-finished .home-caret,
+.home-copy.is-finished .home-caret:after {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.home-cta {
+  --cta-line: 1.35em;
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  margin-left: -6px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-strong);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
+  isolation: isolate;
+  transition: color 0.28s ease, filter 0.28s ease;
+}
+
+.home-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.95);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-cta:hover {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.home-cta:hover::before {
+  transform: scaleX(1);
+}
+
+.home-cta-arrow-picture {
+  display: inline-flex;
+}
+
+.home-cta-arrow {
+  display: inline-block;
+  width: var(--cta-line);
+  height: var(--cta-line);
+  margin-left: 0;
+  vertical-align: middle;
+  transform: translateY(-0.08em);
+  filter: invert(1);
+  animation: homeArrowIn 0.3s ease-out forwards;
+  opacity: 0;
+  transition: filter 0.28s ease;
+}
+
+.home-cta:hover .home-cta-arrow {
+  filter: none;
+}
+
+@keyframes homeArrowIn {
+  0% {
+    opacity: 0;
+    transform: translate(-24px) translateY(-0.08em);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0) translateY(-0.08em);
+  }
+}
+
+.home-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 16px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  margin-top: auto;
+  padding: clamp(8px, 2.5vh, 32px) var(--content-inset) clamp(4px, 1vh, 12px);
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+.home-signature-wrap {
+  flex-shrink: 0;
+  width: auto;
+  max-width: none;
+  color: var(--text-strong);
+  line-height: normal;
+  opacity: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.home-signature-wrap.is-active {
+  opacity: 1;
+}
+
+.home-signature {
+  display: block;
+  width: 100%;
+  color: var(--text-strong);
+  overflow: visible;
+}
+
+.home-signature-text {
+  display: inline-block;
+  font-family: "Caveat", cursive;
+  font-size: clamp(36px, 5.5vw, 56px);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  padding: 0.12em 0.08em 0.28em 0;
+  white-space: nowrap;
+  color: currentColor;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
+  overflow: visible;
+}
+
+.home-signature.is-drawing .home-signature-text {
+  animation: homeSignatureReveal 1.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes homeSignatureReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-signature-text {
+    clip-path: none;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-home {
+    padding-top: clamp(114px, calc(10vh + 50px), 150px);
+  }
+
+  .home-copy {
+    font-size: clamp(22px, 5.5vw, 32px);
+  }
+
+  .home-typewriter br {
+    margin-top: 8px;
+  }
+
+  .home-caret,
+  .home-caret:after {
+    width: 3px !important;
+  }
+
+  .home-caret:after {
+    width: 3px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-cta:hover {
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  .home-cta:hover::before {
+    transform: scaleX(1);
+  }
+}

@@ -1,0 +1,278 @@
+/* Web Trade case — extends Golden Flow language, blue accent */
+
+/* Mesh gradient colorways — cyan / brand / accent triad */
+.wt-hero-glow {
+  background:
+    radial-gradient(ellipse 55% 50% at 28% 40%, color-mix(in srgb, var(--gf-acc) 16%, transparent), transparent 70%),
+    radial-gradient(ellipse 40% 45% at 82% 18%, rgba(61, 200, 255, 0.08), transparent 65%),
+    radial-gradient(ellipse 35% 35% at 55% 72%, color-mix(in srgb, var(--gf-acc) 6%, transparent), transparent 70%);
+}
+
+
+.wt-case .gf-target-card:hover {
+  border-color: color-mix(in srgb, var(--gf-acc) 32%, transparent);
+}
+
+.wt-case .gf-list li::before {
+  box-shadow: 0 0 10px color-mix(in srgb, var(--gf-acc) 45%, transparent);
+}
+
+.wt-media-stack {
+  margin: 28px 0 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--gf-hair);
+  background: #000;
+}
+
+.wt-media-stack .gf-media {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.wt-media-stack .gf-media + .gf-media {
+  margin-top: 0;
+  border-top: 1px solid var(--gf-hair);
+}
+
+.wt-embed-wrap {
+  margin: 28px 0 8px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--gf-hair);
+  background: #000;
+}
+
+.wt-case .gf-prose {
+  letter-spacing: 0.02em;
+  line-height: 1.85;
+}
+
+.wt-embed-wrap.is-flush {
+  margin-top: 0;
+  border-radius: 0;
+  border: none;
+}
+
+.wt-embed {
+  width: 100%;
+  height: 720px;
+  border: 0;
+  display: block;
+  background: transparent;
+}
+
+.wt-embed.tall {
+  height: 780px;
+}
+
+/* Design-frame embeds: full-bleed image, no side rail; caption rule like other modules */
+.wt-embed-wrap.is-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #000;
+  padding-top: 0;
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.wt-embed-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4314 / 2856;
+  min-height: 480px;
+  background: #000;
+  overflow: hidden;
+}
+
+/* Order form scroll demo — Figma 421:41100 2400×1110 */
+.wt-embed-wrap.is-frame:has(iframe[src*='15-order-scroll']) .wt-embed-frame {
+  aspect-ratio: 2400 / 1110;
+  min-height: 420px;
+}
+
+/* Theme switch demo — Figma 422:41136 2400×1110 */
+.wt-embed-wrap.is-frame:has(iframe[src*='theme-switch']) .wt-embed-frame {
+  aspect-ratio: 2400 / 1110;
+  min-height: 520px;
+}
+
+.wt-embed.is-frame-embed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  border: 0;
+  display: block;
+  background: #000;
+}
+
+.wt-embed-wrap.is-frame .wt-embed-caption {
+  width: 100%;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+
+.wt-embed-caption {
+  margin: 0;
+  padding: 12px 14px 14px;
+  font-family: var(--gf-font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gf-ink-3);
+  border-top: 1px solid var(--gf-hair);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 900px) {
+  .wt-embed {
+    height: 880px;
+  }
+
+  .wt-embed.tall {
+    height: 640px;
+  }
+}
+
+@media (max-width: 600px) {
+  .wt-embed {
+    height: 980px;
+  }
+
+  .wt-embed.tall {
+    height: 520px;
+  }
+}
+
+.wt-split-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Hero frosted glass panel */
+.wt-hero-glass {
+  background:
+    radial-gradient(ellipse 70% 60% at 68% 55%, color-mix(in srgb, var(--gf-acc) 18%, transparent), transparent 65%),
+    radial-gradient(ellipse 50% 45% at 82% 28%, rgba(120, 190, 255, 0.12), transparent 60%),
+    linear-gradient(160deg, #0a0c12 0%, #07080c 100%);
+}
+
+.wt-glass-orb {
+  position: absolute;
+  border-radius: 22px;
+  pointer-events: none;
+  filter: blur(0.5px);
+}
+
+.wt-glass-orb-a {
+  width: 42%;
+  height: 38%;
+  right: 8%;
+  bottom: 18%;
+  transform: rotate(-18deg);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--gf-acc) 55%, transparent), rgba(90, 170, 255, 0.18));
+  box-shadow: 0 20px 50px color-mix(in srgb, var(--gf-acc) 25%, transparent);
+}
+
+.wt-glass-orb-b {
+  width: 34%;
+  height: 32%;
+  right: 4%;
+  top: 16%;
+  transform: rotate(16deg);
+  background: linear-gradient(160deg, rgba(120, 190, 255, 0.35), color-mix(in srgb, var(--gf-acc) 12%, transparent));
+}
+
+.wt-glass-orb-c {
+  width: 24%;
+  height: 24%;
+  right: 36%;
+  top: 12%;
+  transform: rotate(-8deg);
+  background: linear-gradient(180deg, rgba(180, 210, 255, 0.22), color-mix(in srgb, var(--gf-acc) 8%, transparent));
+}
+
+.wt-glass-panel {
+  position: absolute;
+  z-index: 1;
+  right: clamp(24px, 10vw, 120px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(42vw, 420px);
+  aspect-ratio: 4 / 3;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(180, 210, 255, 0.08) 45%, rgba(255, 255, 255, 0.06)),
+    rgba(180, 210, 255, 0.08);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    0 24px 60px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wt-glass-sheen {
+  position: absolute;
+  inset: -20% -30%;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.18) 48%,
+    transparent 62%
+  );
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+.wt-glass-rows {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 72%;
+  text-align: center;
+}
+
+.wt-glass-rows span {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--gf-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+@media (max-width: 900px) {
+  .wt-glass-panel {
+    right: 50%;
+    transform: translate(50%, -42%);
+    width: min(78vw, 320px);
+    opacity: 0.85;
+  }
+
+  .wt-glass-orb-a,
+  .wt-glass-orb-b,
+  .wt-glass-orb-c {
+    opacity: 0.7;
+  }
+}
+
+

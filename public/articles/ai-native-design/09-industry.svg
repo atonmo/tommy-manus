@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480">
+  <rect width="1200" height="480" fill="#070708"/>
+  <text x="48" y="48" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.22em" fill="#5B9FFF">INDUSTRY MAP</text>
+  <text x="48" y="82" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.55)">行业对照地图</text>
+  <g font-family="PingFang SC, Inter, system-ui, sans-serif">
+    <rect x="48" y="120" width="260" height="300" rx="16" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="72" y="144" width="90" height="26" rx="6" fill="rgba(91,159,255,0.14)" stroke="rgba(91,159,255,0.35)"/>
+    <text x="84" y="162" font-family="JetBrains Mono, ui-monospace, monospace" font-size="10" letter-spacing="0.08em" fill="#5B9FFF">GEN UI</text>
+    <text x="72" y="210" font-size="18" font-weight="500" fill="#FFFFFF">v0 / Bolt</text>
+    <text x="72" y="240" font-size="18" font-weight="500" fill="#FFFFFF">Lovable</text>
+    <text x="72" y="288" font-size="13" fill="rgba(255,255,255,0.4)">启动快</text>
+    <text x="72" y="314" font-size="13" fill="rgba(255,255,255,0.4)">缺企业设计系统</text>
+    <text x="72" y="362" font-size="13" font-weight="500" fill="#5B9FFF">→ 用内部品约束</text>
+
+    <rect x="328" y="120" width="260" height="300" rx="16" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="352" y="144" width="90" height="26" rx="6" fill="rgba(91,159,255,0.14)" stroke="rgba(91,159,255,0.35)"/>
+    <text x="366" y="162" font-family="JetBrains Mono, ui-monospace, monospace" font-size="10" letter-spacing="0.08em" fill="#5B9FFF">DESIGN</text>
+    <text x="352" y="210" font-size="18" font-weight="500" fill="#FFFFFF">Figma AI</text>
+    <text x="352" y="240" font-size="18" font-weight="500" fill="#FFFFFF">Relume</text>
+    <text x="352" y="288" font-size="13" fill="rgba(255,255,255,0.4)">利于探索草稿</text>
+    <text x="352" y="314" font-size="13" fill="rgba(255,255,255,0.4)">到工程需翻译</text>
+    <text x="352" y="362" font-size="13" font-weight="500" fill="#5B9FFF">→ Skill 锁映射</text>
+
+    <rect x="608" y="120" width="260" height="300" rx="16" fill="rgba(91,159,255,0.08)" stroke="rgba(91,159,255,0.32)"/>
+    <rect x="632" y="144" width="90" height="26" rx="6" fill="#5B9FFF"/>
+    <text x="648" y="162" font-family="JetBrains Mono, ui-monospace, monospace" font-size="10" letter-spacing="0.08em" fill="#141414">AGENT</text>
+    <text x="632" y="210" font-size="18" font-weight="500" fill="#FFFFFF">Claude Skills</text>
+    <text x="632" y="240" font-size="18" font-weight="500" fill="#FFFFFF">Cursor Rules</text>
+    <text x="632" y="288" font-size="13" fill="rgba(255,255,255,0.55)">指令可版本化</text>
+    <text x="632" y="314" font-size="13" fill="rgba(255,255,255,0.55)">结构决定质量</text>
+    <text x="632" y="362" font-size="13" font-weight="500" fill="#5B9FFF">→ 四层单入口</text>
+
+    <rect x="888" y="120" width="264" height="300" rx="16" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="912" y="144" width="90" height="26" rx="6" fill="rgba(91,159,255,0.14)" stroke="rgba(91,159,255,0.35)"/>
+    <text x="926" y="162" font-family="JetBrains Mono, ui-monospace, monospace" font-size="10" letter-spacing="0.08em" fill="#5B9FFF">ORCH</text>
+    <text x="912" y="210" font-size="18" font-weight="500" fill="#FFFFFF">n8n / Dify</text>
+    <text x="912" y="240" font-size="18" font-weight="500" fill="#FFFFFF">Coze</text>
+    <text x="912" y="288" font-size="13" fill="rgba(255,255,255,0.4)">节点可编排</text>
+    <text x="912" y="314" font-size="13" fill="rgba(255,255,255,0.4)">缺设计纵深</text>
+    <text x="912" y="362" font-size="13" font-weight="500" fill="#5B9FFF">→ 固定产线节点</text>
+  </g>
+</svg>

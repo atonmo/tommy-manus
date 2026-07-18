@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420">
+  <rect width="1200" height="420" fill="#070708"/>
+  <text x="48" y="52" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.22em" fill="#5B9FFF">LEARNING PATH</text>
+  <text x="48" y="86" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.55)">从能生成 → 能约束 → 能进生产</text>
+  <line x1="120" y1="230" x2="1080" y2="230" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+  <g font-family="PingFang SC, Inter, system-ui, sans-serif">
+    <circle cx="180" cy="230" r="16" fill="#5B9FFF"/>
+    <text x="174" y="235" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="#141414">1</text>
+    <rect x="90" y="118" width="180" height="72" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <text x="148" y="152" font-size="16" font-weight="500" fill="#FFFFFF">起步</text>
+    <text x="112" y="176" font-size="12" fill="rgba(255,255,255,0.4)">LLM · 文生图 · 视频</text>
+
+    <circle cx="460" cy="230" r="16" fill="#5B9FFF"/>
+    <text x="454" y="235" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="#141414">2</text>
+    <rect x="370" y="268" width="180" height="72" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <text x="422" y="302" font-size="16" font-weight="500" fill="#FFFFFF">工作流</text>
+    <text x="392" y="326" font-size="12" fill="rgba(255,255,255,0.4)">n8n / Dify / Coze</text>
+
+    <circle cx="740" cy="230" r="16" fill="#5B9FFF"/>
+    <text x="734" y="235" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="#141414">3</text>
+    <rect x="650" y="118" width="180" height="72" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <text x="708" y="152" font-size="16" font-weight="500" fill="#FFFFFF">深入</text>
+    <text x="668" y="176" font-size="12" fill="rgba(255,255,255,0.4)">OpenClaw · Skill</text>
+
+    <circle cx="1020" cy="230" r="16" fill="rgba(91,159,255,0.2)" stroke="#5B9FFF" stroke-width="1.5"/>
+    <text x="1014" y="235" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="#5B9FFF">4</text>
+    <rect x="930" y="268" width="180" height="72" rx="14" fill="rgba(91,159,255,0.1)" stroke="rgba(91,159,255,0.35)"/>
+    <text x="976" y="302" font-size="16" font-weight="500" fill="#5B9FFF">专业工具</text>
+    <text x="954" y="326" font-size="12" fill="rgba(255,255,255,0.45)">Codex / Cursor</text>
+  </g>
+</svg>

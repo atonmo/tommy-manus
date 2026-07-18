@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Skill Refactor · Before After</title>
+    <style>
+      :root {
+        --bg: #070708;
+        --ink: #f2f3f5;
+        --ink-2: rgba(255, 255, 255, 0.48);
+        --ink-3: rgba(255, 255, 255, 0.32);
+        --hair: rgba(255, 255, 255, 0.1);
+        --before: rgba(255, 255, 255, 0.04);
+        --after: rgba(91, 159, 255, 0.1);
+        --after-border: rgba(91, 159, 255, 0.28);
+        --bad: rgba(255, 120, 130, 0.72);
+        --good: #8ec0ff;
+        --font: 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        --mono: 'SF Mono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        padding: 4px 0 8px;
+      }
+
+      .table {
+        display: grid;
+        gap: 10px;
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      .head,
+      .row {
+        display: grid;
+        grid-template-columns: 104px 1fr 28px 1fr;
+        gap: 10px;
+        align-items: stretch;
+      }
+
+      .head {
+        padding: 0 2px 2px;
+      }
+
+      .head span {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+
+      .head .label-col {
+        visibility: hidden;
+      }
+
+      .metric {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        font-weight: 560;
+        color: var(--ink);
+        line-height: 1.35;
+        padding-right: 4px;
+      }
+
+      .cell {
+        display: flex;
+        align-items: center;
+        min-height: 64px;
+        padding: 14px 16px;
+        border-radius: 10px;
+        border: 1px solid var(--hair);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .cell.before {
+        background: var(--before);
+        color: var(--bad);
+      }
+
+      .cell.after {
+        background: var(--after);
+        border-color: var(--after-border);
+        color: var(--good);
+        font-weight: 560;
+      }
+
+      .arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ink-3);
+      }
+
+      .arrow svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      @media (max-width: 640px) {
+        .head {
+          display: none;
+        }
+
+        .row {
+          grid-template-columns: 1fr;
+          gap: 8px;
+          padding: 12px 0;
+          border-bottom: 1px solid var(--hair);
+        }
+
+        .row:last-child {
+          border-bottom: 0;
+        }
+
+        .arrow {
+          transform: rotate(90deg);
+          height: 18px;
+        }
+
+        .metric {
+          padding: 0 2px;
+          font-size: 12px;
+          color: var(--ink-2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="table">
+      <div class="head" aria-hidden="true">
+        <span class="label-col">Metric</span>
+        <span>Before</span>
+        <span></span>
+        <span>After</span>
+      </div>
+
+      <div class="row">
+        <div class="metric">文件结构</div>
+        <div class="cell before">8+ 互相引用</div>
+        <div class="arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none">
+            <path d="M2 8h10M9 4.5 12.5 8 9 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cell after">1 主文件 + 按需加载</div>
+      </div>
+
+      <div class="row">
+        <div class="metric">AI Read 次数</div>
+        <div class="cell before">5–8 次 · 易迷路</div>
+        <div class="arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none">
+            <path d="M2 8h10M9 4.5 12.5 8 9 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cell after">0–2 次 · 按需</div>
+      </div>
+
+      <div class="row">
+        <div class="metric">规则遗漏</div>
+        <div class="cell before">易被挤出上下文</div>
+        <div class="arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none">
+            <path d="M2 8h10M9 4.5 12.5 8 9 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cell after">显著下降 · 多轮仍守规范</div>
+      </div>
+    </div>
+
+    <script>
+      function postHeight() {
+        const h = Math.ceil(document.documentElement.scrollHeight)
+        parent.postMessage({ type: 'embed-height', height: h }, '*')
+      }
+      window.addEventListener('load', postHeight)
+      new ResizeObserver(postHeight).observe(document.body)
+    </script>
+  </body>
+</html>

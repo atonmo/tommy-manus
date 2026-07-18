@@ -1,0 +1,96 @@
+/* Shared case UI blocks used by multiple cases */
+
+.tm-inventory {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 8px 0 4px;
+}
+
+.tm-inv-card {
+  padding: 18px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--gf-hair);
+  background: rgba(255, 255, 255, 0.025);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.tm-inv-card:hover {
+  border-color: color-mix(in srgb, var(--gf-acc) 28%, transparent);
+  transform: translateY(-1px);
+}
+
+.tm-inv-tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-family: var(--gf-font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gf-acc);
+  background: color-mix(in srgb, var(--gf-acc) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gf-acc) 18%, transparent);
+}
+
+.tm-inv-card h4 {
+  margin: 0 0 6px;
+  font-family: var(--gf-font-zh);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gf-ink-0);
+}
+
+.tm-inv-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--gf-ink-2);
+}
+
+
+/* Aliases used by AI-Native case */
+.an-inventory {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 8px 0 4px;
+}
+.an-inv-card {
+  padding: 18px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--gf-hair);
+  background: rgba(255, 255, 255, 0.025);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.an-inv-card:hover {
+  border-color: color-mix(in srgb, var(--gf-acc) 28%, transparent);
+  transform: translateY(-1px);
+}
+.an-inv-tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-family: var(--gf-font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gf-acc);
+  background: color-mix(in srgb, var(--gf-acc) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gf-acc) 18%, transparent);
+}
+.an-inv-card h4 {
+  margin: 0 0 6px;
+  font-family: var(--gf-font-zh);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gf-ink-0);
+}
+.an-inv-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--gf-ink-2);
+}

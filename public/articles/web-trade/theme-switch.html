@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>深浅色主题切换</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+      }
+
+      .stage {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+      }
+
+      /*
+        Figma 422:41136「设计规范2」2400×1110
+        月亮图标 ≈ 77.24% × 4.22%
+      */
+      .shot {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+        display: block;
+        opacity: 0;
+        transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .shot.is-on {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      .hot {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        margin: -20px 0 0 -20px;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        cursor: pointer;
+        border-radius: 10px;
+        z-index: 4;
+      }
+
+      .cursor-dot {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        margin: -8px 0 0 -8px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.95);
+        background: rgba(0, 71, 255, 0.35);
+        box-shadow: 0 0 0 6px rgba(0, 71, 255, 0.14);
+        pointer-events: none;
+        z-index: 6;
+        opacity: 0;
+        left: 42%;
+        top: 48%;
+        will-change: left, top, transform;
+        transition:
+          left 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+          top 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.25s ease,
+          transform 0.14s ease,
+          box-shadow 0.14s ease;
+      }
+
+      .cursor-dot.is-on {
+        opacity: 1;
+      }
+
+      .cursor-dot.is-click {
+        transform: scale(0.72);
+        box-shadow: 0 0 0 2px rgba(0, 71, 255, 0.35);
+      }
+
+      .ripple {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        margin: -6px 0 0 -6px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.85);
+        pointer-events: none;
+        z-index: 5;
+        opacity: 0;
+        transform: scale(0.4);
+      }
+
+      .ripple.is-play {
+        animation: ripple-out 0.55s ease-out forwards;
+      }
+
+      @keyframes ripple-out {
+        0% {
+          opacity: 0.9;
+          transform: scale(0.4);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(3.2);
+        }
+      }
+
+      .badge {
+        position: absolute;
+        left: 50%;
+        bottom: 1.6%;
+        transform: translateX(-50%);
+        z-index: 5;
+        font: 600 11px/1 'SF Pro Text', 'PingFang SC', system-ui, sans-serif;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        padding: 7px 12px;
+        backdrop-filter: blur(8px);
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage" id="stage" data-theme="dark">
+      <img
+        class="shot is-on"
+        data-id="dark"
+        src="/articles/web-trade/theme-switch/dark-frame.png?v=4"
+        width="4800"
+        height="2220"
+        alt="深色模式交易页"
+        decoding="async"
+        fetchpriority="high"
+      />
+      <img
+        class="shot"
+        data-id="light"
+        src="/articles/web-trade/theme-switch/light-frame.png?v=4"
+        width="4800"
+        height="2220"
+        alt="浅色模式交易页"
+        decoding="async"
+      />
+      <button class="hot" id="hot" type="button" aria-label="切换深浅色主题"></button>
+      <div class="ripple" id="ripple" aria-hidden="true"></div>
+      <div class="cursor-dot is-on" id="cursor" aria-hidden="true"></div>
+      <div class="badge" id="badge">Dark Mode</div>
+    </div>
+
+    <script>
+      const HOLD_MS = 3000
+      const MOVE_MS = 700
+      const CLICK_MS = 180
+      const FADE_MS = 650
+      const REST_MS = 450
+      const IMG_W = 4800
+      const IMG_H = 2220
+      const MOON = { x: 0.7724, y: 0.0422 }
+      const REST = { x: 0.42, y: 0.48 }
+
+      const stage = document.getElementById('stage')
+      const hot = document.getElementById('hot')
+      const cursor = document.getElementById('cursor')
+      const ripple = document.getElementById('ripple')
+      const badge = document.getElementById('badge')
+      const shots = {
+        dark: document.querySelector('.shot[data-id="dark"]'),
+        light: document.querySelector('.shot[data-id="light"]'),
+      }
+
+      let theme = 'dark'
+      let running = true
+      let switching = false
+      let manualPauseUntil = 0
+      let waitReject = null
+
+      function wait(ms) {
+        return new Promise((resolve, reject) => {
+          const id = window.setTimeout(() => {
+            waitReject = null
+            resolve()
+          }, ms)
+          waitReject = () => {
+            window.clearTimeout(id)
+            waitReject = null
+            reject(new Error('wait-aborted'))
+          }
+        })
+      }
+
+      function abortWait() {
+        if (waitReject) waitReject()
+      }
+
+      function contentBox() {
+        const rect = stage.getBoundingClientRect()
+        const sw = Math.max(rect.width, 1)
+        const sh = Math.max(rect.height, 1)
+        const scale = Math.min(sw / IMG_W, sh / IMG_H)
+        const w = IMG_W * scale
+        const h = IMG_H * scale
+        return {
+          left: (sw - w) / 2,
+          top: (sh - h) / 2,
+          width: w,
+          height: h,
+        }
+      }
+
+      function point(nx, ny) {
+        const box = contentBox()
+        return {
+          x: box.left + box.width * nx,
+          y: box.top + box.height * ny,
+        }
+      }
+
+      function placeHot() {
+        const p = point(MOON.x, MOON.y)
+        hot.style.left = `${p.x}px`
+        hot.style.top = `${p.y}px`
+      }
+
+      function placeCursor(nx, ny, instant) {
+        const p = point(nx, ny)
+        if (instant) {
+          cursor.style.transition = 'none'
+          cursor.style.left = `${p.x}px`
+          cursor.style.top = `${p.y}px`
+          void cursor.offsetWidth
+          cursor.style.transition = ''
+        } else {
+          cursor.style.left = `${p.x}px`
+          cursor.style.top = `${p.y}px`
+        }
+        cursor.classList.add('is-on')
+      }
+
+      function playRipple() {
+        const p = point(MOON.x, MOON.y)
+        ripple.style.left = `${p.x}px`
+        ripple.style.top = `${p.y}px`
+        ripple.classList.remove('is-play')
+        void ripple.offsetWidth
+        ripple.classList.add('is-play')
+      }
+
+      function applyTheme(next) {
+        theme = next
+        shots.dark.classList.toggle('is-on', next === 'dark')
+        shots.light.classList.toggle('is-on', next === 'light')
+        stage.dataset.theme = next
+        badge.textContent = next === 'dark' ? 'Dark Mode' : 'Light Mode'
+      }
+
+      async function playSwitch() {
+        if (switching) return
+        switching = true
+        try {
+          placeHot()
+          placeCursor(REST.x, REST.y, true)
+          await wait(50)
+          placeCursor(MOON.x, MOON.y, false)
+          await wait(MOVE_MS)
+          cursor.classList.add('is-click')
+          playRipple()
+          await wait(CLICK_MS)
+          cursor.classList.remove('is-click')
+          applyTheme(theme === 'dark' ? 'light' : 'dark')
+          await wait(FADE_MS)
+          placeCursor(REST.x, REST.y, false)
+          await wait(REST_MS)
+        } finally {
+          switching = false
+        }
+      }
+
+      async function loop() {
+        placeHot()
+        placeCursor(REST.x, REST.y, true)
+        applyTheme('dark')
+
+        while (running) {
+          try {
+            await wait(HOLD_MS)
+          } catch {
+            continue
+          }
+          if (!running) break
+          if (Date.now() < manualPauseUntil) continue
+          if (switching) continue
+          try {
+            await playSwitch()
+          } catch (err) {
+            if (err && err.message === 'wait-aborted') continue
+            await wait(400).catch(() => {})
+          }
+        }
+      }
+
+      hot.addEventListener('click', async (e) => {
+        e.preventDefault()
+        if (switching) return
+        // 手动切换后暂停自动循环 7 秒
+        manualPauseUntil = Date.now() + 7000
+        abortWait()
+        try {
+          await playSwitch()
+        } catch (_) {}
+      })
+
+      // 预热浅色图，避免第一次切换空白
+      ;[shots.dark, shots.light].forEach((img) => {
+        if (!img.complete) {
+          const warm = new Image()
+          warm.src = img.src
+        }
+      })
+
+      window.addEventListener('resize', () => {
+        placeHot()
+        placeCursor(REST.x, REST.y, true)
+      })
+
+      // 页面/iframe 重新可见时确保循环还在跑
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          placeHot()
+          placeCursor(REST.x, REST.y, true)
+        }
+      })
+
+      loop()
+    </script>
+  </body>
+</html>

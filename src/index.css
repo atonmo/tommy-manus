@@ -1,0 +1,310 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:root {
+  --font-sans: "PingFang SC", "PingFang TC", "Hiragino Sans GB", "Microsoft YaHei",
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "Fira Code", ui-monospace, monospace;
+  --page-pad-x: clamp(16px, 3.5vw, 48px);
+  --content-inset: 18px;
+
+  --bg: #050505;
+  --bg-elevated: #141414;
+  --bg-soft: #1c1c1c;
+  --bg-hover: #242424;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #dadada;
+  --text-strong: #f5f5f5;
+  --text-muted: #8a8a8a;
+  --text-faint: #5c5c5c;
+  --cta-bg: rgba(255, 255, 255, 0.95);
+  --cta-text: rgba(0, 0, 0, 0.9);
+  --accent: #ffffff;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  color-scheme: dark;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Light theme — AI-Native Design case study */
+html.theme-light {
+  --bg: #f7f8f6;
+  --bg-elevated: #ffffff;
+  --bg-soft: #eef0eb;
+  --bg-hover: #e4e6e1;
+  --border: rgba(26, 28, 24, 0.08);
+  --border-strong: rgba(26, 28, 24, 0.14);
+  --text: #3d403a;
+  --text-strong: #141414;
+  --text-muted: #6d726c;
+  --text-faint: #9a9e97;
+  --cta-bg: #1a1c18;
+  --cta-text: #ffffff;
+  --accent: #7c5cff;
+  color-scheme: light;
+}
+
+html.theme-light .app-atmosphere {
+  background:
+    radial-gradient(ellipse 70% 45% at 85% 8%, rgba(124, 92, 255, 0.14), transparent 55%),
+    radial-gradient(ellipse 50% 35% at 12% 90%, rgba(124, 92, 255, 0.07), transparent 50%),
+    var(--bg);
+}
+
+html.theme-light .nav-inner {
+  border-color: rgba(26, 28, 24, 0.1);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.9),
+    0 8px 28px rgba(26, 28, 24, 0.08);
+}
+
+html.theme-light .nav-indicator {
+  background: rgba(26, 28, 24, 0.06);
+  box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.55);
+}
+
+html.theme-light .nav-mobile-menu {
+  border-color: rgba(26, 28, 24, 0.1);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow:
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.9),
+    0 8px 24px rgba(26, 28, 24, 0.08);
+}
+
+html.theme-light .nav-mobile-link:hover,
+html.theme-light .nav-mobile-link.nav-link-active {
+  background: rgba(26, 28, 24, 0.05);
+}
+
+html.theme-light .btn-ghost:hover {
+  border-color: rgba(26, 28, 24, 0.22);
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+html.theme-light ::selection {
+  background: rgba(124, 92, 255, 0.28);
+  color: #141414;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+html {
+  /* clip keeps y-axis scrolling on the viewport; hidden would force nested scrollports */
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+/* Keep media and wide content inside the viewport instead of clipping them */
+img,
+svg,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+canvas {
+  max-width: 100%;
+}
+
+table {
+  max-width: 100%;
+}
+
+pre,
+code {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100svh;
+  isolation: isolate;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.app-atmosphere {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255, 255, 255, 0.06), transparent 55%),
+    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(255, 255, 255, 0.03), transparent 50%),
+    var(--bg);
+  transition: opacity 0.35s ease;
+}
+
+.app-shell > *:not(.app-atmosphere):not(.manus-backdrop):not(.nav) {
+  position: relative;
+  z-index: 1;
+}
+
+.nav {
+  z-index: 1000;
+}
+
+.page {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100svh;
+  box-sizing: border-box;
+  padding: 24px var(--page-pad-x);
+  display: flex;
+  flex-direction: column;
+}
+
+.page-home {
+  height: 100svh;
+  height: 100dvh;
+  min-height: 0;
+  max-height: 100dvh;
+  overflow: hidden;
+}
+
+.page-chat {
+  height: 100dvh;
+  min-height: 100svh;
+}
+
+.text-h1 {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--text-strong);
+}
+
+.text-h1-light {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: var(--text-strong);
+}
+
+.text-h4-light {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.text-paragraph {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--cta-bg);
+  color: var(--cta-text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--bg-hover);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+@media (max-width: 600px) {
+  :root {
+    --content-inset: 12px;
+  }
+
+  .page {
+    padding: 16px var(--page-pad-x);
+  }
+
+  .text-h1,
+  .text-h1-light {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540">
+  <rect width="1200" height="540" fill="#070708"/>
+  <text x="48" y="52" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.22em" fill="#5B9FFF">SKILL LAYERS</text>
+  <text x="48" y="86" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.55)">硬规则前置 · 细节按需加载</text>
+  <g font-family="PingFang SC, Inter, system-ui, sans-serif">
+    <rect x="120" y="130" width="960" height="72" rx="14" fill="rgba(91,159,255,0.12)" stroke="rgba(91,159,255,0.35)"/>
+    <text x="152" y="174" font-size="18" font-weight="500" fill="#5B9FFF">L1 入口 + 硬规则</text>
+    <text x="860" y="174" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.08em" fill="rgba(255,255,255,0.4)">HIGHEST ATTENTION</text>
+
+    <rect x="160" y="220" width="880" height="72" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <text x="192" y="264" font-size="18" font-weight="500" fill="#FFFFFF">L2 基础设计系统</text>
+    <text x="860" y="264" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="rgba(255,255,255,0.35)">TOKEN / COMPONENTS</text>
+
+    <rect x="200" y="310" width="800" height="72" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <text x="232" y="354" font-size="18" font-weight="500" fill="#FFFFFF">L3 设计判断 · 去 AI 味</text>
+    <text x="820" y="354" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="rgba(255,255,255,0.35)">HIERARCHY / BRAND</text>
+
+    <rect x="240" y="400" width="720" height="72" rx="14" fill="#5B9FFF"/>
+    <text x="272" y="444" font-size="18" font-weight="600" fill="#141414">L4 执行工作流 + 交付门禁</text>
+    <text x="780" y="444" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="#3D6FBF">QA / HANDOFF</text>
+  </g>
+</svg>

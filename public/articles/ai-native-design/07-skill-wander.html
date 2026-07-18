@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Skill Wander Flow</title>
+    <style>
+      :root {
+        --bg: #070708;
+        --card: #141416;
+        --card-ink: #f2f3f5;
+        --card-muted: rgba(255, 255, 255, 0.48);
+        --inner: rgba(255, 255, 255, 0.05);
+        --line: rgba(255, 255, 255, 0.22);
+        --port: #141416;
+        --port-stroke: rgba(255, 255, 255, 0.28);
+        --hair: rgba(255, 255, 255, 0.1);
+        --font: 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        padding: 4px 0 8px;
+      }
+
+      .flow {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .node {
+        position: relative;
+        width: 100%;
+        background: var(--card);
+        border: 1px solid var(--hair);
+        border-radius: 10px;
+        padding: 11px 13px;
+      }
+
+      .node.is-fail {
+        border-color: rgba(255, 77, 106, 0.35);
+      }
+
+      .head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .icon {
+        flex: 0 0 22px;
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+      }
+
+      .icon svg {
+        width: 12px;
+        height: 12px;
+        display: block;
+      }
+
+      .icon.blue {
+        background: #3d7eff;
+      }
+      .icon.red {
+        background: #ff4d57;
+      }
+      .icon.orange {
+        background: #ff8a3d;
+      }
+      .icon.green {
+        background: #2fbf71;
+      }
+      .icon.violet {
+        background: #7b6cff;
+      }
+      .icon.rose {
+        background: #ff4d6a;
+      }
+
+      .title {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--card-ink);
+        letter-spacing: -0.01em;
+      }
+
+      .inner {
+        margin: 8px 0 0;
+        padding: 8px 10px;
+        border-radius: 7px;
+        background: var(--inner);
+        font-size: 11.5px;
+        line-height: 1.5;
+        color: var(--card-muted);
+      }
+
+      .node.is-fail .inner {
+        background: rgba(255, 77, 106, 0.1);
+        color: rgba(255, 140, 155, 0.92);
+      }
+
+      .port {
+        position: absolute;
+        left: 50%;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--port);
+        border: 1.5px solid var(--port-stroke);
+        transform: translateX(-50%);
+        z-index: 2;
+      }
+
+      .port.top {
+        top: -4px;
+      }
+
+      .port.bottom {
+        bottom: -4px;
+      }
+
+      .connector {
+        position: relative;
+        width: 1.5px;
+        height: 16px;
+        background: var(--line);
+        flex-shrink: 0;
+      }
+
+      .connector::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -1px;
+        width: 0;
+        height: 0;
+        border-left: 3.5px solid transparent;
+        border-right: 3.5px solid transparent;
+        border-top: 5px solid var(--line);
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flow">
+      <article class="node">
+        <span class="port bottom" aria-hidden="true"></span>
+        <div class="head">
+          <span class="icon blue" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h8M8 4.5 11.5 8 8 11.5" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3 class="title">读 Skill</h3>
+        </div>
+        <p class="inner">从入口文件开始加载必读文档</p>
+      </article>
+
+      <div class="connector" aria-hidden="true"></div>
+
+      <article class="node">
+        <span class="port top" aria-hidden="true"></span>
+        <span class="port bottom" aria-hidden="true"></span>
+        <div class="head">
+          <span class="icon violet" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none">
+              <path d="M3 4.5h6.5M9.5 4.5 12 7 9.5 9.5M3 11.5h6.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3 class="title">跳文件 A</h3>
+        </div>
+        <p class="inner">跳去组件规范 / 工程说明</p>
+      </article>
+
+      <div class="connector" aria-hidden="true"></div>
+
+      <article class="node">
+        <span class="port top" aria-hidden="true"></span>
+        <span class="port bottom" aria-hidden="true"></span>
+        <div class="head">
+          <span class="icon orange" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none">
+              <path d="M12.5 8H4.5M7 4.5 3.5 8 7 11.5" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3 class="title">回来</h3>
+        </div>
+        <p class="inner">回到入口，上下文已被打断</p>
+      </article>
+
+      <div class="connector" aria-hidden="true"></div>
+
+      <article class="node">
+        <span class="port top" aria-hidden="true"></span>
+        <span class="port bottom" aria-hidden="true"></span>
+        <div class="head">
+          <span class="icon green" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none">
+              <path d="M3 4.5h6.5M9.5 4.5 12 7 9.5 9.5M3 11.5h6.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3 class="title">跳文件 B</h3>
+        </div>
+        <p class="inner">再跳页面风格 / 其它必读</p>
+      </article>
+
+      <div class="connector" aria-hidden="true"></div>
+
+      <article class="node">
+        <span class="port top" aria-hidden="true"></span>
+        <span class="port bottom" aria-hidden="true"></span>
+        <div class="head">
+          <span class="icon red" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="7" r="3.2" stroke="#fff" stroke-width="1.5"/>
+              <path d="M5.2 11.8c.9-1.2 2-1.8 2.8-1.8s1.9.6 2.8 1.8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3 class="title">读了一半就开始干活</h3>
+        </div>
+        <p class="inner">注意力被切碎，规则未读完</p>
+      </article>
+
+      <div class="connector" aria-hidden="true"></div>
+
+      <article class="node is-fail">
+        <span class="port top" aria-hidden="true"></span>
+        <div class="head">
+          <span class="icon rose" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none">
+              <path d="M4.2 4.2 11.8 11.8M11.8 4.2 4.2 11.8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3 class="title">漏掉关键红线</h3>
+        </div>
+        <p class="inner">规范被挤出上下文，结果漂移</p>
+      </article>
+    </div>
+
+    <script>
+      function postHeight() {
+        const h = Math.ceil(document.documentElement.scrollHeight)
+        parent.postMessage({ type: 'embed-height', height: h }, '*')
+      }
+      window.addEventListener('load', postHeight)
+      new ResizeObserver(postHeight).observe(document.body)
+    </script>
+  </body>
+</html>

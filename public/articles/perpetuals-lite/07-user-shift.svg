@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 163 1200 330">
+  <rect y="163" width="1200" height="330" fill="#070708"/>
+
+  <g transform="translate(132 71.5) scale(0.78)">
+  <!-- left circle -->
+  <g>
+    <circle cx="310" cy="330" r="185" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
+    <circle cx="310" cy="330" r="160" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 7"/>
+    <text x="310" y="318" text-anchor="middle" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="44" font-weight="600" fill="#FFFFFF">意愿用户</text>
+    <text x="310" y="366" text-anchor="middle" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="17" fill="rgba(255,255,255,0.45)">跟随交易 · 看不懂 · 不敢下</text>
+  </g>
+
+  <!-- right circle -->
+  <g>
+    <circle cx="890" cy="330" r="185" fill="none" stroke="rgba(184,245,58,0.4)" stroke-width="1.5"/>
+    <circle cx="890" cy="330" r="160" fill="none" stroke="rgba(184,245,58,0.12)" stroke-width="1" stroke-dasharray="3 7"/>
+    <text x="890" y="318" text-anchor="middle" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="44" font-weight="600" fill="#B8F53A">自主用户</text>
+    <text x="890" y="366" text-anchor="middle" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="17" fill="rgba(255,255,255,0.45)">独立开仓 · 敢下单 · 会管理</text>
+  </g>
+
+  <!-- forward arrow -->
+  <g>
+    <line x1="512" y1="298" x2="678" y2="298" stroke="#B8F53A" stroke-width="1.5"/>
+    <path d="M 678 298 l -10 -5 v 10 z" fill="#B8F53A"/>
+    <text x="600" y="278" text-anchor="middle" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="14" fill="rgba(255,255,255,0.7)">顺畅体验</text>
+  </g>
+
+  <!-- back arrow -->
+  <g>
+    <line x1="688" y1="368" x2="522" y2="368" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+    <path d="M 522 368 l 10 -5 v 10 z" fill="rgba(255,255,255,0.28)"/>
+    <text x="600" y="398" text-anchor="middle" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="13" fill="rgba(255,255,255,0.4)">带动更多意愿用户尝试</text>
+  </g>
+  </g>
+</svg>

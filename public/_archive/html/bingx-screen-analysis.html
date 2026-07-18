@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BingX Screen Utilization Analysis</title>
+    <style>
+      :root {
+        --bg: #f2f3f5;
+        --card: #ffffff;
+        --title: #1f1f1f;
+        --sub: #8a8f98;
+        --label: #3d3d3d;
+        --value: #a0a5ad;
+        --track: #eef0f3;
+        --line: #f0f1f3;
+        --orange: #ff8a1f;
+        --orange-deep: #ff7a00;
+        --radius-card: 22px;
+        --radius-inner: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        font-family:
+          "SF Pro Text",
+          "PingFang SC",
+          "Helvetica Neue",
+          Helvetica,
+          Arial,
+          sans-serif;
+        color: var(--title);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .page {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 40px 28px 56px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(320px, 0.95fr) minmax(380px, 1.15fr);
+        gap: 20px;
+        align-items: stretch;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: var(--radius-card);
+        padding: 28px 28px 24px;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+      }
+
+      .card-title {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--title);
+      }
+
+      .card-sub {
+        margin: 8px 0 0;
+        font-size: 13px;
+        color: var(--sub);
+        font-weight: 400;
+      }
+
+      .card-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 22px;
+      }
+
+      .card-note {
+        margin: 4px 0 0;
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
+
+      /* —— Resolution list —— */
+      .res-list {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .res-row {
+        display: grid;
+        grid-template-columns: 92px 1fr 60px;
+        align-items: center;
+        gap: 14px;
+        padding: 13px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .res-row:last-child {
+        border-bottom: none;
+        padding-bottom: 4px;
+      }
+
+      .res-label {
+        font-size: 13px;
+        color: var(--label);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .res-track {
+        height: 8px;
+        border-radius: 999px;
+        background: var(--track);
+        overflow: hidden;
+      }
+
+      .res-bar {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--orange), var(--orange-deep));
+      }
+
+      .res-value {
+        font-size: 13px;
+        color: var(--value);
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* —— Utilization visual —— */
+      .stage {
+        margin-top: 4px;
+        border-radius: var(--radius-inner);
+        overflow: hidden;
+        background:
+          radial-gradient(120% 90% at 50% 20%, #fff7ef 0%, #f3f5f8 48%, #e8edf3 100%);
+        border: 1px solid #ebecef;
+        min-height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 28px 36px;
+        position: relative;
+      }
+
+      .stage-shell {
+        width: 66.7%;
+        max-width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #0b0e14;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 12px 40px rgba(20, 28, 40, 0.12);
+      }
+
+      .bx-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        background: #12161f;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .bx-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .bx-logo {
+        width: 18px;
+        height: 18px;
+        border-radius: 5px;
+        background: linear-gradient(135deg, #2de0c5, #1bb8a0);
+        display: grid;
+        place-items: center;
+      }
+
+      .bx-logo svg {
+        width: 11px;
+        height: 11px;
+        fill: #041410;
+      }
+
+      .bx-nav {
+        display: flex;
+        gap: 10px;
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 10px;
+      }
+
+      .bx-nav span:first-child {
+        color: #2de0c5;
+      }
+
+      .bx-cta {
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: #2de0c5;
+        color: #041410;
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      .bx-body {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 8px;
+        padding: 10px;
+        background: #0b0e14;
+      }
+
+      .bx-panel {
+        border-radius: 8px;
+        background: #151a24;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 8px;
+        min-height: 150px;
+      }
+
+      .bx-chart {
+        height: 78px;
+        margin-top: 8px;
+        border-radius: 6px;
+        background:
+          linear-gradient(180deg, rgba(45, 224, 197, 0.12), transparent 70%),
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.03) 10px,
+            rgba(255, 255, 255, 0.03) 11px
+          );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .bx-chart:after {
+        content: "";
+        position: absolute;
+        left: 6%;
+        right: 6%;
+        top: 28%;
+        height: 2px;
+        border-radius: 2px;
+        background: #2de0c5;
+        box-shadow: 0 18px 0 -0.5px rgba(45, 224, 197, 0.35);
+        transform: rotate(-8deg);
+      }
+
+      .bx-ticker {
+        display: flex;
+        justify-content: space-between;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 10px;
+      }
+
+      .bx-ticker strong {
+        color: #2de0c5;
+        font-weight: 600;
+      }
+
+      .bx-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .bx-row {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 8px;
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      .up {
+        color: #2de0c5;
+      }
+
+      .down {
+        color: #ff5f6d;
+      }
+
+      .stage-caption {
+        position: absolute;
+        right: 14px;
+        bottom: 10px;
+        font-size: 11px;
+        color: var(--sub);
+      }
+
+      /* —— Peer grid —— */
+      .peers {
+        margin-top: 22px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px 20px;
+      }
+
+      .peer {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        column-gap: 8px;
+        row-gap: 2px;
+        align-items: center;
+      }
+
+      .peer-icon {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        grid-row: span 2;
+        display: grid;
+        place-items: center;
+        font-size: 9px;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .peer-name {
+        font-size: 13px;
+        color: var(--label);
+        font-weight: 500;
+      }
+
+      .peer-meta {
+        font-size: 12px;
+        color: var(--sub);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .i-binance {
+        background: #f3ba2f;
+        color: #1a1200;
+      }
+      .i-okx {
+        background: #111;
+      }
+      .i-bybit {
+        background: #f7a600;
+        color: #1a1200;
+      }
+      .i-bitget {
+        background: #00f0ff;
+        color: #003038;
+      }
+      .i-kucoin {
+        background: #23af91;
+      }
+      .i-gate {
+        background: #17e6a1;
+        color: #043026;
+      }
+      .i-mexc {
+        background: #2863ff;
+      }
+      .i-bingx {
+        background: #1fd6b8;
+        color: #04261f;
+      }
+
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .peers {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="grid">
+        <!-- Left: resolutions -->
+        <section class="card">
+          <h1 class="card-title">PC browser Resolution in China</h1>
+          <p class="card-sub">From StatCounter; 2024.05-2024.07</p>
+          <div class="res-list" id="res-list"></div>
+        </section>
+
+        <!-- Right: BingX utilization -->
+        <section class="card">
+          <div class="card-head">
+            <div>
+              <h1 class="card-title">BingX's screen utilization</h1>
+              <p class="card-sub">width:1280px&nbsp;&nbsp;usage rate:66.7%</p>
+            </div>
+            <p class="card-note">*base on a 1920px display width</p>
+          </div>
+
+          <div class="stage">
+            <div class="stage-shell" aria-label="BingX layout preview">
+              <div class="bx-top">
+                <div class="bx-brand">
+                  <div class="bx-logo">
+                    <svg viewBox="0 0 12 12" aria-hidden="true">
+                      <path
+                        d="M2 6.5 5.2 3.2h1.7L3.7 6.5 6.9 9.8H5.2L2 6.5Zm4.1 0 3.2-3.3h1.7L7.8 6.5l3.2 3.3H9.3L6.1 6.5Z"
+                      />
+                    </svg>
+                  </div>
+                  BingX
+                </div>
+                <div class="bx-nav">
+                  <span>Markets</span>
+                  <span>Futures</span>
+                  <span>Copy</span>
+                  <span>Earn</span>
+                </div>
+                <div class="bx-cta">Trade</div>
+              </div>
+              <div class="bx-body">
+                <div class="bx-panel">
+                  <div class="bx-ticker">
+                    <span>BTC/USDT</span>
+                    <strong>+1.28%</strong>
+                  </div>
+                  <div class="bx-chart"></div>
+                </div>
+                <div class="bx-panel">
+                  <div class="bx-ticker">
+                    <span>Order book</span>
+                    <span>0.01</span>
+                  </div>
+                  <div class="bx-rows">
+                    <div class="bx-row">
+                      <span class="down">68420.2</span><span>0.421</span><span>28.8k</span>
+                    </div>
+                    <div class="bx-row">
+                      <span class="down">68418.5</span><span>0.210</span><span>14.3k</span>
+                    </div>
+                    <div class="bx-row">
+                      <span class="down">68415.1</span><span>1.024</span><span>70.1k</span>
+                    </div>
+                    <div class="bx-row">
+                      <span class="up">68410.0</span><span>0.880</span><span>60.2k</span>
+                    </div>
+                    <div class="bx-row">
+                      <span class="up">68408.4</span><span>0.355</span><span>24.3k</span>
+                    </div>
+                    <div class="bx-row">
+                      <span class="up">68405.9</span><span>1.410</span><span>96.5k</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="peers">
+            <div class="peer">
+              <div class="peer-icon i-binance">B</div>
+              <div class="peer-name">Binance</div>
+              <div class="peer-meta">1200px&nbsp;&nbsp;62.5%</div>
+            </div>
+            <div class="peer">
+              <div class="peer-icon i-okx">O</div>
+              <div class="peer-name">OKX</div>
+              <div class="peer-meta">1248px&nbsp;&nbsp;65.0%</div>
+            </div>
+            <div class="peer">
+              <div class="peer-icon i-bybit">By</div>
+              <div class="peer-name">Bybit</div>
+              <div class="peer-meta">1440px&nbsp;&nbsp;75.0%</div>
+            </div>
+            <div class="peer">
+              <div class="peer-icon i-bitget">Bg</div>
+              <div class="peer-name">Bitget</div>
+              <div class="peer-meta">1200px&nbsp;&nbsp;62.5%</div>
+            </div>
+            <div class="peer">
+              <div class="peer-icon i-kucoin">K</div>
+              <div class="peer-name">KuCoin</div>
+              <div class="peer-meta">1180px&nbsp;&nbsp;61.5%</div>
+            </div>
+            <div class="peer">
+              <div class="peer-icon i-gate">G</div>
+              <div class="peer-name">Gate.io</div>
+              <div class="peer-meta">1280px&nbsp;&nbsp;66.7%</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const resolutions = [
+        ['1920*1080', 31.73],
+        ['1536*864', 9.1],
+        ['1366*768', 8.24],
+        ['1440*900', 5.41],
+        ['1280*720', 4.18],
+        ['1600*900', 3.62],
+        ['2560*1440', 3.15],
+        ['1024*768', 2.87],
+        ['Other', 26.1],
+      ]
+      const max = Math.max(...resolutions.map(([, v]) => v))
+      const list = document.getElementById('res-list')
+      list.innerHTML = resolutions
+        .map(
+          ([label, value]) => `
+        <div class="res-row">
+          <div class="res-label">${label}</div>
+          <div class="res-track">
+            <div class="res-bar" style="width:${(value / max) * 100}%"></div>
+          </div>
+          <div class="res-value">${value.toFixed(2).replace(/\.00$/, '')}%</div>
+        </div>`,
+        )
+        .join('')
+    </script>
+  </body>
+</html>

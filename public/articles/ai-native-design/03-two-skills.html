@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Two Skills · Structure</title>
+    <style>
+      :root {
+        --bg: #070708;
+        --card: #121214;
+        --card-border: rgba(255, 255, 255, 0.08);
+        --pill: rgba(255, 255, 255, 0.04);
+        --pill-border: rgba(255, 255, 255, 0.06);
+        --ink: #f2f3f5;
+        --ink-2: rgba(255, 255, 255, 0.58);
+        --ink-3: rgba(255, 255, 255, 0.38);
+        --file: #9ec5ff;
+        --acc: #5b9fff;
+        --tree: rgba(255, 255, 255, 0.12);
+        --font: 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        --mono: 'SF Mono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        padding: 8px 0 4px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        width: 100%;
+      }
+
+      .card {
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        background: var(--card);
+        padding: 28px 26px 30px;
+        min-width: 0;
+      }
+
+      .card h2 {
+        margin: 0 0 12px;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        color: var(--ink);
+      }
+
+      .card .desc {
+        margin: 0 0 18px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--ink-2);
+      }
+
+      .pill {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px 4px;
+        padding: 12px 14px;
+        border-radius: 999px;
+        background: var(--pill);
+        border: 1px solid var(--pill-border);
+        margin-bottom: 22px;
+      }
+
+      .pill span {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+
+      .pill .sep {
+        color: var(--ink-3);
+        font-weight: 400;
+        padding: 0 4px;
+      }
+
+      .section-label {
+        margin: 0 0 14px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .tree {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 12.5px;
+        line-height: 1.45;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.2fr);
+        gap: 10px 16px;
+        align-items: baseline;
+      }
+
+      .name {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--file);
+        font-weight: 500;
+      }
+
+      .name.is-folder {
+        color: var(--ink);
+      }
+
+      .hint {
+        color: var(--ink-3);
+        font-size: 12px;
+      }
+
+      .group {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        margin: 2px 0 4px;
+        padding-left: 14px;
+        border-left: 1px solid var(--tree);
+      }
+
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .card h2 {
+          font-size: 24px;
+        }
+
+        .row {
+          grid-template-columns: 1fr;
+          gap: 2px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <article class="card">
+        <h2>PRD → Prompt</h2>
+        <p class="desc">
+          面向页面生成场景：把产品需求拆成 AI 可执行的设计输入。五步闭环，每一步输出都需设计师确认后，再进入下一步。
+        </p>
+        <div class="pill" aria-label="workflow">
+          <span>需求拆解</span><span class="sep">⇢</span>
+          <span>流程建模</span><span class="sep">⇢</span>
+          <span>页面&状态</span><span class="sep">⇢</span>
+          <span>Prompt 合成</span><span class="sep">⇢</span>
+          <span>验收清单</span>
+        </div>
+        <p class="section-label">目录结构</p>
+        <div class="tree">
+          <div class="row">
+            <span class="name">SKILL.md</span>
+            <span class="hint">入口与硬规则</span>
+          </div>
+          <div class="row">
+            <span class="name is-folder">References</span>
+            <span class="hint">方法说明</span>
+          </div>
+          <div class="group">
+            <div class="row">
+              <span class="name">brief-extract.md</span>
+              <span class="hint">从 PRD 抽取目标、角色、约束</span>
+            </div>
+            <div class="row">
+              <span class="name">ask-back.md</span>
+              <span class="hint">关键澄清问题清单</span>
+            </div>
+            <div class="row">
+              <span class="name">flow-map.md</span>
+              <span class="hint">主路径 / 分支 / 异常流</span>
+            </div>
+            <div class="row">
+              <span class="name">screen-matrix.md</span>
+              <span class="hint">页面类型 × 状态矩阵</span>
+            </div>
+            <div class="row">
+              <span class="name">prompt-rules.md</span>
+              <span class="hint">组装规范与自检项</span>
+            </div>
+          </div>
+          <div class="row">
+            <span class="name is-folder">Assets</span>
+            <span class="hint">可复用模版</span>
+          </div>
+          <div class="group">
+            <div class="row">
+              <span class="name">design-brief.md</span>
+              <span class="hint">设计简报输出模版</span>
+            </div>
+            <div class="row">
+              <span class="name">state-table.md</span>
+              <span class="hint">页面状态表模版</span>
+            </div>
+            <div class="row">
+              <span class="name">prompt-shell.md</span>
+              <span class="hint">最终 Prompt 骨架</span>
+            </div>
+          </div>
+          <div class="row">
+            <span class="name is-folder">Examples</span>
+            <span class="hint">示例</span>
+          </div>
+          <div class="group">
+            <div class="row">
+              <span class="name">sample-run.md</span>
+              <span class="hint">一次完整跑通记录</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Design Review</h2>
+        <p class="desc">
+          面向方案评审：按统一维度快速挑问题、定严重度，并输出可交给产品和研发的结构化评审结论。
+        </p>
+        <div class="pill" aria-label="dimensions">
+          <span>结构</span><span class="sep">+</span>
+          <span>交互</span><span class="sep">+</span>
+          <span>体验</span><span class="sep">+</span>
+          <span>视觉</span>
+        </div>
+        <p class="section-label">目录结构</p>
+        <div class="tree">
+          <div class="row">
+            <span class="name">SKILL.md</span>
+            <span class="hint">入口与评审节奏</span>
+          </div>
+          <div class="row">
+            <span class="name is-folder">References</span>
+            <span class="hint">评判依据</span>
+          </div>
+          <div class="group">
+            <div class="row">
+              <span class="name">rubric.md</span>
+              <span class="hint">四维评分细则</span>
+            </div>
+            <div class="row">
+              <span class="name">heuristics.md</span>
+              <span class="hint">可用性启发式要点</span>
+            </div>
+            <div class="row">
+              <span class="name">a11y-checks.md</span>
+              <span class="hint">无障碍检查项</span>
+            </div>
+            <div class="row">
+              <span class="name">severity.md</span>
+              <span class="hint">问题严重度分级</span>
+            </div>
+          </div>
+          <div class="row">
+            <span class="name is-folder">Assets</span>
+            <span class="hint">输出物</span>
+          </div>
+          <div class="group">
+            <div class="row">
+              <span class="name">review-report.html</span>
+              <span class="hint">评审报告模版</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <script>
+      function postHeight() {
+        const h = Math.ceil(document.documentElement.scrollHeight)
+        parent.postMessage({ type: 'embed-height', height: h }, '*')
+      }
+      window.addEventListener('load', postHeight)
+      new ResizeObserver(postHeight).observe(document.body)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" font-family="PingFang SC, Noto Sans SC, Hiragino Sans GB, sans-serif">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="rgba(184,245,58,0.05)"/>
+      <stop offset="100%" stop-color="rgba(184,245,58,0)"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="780" fill="#050507"/>
+  <rect width="1200" height="780" fill="url(#glow)"/>
+
+  <g fill="none" stroke="rgba(255,255,255,0.30)" stroke-width="1.5">
+    <circle cx="600" cy="300" r="215"/>
+    <circle cx="478" cy="512" r="215"/>
+    <circle cx="722" cy="512" r="215"/>
+  </g>
+
+  <g text-anchor="middle">
+    <text x="600" y="192" fill="#ffffff" font-size="30" font-weight="600">用户目标</text>
+    <text x="600" y="232" fill="rgba(255,255,255,0.55)" font-size="16">操作不再是阻碍收益的门槛</text>
+  </g>
+
+  <g text-anchor="middle">
+    <text x="368" y="520" fill="#ffffff" font-size="30" font-weight="600">设计目标</text>
+    <text x="368" y="560" fill="rgba(255,255,255,0.55)" font-size="16">符合拉美地区小白</text>
+    <text x="368" y="586" fill="rgba(255,255,255,0.55)" font-size="16">用户操作习惯</text>
+  </g>
+
+  <g text-anchor="middle">
+    <text x="832" y="520" fill="#ffffff" font-size="30" font-weight="600">业务目标</text>
+    <text x="832" y="560" fill="rgba(255,255,255,0.55)" font-size="16">提升拉美地区小白</text>
+    <text x="832" y="586" fill="rgba(255,255,255,0.55)" font-size="16">用户使用量</text>
+  </g>
+
+  <g text-anchor="middle" fill="#b8f53a" font-size="26" font-weight="600">
+    <text x="512" y="418">易用</text>
+    <text x="688" y="418">高效</text>
+    <text x="600" y="622">可靠</text>
+  </g>
+</svg>

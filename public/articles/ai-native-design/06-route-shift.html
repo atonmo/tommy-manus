@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Route Shift · Demo → Real Code</title>
+    <style>
+      :root {
+        --bg: #070708;
+        --ink: #f2f3f5;
+        --ink-2: rgba(255, 255, 255, 0.48);
+        --ink-3: rgba(255, 255, 255, 0.32);
+        --ring: rgba(255, 255, 255, 0.18);
+        --size: 260px;
+        --font: 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        --mono: 'SF Mono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        padding: 12px 0 16px;
+        min-height: 292px;
+      }
+
+      .flow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 36px;
+        width: 100%;
+      }
+
+      .node {
+        flex: 0 0 var(--size);
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        border: 1px solid var(--ring);
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 36px 28px;
+      }
+
+      .label {
+        margin: 0 0 12px;
+        font-family: var(--font);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        line-height: 1;
+        color: rgba(255, 255, 255, 0.36);
+      }
+
+      .title {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.35;
+        color: var(--ink);
+        white-space: normal;
+        writing-mode: horizontal-tb;
+      }
+
+      .title span {
+        display: block;
+      }
+
+      .desc {
+        margin: 14px 0 0;
+        font-size: 12px;
+        line-height: 1.55;
+        color: var(--ink-2);
+        max-width: 11em;
+      }
+
+      .arrow {
+        flex: 0 0 auto;
+        color: rgba(255, 255, 255, 0.55);
+        display: flex;
+        align-items: center;
+      }
+
+      .arrow svg {
+        width: 36px;
+        height: 16px;
+        display: block;
+      }
+
+      @media (max-width: 640px) {
+        :root {
+          --size: 220px;
+        }
+
+        body {
+          min-height: 520px;
+        }
+
+        .flow {
+          flex-direction: column;
+          gap: 18px;
+        }
+
+        .arrow {
+          transform: rotate(90deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flow">
+      <article class="node">
+        <p class="label">路线 A</p>
+        <h3 class="title"><span>好看的</span><span>Demo</span></h3>
+        <p class="desc">上手快，但进不了生产</p>
+      </article>
+
+      <div class="arrow" aria-hidden="true">
+        <svg viewBox="0 0 36 16" fill="none">
+          <path
+            d="M2 8h28M24 3l7 5-7 5"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <article class="node">
+        <p class="label">路线 B</p>
+        <h3 class="title">真实代码</h3>
+        <p class="desc">生成三端可运行代码，进入业务</p>
+      </article>
+    </div>
+
+    <script>
+      function postHeight() {
+        const h = Math.max(292, Math.ceil(document.documentElement.scrollHeight))
+        parent.postMessage({ type: 'embed-height', height: h }, '*')
+      }
+      window.addEventListener('load', postHeight)
+      new ResizeObserver(postHeight).observe(document.body)
+    </script>
+  </body>
+</html>

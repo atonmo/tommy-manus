@@ -1,0 +1,52 @@
+/* Endoscope case — violet accent */
+
+.endo-hero-glow {
+  background:
+    radial-gradient(ellipse 55% 50% at 28% 40%, color-mix(in srgb, var(--gf-acc) 18%, transparent), transparent 70%),
+    radial-gradient(ellipse 40% 45% at 82% 18%, rgba(192, 132, 252, 0.12), transparent 65%),
+    radial-gradient(ellipse 35% 35% at 55% 72%, color-mix(in srgb, var(--gf-acc) 7%, transparent), transparent 70%);
+}
+
+.endo-case .gf-target-card:hover {
+  border-color: color-mix(in srgb, var(--gf-acc) 32%, transparent);
+}
+
+.endo-case .gf-list li::before {
+  box-shadow: 0 0 10px color-mix(in srgb, var(--gf-acc) 45%, transparent);
+}
+
+/* —— 对齐参考版（endoscope-project/index.html）的宽度与间距 —— */
+
+.endo-case .gf-hero-body {
+  padding-bottom: 36px;
+}
+
+.endo-case .gf-hero-title {
+  white-space: normal;
+  font-size: clamp(36px, 5vw, 56px);
+}
+
+/* 强调词整体换行，避免「产品形态」被折断 */
+.endo-case .gf-hero-title em {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Metrics 条：更紧凑的行高与内边距 */
+.endo-case .gf-metric {
+  padding: 18px 28px;
+  gap: 6px;
+}
+
+.endo-case .gf-metric:first-child {
+  padding-left: var(--gf-pad-x);
+}
+
+.endo-case .gf-metric:last-child {
+  padding-right: var(--gf-pad-x);
+}
+
+.endo-case .gf-metric-value {
+  font-size: clamp(22px, 2.4vw, 26px);
+  white-space: normal;
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420">
+  <rect width="1200" height="420" fill="#070708"/>
+  <text x="48" y="48" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.22em" fill="#5B9FFF">MATURITY</text>
+  <text x="48" y="82" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.55)">当前：L3 → L4</text>
+  <g font-family="PingFang SC, Inter, system-ui, sans-serif">
+    <rect x="48" y="140" width="160" height="200" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <text x="104" y="190" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" font-weight="600" fill="rgba(255,255,255,0.25)">L0</text>
+    <text x="86" y="240" font-size="14" font-weight="500" fill="#FFFFFF">对话生成</text>
+    <text x="96" y="270" font-size="12" fill="rgba(255,255,255,0.35)">不可控</text>
+
+    <rect x="228" y="140" width="160" height="200" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <text x="284" y="190" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" font-weight="600" fill="rgba(255,255,255,0.25)">L1</text>
+    <text x="258" y="240" font-size="14" font-weight="500" fill="#FFFFFF">提示词规范</text>
+    <text x="278" y="270" font-size="12" fill="rgba(255,255,255,0.35)">靠人盯</text>
+
+    <rect x="408" y="140" width="160" height="200" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <text x="464" y="190" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" font-weight="600" fill="rgba(255,255,255,0.25)">L2</text>
+    <text x="438" y="240" font-size="14" font-weight="500" fill="#FFFFFF">Skill 资产化</text>
+    <text x="448" y="270" font-size="12" fill="rgba(255,255,255,0.35)">可版本分发</text>
+
+    <rect x="588" y="140" width="160" height="200" rx="14" fill="rgba(91,159,255,0.1)" stroke="rgba(91,159,255,0.4)"/>
+    <text x="644" y="190" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" font-weight="600" fill="#5B9FFF">L3</text>
+    <text x="618" y="240" font-size="14" font-weight="500" fill="#FFFFFF">Starter 映射</text>
+    <text x="628" y="270" font-size="12" fill="rgba(255,255,255,0.5)">生成即编译</text>
+
+    <rect x="768" y="140" width="160" height="200" rx="14" fill="#5B9FFF"/>
+    <text x="824" y="190" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" font-weight="600" fill="#141414">L4</text>
+    <text x="794" y="240" font-size="14" font-weight="600" fill="#141414">Handoff 闭环</text>
+    <text x="810" y="270" font-size="12" fill="#3D6FBF">可审计交付</text>
+
+    <rect x="948" y="140" width="160" height="200" rx="14" fill="#131318" stroke="rgba(255,255,255,0.18)" stroke-dasharray="5 5"/>
+    <text x="1004" y="190" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" font-weight="600" fill="rgba(255,255,255,0.25)">L5</text>
+    <text x="984" y="240" font-size="14" font-weight="500" fill="#FFFFFF">自动回流</text>
+    <text x="996" y="270" font-size="12" fill="rgba(255,255,255,0.35)">进行中</text>
+  </g>
+</svg>

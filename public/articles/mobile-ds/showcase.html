@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BingX Mobile Design System · Collage Spec</title>
+    <style>
+      :root {
+        --peach: #f5d9c8;
+        --peach-2: #f0cbb6;
+        --ink: #1a1a1a;
+        --muted: #8a8a8a;
+        --brand: #0047ff;
+        --rise: #11b36f;
+        --fall: #f65c69;
+        --warn: #f5a623;
+        --dark: #0c0c0c;
+        --dark-2: #161616;
+        --dark-3: #222;
+        --line: rgba(255, 255, 255, 0.08);
+        --font: 'SF Pro Text', 'SF Pro', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial,
+          sans-serif;
+        --shadow: 0 28px 60px rgba(80, 40, 20, 0.22), 0 8px 18px rgba(80, 40, 20, 0.12);
+        --shadow-sm: 0 16px 36px rgba(80, 40, 20, 0.18), 0 4px 12px rgba(80, 40, 20, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        background: var(--peach);
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #poster {
+        position: relative;
+        width: 1600px;
+        height: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse 60% 50% at 20% 15%, rgba(255, 255, 255, 0.35), transparent 60%),
+          radial-gradient(ellipse 50% 45% at 85% 80%, rgba(255, 180, 140, 0.35), transparent 55%),
+          var(--peach);
+      }
+
+      .piece {
+        position: absolute;
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+        transform-origin: center center;
+      }
+
+      .piece-sm {
+        border-radius: 22px;
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* —— Phone shells —— */
+      .phone {
+        width: 280px;
+        background: var(--dark);
+        color: #fff;
+        padding: 0 0 20px;
+        overflow: hidden;
+      }
+
+      .status {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 18px 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .status .icons {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        opacity: 0.85;
+      }
+
+      .dot {
+        width: 10px;
+        height: 6px;
+        border-radius: 2px;
+        background: currentColor;
+      }
+
+      .notch {
+        width: 72px;
+        height: 8px;
+        border-radius: 999px;
+        background: #000;
+        margin: 0 auto 10px;
+      }
+
+      .phone-pad {
+        padding: 0 14px;
+      }
+
+      .pair-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 10px;
+      }
+
+      .pair {
+        font-size: 18px;
+        font-weight: 650;
+        letter-spacing: -0.02em;
+      }
+
+      .pair-sub {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.45);
+        margin-top: 2px;
+      }
+
+      .price {
+        text-align: right;
+      }
+
+      .price strong {
+        display: block;
+        font-size: 16px;
+        color: var(--rise);
+        font-weight: 650;
+      }
+
+      .price span {
+        font-size: 11px;
+        color: var(--rise);
+      }
+
+      .tabs {
+        display: flex;
+        gap: 4px;
+        background: var(--dark-2);
+        border-radius: 10px;
+        padding: 3px;
+        margin-bottom: 12px;
+      }
+
+      .tabs button {
+        flex: 1;
+        border: 0;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.45);
+        font: inherit;
+        font-size: 12px;
+        font-weight: 560;
+        padding: 8px 0;
+        border-radius: 8px;
+      }
+
+      .tabs button.on {
+        background: #2a2a2a;
+        color: #fff;
+      }
+
+      .dir {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .dir button {
+        border: 1.5px solid transparent;
+        border-radius: 10px;
+        padding: 11px 0;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 620;
+        background: var(--dark-2);
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .dir button.long {
+        border-color: var(--rise);
+        color: var(--rise);
+        background: rgba(17, 179, 111, 0.12);
+      }
+
+      .dir button.short {
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+
+      .field {
+        background: var(--dark-2);
+        border-radius: 12px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .field .lab {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .field .val {
+        font-size: 13px;
+        font-weight: 560;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .field .unit {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 12px;
+      }
+
+      .chips {
+        display: flex;
+        gap: 6px;
+        margin: 10px 0 14px;
+        flex-wrap: wrap;
+      }
+
+      .chip {
+        font-size: 11px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: var(--dark-2);
+        color: rgba(255, 255, 255, 0.55);
+        font-weight: 550;
+      }
+
+      .chip.on {
+        background: rgba(0, 71, 255, 0.22);
+        color: #7aa0ff;
+      }
+
+      .cta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .cta button {
+        border: 0;
+        border-radius: 12px;
+        padding: 13px 0;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 650;
+        color: #fff;
+      }
+
+      .cta .buy {
+        background: var(--rise);
+      }
+
+      .cta .sell {
+        background: var(--fall);
+      }
+
+      /* —— Floating cards —— */
+      .card {
+        background: #fff;
+        color: var(--ink);
+        padding: 18px 18px 16px;
+      }
+
+      .card-dark {
+        background: var(--dark);
+        color: #fff;
+        padding: 18px;
+      }
+
+      .card-title {
+        font-size: 12px;
+        font-weight: 650;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 14px;
+      }
+
+      .card-dark .card-title {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* Color swatches */
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        width: 260px;
+      }
+
+      .swatch {
+        border-radius: 14px;
+        overflow: hidden;
+        background: #f7f7f7;
+      }
+
+      .swatch .block {
+        height: 48px;
+      }
+
+      .swatch .meta {
+        padding: 8px 10px 10px;
+      }
+
+      .swatch .meta b {
+        display: block;
+        font-size: 12px;
+        font-weight: 650;
+      }
+
+      .swatch .meta span {
+        font-size: 10px;
+        color: var(--muted);
+      }
+
+      /* Buttons strip */
+      .btn-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 220px;
+      }
+
+      .btn {
+        border: 0;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 620;
+        text-align: center;
+      }
+
+      .btn-brand {
+        background: var(--brand);
+        color: #fff;
+      }
+
+      .btn-primary {
+        background: #111;
+        color: #fff;
+      }
+
+      .btn-secondary {
+        background: #eee;
+        color: #111;
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 1.5px solid #ddd;
+        color: #111;
+      }
+
+      .btn-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .btn-rise {
+        background: var(--rise);
+        color: #fff;
+      }
+
+      .btn-fall {
+        background: var(--fall);
+        color: #fff;
+      }
+
+      /* Option rows */
+      .rows {
+        width: 280px;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 4px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .row:last-child {
+        border-bottom: 0;
+      }
+
+      .row .left b {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .row .left span {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .row .chev {
+        color: #ccc;
+        font-size: 16px;
+      }
+
+      /* Switch / checkbox card */
+      .toggle-list {
+        width: 240px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .toggle-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        font-weight: 560;
+      }
+
+      .switch {
+        width: 42px;
+        height: 26px;
+        border-radius: 999px;
+        background: var(--brand);
+        position: relative;
+      }
+
+      .switch::after {
+        content: '';
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      .check {
+        width: 20px;
+        height: 20px;
+        border-radius: 6px;
+        background: var(--brand);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      /* Badges */
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 260px;
+      }
+
+      .badge {
+        font-size: 12px;
+        font-weight: 620;
+        padding: 6px 10px;
+        border-radius: 8px;
+      }
+
+      .b-rise {
+        background: rgba(17, 179, 111, 0.14);
+        color: var(--rise);
+      }
+
+      .b-fall {
+        background: rgba(246, 92, 105, 0.14);
+        color: var(--fall);
+      }
+
+      .b-brand {
+        background: rgba(0, 71, 255, 0.12);
+        color: var(--brand);
+      }
+
+      .b-warn {
+        background: rgba(245, 166, 35, 0.16);
+        color: #c07800;
+      }
+
+      .b-muted {
+        background: #f0f0f0;
+        color: #666;
+      }
+
+      /* Segment / search */
+      .seg {
+        display: flex;
+        background: #f2f2f2;
+        border-radius: 12px;
+        padding: 3px;
+        gap: 2px;
+        margin-bottom: 12px;
+      }
+
+      .seg span {
+        flex: 1;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 9px 0;
+        border-radius: 10px;
+        color: #888;
+      }
+
+      .seg span.on {
+        background: #fff;
+        color: #111;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      }
+
+      .search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #f5f5f5;
+        border-radius: 12px;
+        padding: 11px 14px;
+        color: #999;
+        font-size: 13px;
+      }
+
+      /* Chart mini phone */
+      .chart-box {
+        height: 110px;
+        border-radius: 12px;
+        background:
+          linear-gradient(180deg, rgba(17, 179, 111, 0.18), transparent 70%),
+          var(--dark-2);
+        margin-bottom: 12px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .chart-box svg {
+        position: absolute;
+        inset: 18px 8px 8px;
+        width: calc(100% - 16px);
+        height: calc(100% - 26px);
+      }
+
+      .book {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 11px;
+        font-variant-numeric: tabular-nums;
+        margin-bottom: 12px;
+      }
+
+      .book .ask {
+        color: var(--fall);
+        display: flex;
+        justify-content: space-between;
+        opacity: 0.85;
+      }
+
+      .book .bid {
+        color: var(--rise);
+        display: flex;
+        justify-content: space-between;
+        opacity: 0.85;
+      }
+
+      .book .mid {
+        text-align: center;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 650;
+        padding: 6px 0;
+      }
+
+      /* Footer dialog */
+      .footer-btns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        width: 260px;
+      }
+
+      .footer-btns button {
+        border: 0;
+        border-radius: 14px;
+        padding: 14px 0;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 620;
+      }
+
+      .fb-sec {
+        background: #efefef;
+        color: #333;
+      }
+
+      .fb-pri {
+        background: var(--brand);
+        color: #fff;
+      }
+
+      /* Corner brand mark */
+      .brand-mark {
+        position: absolute;
+        left: 48px;
+        bottom: 40px;
+        z-index: 2;
+        color: rgba(60, 30, 15, 0.45);
+        font-size: 13px;
+        font-weight: 560;
+        letter-spacing: 0.02em;
+        line-height: 1.45;
+      }
+
+      .brand-mark strong {
+        display: block;
+        color: rgba(50, 25, 12, 0.72);
+        font-size: 15px;
+        font-weight: 650;
+        margin-bottom: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="poster">
+      <!-- Left tall phone: Trade form -->
+      <div class="piece phone" style="left: 70px; top: 90px; transform: rotate(-8deg); z-index: 4">
+        <div class="status">
+          <span>9:41</span>
+          <div class="icons"><span class="dot"></span><span class="dot"></span><span>■</span></div>
+        </div>
+        <div class="notch"></div>
+        <div class="phone-pad">
+          <div class="pair-row">
+            <div>
+              <div class="pair">BTC/USDT</div>
+              <div class="pair-sub">永续 · 全仓 20x</div>
+            </div>
+            <div class="price">
+              <strong>67,842.5</strong>
+              <span>+1.33%</span>
+            </div>
+          </div>
+          <div class="tabs">
+            <button class="on">开仓</button>
+            <button>平仓</button>
+          </div>
+          <div class="dir">
+            <button class="long">开多</button>
+            <button class="short">开空</button>
+          </div>
+          <div class="field">
+            <span class="lab">价格</span>
+            <span class="val">市价 <span class="unit">USDT</span></span>
+          </div>
+          <div class="field">
+            <span class="lab">数量</span>
+            <span class="val">0.25 <span class="unit">BTC</span></span>
+          </div>
+          <div class="field">
+            <span class="lab">比例</span>
+            <span class="val">25%</span>
+          </div>
+          <div class="chips">
+            <span class="chip on">全部</span>
+            <span class="chip">限价</span>
+            <span class="chip">市价</span>
+            <span class="chip">TWAP</span>
+          </div>
+          <div class="cta">
+            <button class="buy">开多</button>
+            <button class="sell">开空</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center-left phone: Market -->
+      <div class="piece phone" style="left: 320px; top: 40px; transform: rotate(6deg); z-index: 5">
+        <div class="status">
+          <span>9:41</span>
+          <div class="icons"><span class="dot"></span><span class="dot"></span><span>■</span></div>
+        </div>
+        <div class="notch"></div>
+        <div class="phone-pad">
+          <div class="pair-row">
+            <div>
+              <div class="pair">ETH/USDT</div>
+              <div class="pair-sub">行情 · 1H</div>
+            </div>
+            <div class="price">
+              <strong style="color: var(--fall)">3,421.8</strong>
+              <span style="color: var(--fall)">−0.84%</span>
+            </div>
+          </div>
+          <div class="chart-box">
+            <svg viewBox="0 0 240 90" preserveAspectRatio="none">
+              <polyline
+                fill="none"
+                stroke="#11b36f"
+                stroke-width="2.5"
+                points="0,70 20,65 40,72 60,48 80,55 100,40 120,45 140,28 160,35 180,22 200,30 220,18 240,24"
+              />
+            </svg>
+          </div>
+          <div class="book">
+            <div class="ask"><span>3,422.4</span><span>1.284</span></div>
+            <div class="ask"><span>3,422.1</span><span>0.652</span></div>
+            <div class="mid">3,421.8</div>
+            <div class="bid"><span>3,421.5</span><span>2.104</span></div>
+            <div class="bid"><span>3,421.2</span><span>0.891</span></div>
+          </div>
+          <div class="cta">
+            <button class="buy">买入</button>
+            <button class="sell">卖出</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right phone: Settings -->
+      <div class="piece phone" style="left: 980px; top: 70px; transform: rotate(-5deg); z-index: 4">
+        <div class="status">
+          <span>9:41</span>
+          <div class="icons"><span class="dot"></span><span class="dot"></span><span>■</span></div>
+        </div>
+        <div class="notch"></div>
+        <div class="phone-pad">
+          <div class="pair" style="margin-bottom: 16px">我的</div>
+          <div class="field" style="margin-bottom: 6px">
+            <span class="lab">UID</span>
+            <span class="val">88291047</span>
+          </div>
+          <div
+            style="
+              background: var(--dark-2);
+              border-radius: 14px;
+              padding: 4px 12px;
+              margin-top: 10px;
+            "
+          >
+            <div
+              class="row"
+              style="border-color: rgba(255, 255, 255, 0.06); color: #fff; padding: 14px 0"
+            >
+              <div class="left">
+                <b style="color: #fff">安全中心</b>
+                <span>两步验证、设备管理</span>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div
+              class="row"
+              style="border-color: rgba(255, 255, 255, 0.06); color: #fff; padding: 14px 0"
+            >
+              <div class="left">
+                <b style="color: #fff">偏好设置</b>
+                <span>语言、涨跌色、主题</span>
+              </div>
+              <span class="chev">›</span>
+            </div>
+            <div class="row" style="border: 0; color: #fff; padding: 14px 0">
+              <div class="left">
+                <b style="color: #fff">关于我们</b>
+                <span>版本 4.5.0</span>
+              </div>
+              <span class="chev">›</span>
+            </div>
+          </div>
+          <div style="margin-top: 14px">
+            <div class="toggle-item" style="color: #fff; margin-bottom: 12px">
+              <span>消息通知</span>
+              <div class="switch"></div>
+            </div>
+            <div class="toggle-item" style="color: #fff">
+              <span>指纹解锁</span>
+              <div class="check">✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color tokens card -->
+      <div
+        class="piece piece-sm card"
+        style="left: 560px; top: 70px; transform: rotate(-11deg); z-index: 6; padding: 16px"
+      >
+        <div class="card-title">Color Tokens</div>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="block" style="background: #0047ff"></div>
+            <div class="meta"><b>Brand</b><span>#0047FF</span></div>
+          </div>
+          <div class="swatch">
+            <div class="block" style="background: #11b36f"></div>
+            <div class="meta"><b>Rise</b><span>#11B36F</span></div>
+          </div>
+          <div class="swatch">
+            <div class="block" style="background: #f65c69"></div>
+            <div class="meta"><b>Fall</b><span>#F65C69</span></div>
+          </div>
+          <div class="swatch">
+            <div class="block" style="background: #f5a623"></div>
+            <div class="meta"><b>Warn</b><span>#F5A623</span></div>
+          </div>
+          <div class="swatch">
+            <div class="block" style="background: #1a1a1a"></div>
+            <div class="meta"><b>Container</b><span>#1A1A1A</span></div>
+          </div>
+          <div class="swatch">
+            <div class="block" style="background: #fff; border-bottom: 1px solid #eee"></div>
+            <div class="meta"><b>Constant</b><span>#FFFFFF</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button hierarchy -->
+      <div
+        class="piece piece-sm card"
+        style="left: 880px; top: 40px; transform: rotate(9deg); z-index: 7"
+      >
+        <div class="card-title">Button</div>
+        <div class="btn-stack">
+          <button class="btn btn-brand">Brand</button>
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-outline">Outline</button>
+          <div class="btn-row">
+            <button class="btn btn-rise">开多</button>
+            <button class="btn btn-fall">开空</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search + segment -->
+      <div
+        class="piece piece-sm card"
+        style="left: 620px; top: 360px; transform: rotate(4deg); z-index: 8; width: 280px"
+      >
+        <div class="card-title">Search · Segment</div>
+        <div class="seg">
+          <span>限价</span>
+          <span class="on">TWAP</span>
+          <span>市价</span>
+        </div>
+        <div class="search">⌕  搜索交易对 / 币种</div>
+      </div>
+
+      <!-- OptionRow light card -->
+      <div
+        class="piece piece-sm card"
+        style="left: 1080px; top: 420px; transform: rotate(7deg); z-index: 6"
+      >
+        <div class="card-title">OptionRow</div>
+        <div class="rows">
+          <div class="row">
+            <div class="left"><b>安全中心</b><span>两步验证、设备管理</span></div>
+            <span class="chev">›</span>
+          </div>
+          <div class="row">
+            <div class="left"><b>偏好设置</b><span>语言、涨跌色、主题</span></div>
+            <span class="chev">›</span>
+          </div>
+          <div class="row">
+            <div class="left"><b>关于我们</b><span>版本与协议</span></div>
+            <span class="chev">›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div
+        class="piece piece-sm card"
+        style="left: 420px; top: 520px; transform: rotate(-6deg); z-index: 7"
+      >
+        <div class="card-title">Badge · Semantic</div>
+        <div class="badges">
+          <span class="badge b-rise">+1.33%</span>
+          <span class="badge b-fall">−0.84%</span>
+          <span class="badge b-brand">VIP0</span>
+          <span class="badge b-warn">风险提示</span>
+          <span class="badge b-muted">默认</span>
+        </div>
+      </div>
+
+      <!-- Direction + InputTrade dark floating -->
+      <div
+        class="piece piece-sm card-dark"
+        style="left: 700px; top: 520px; transform: rotate(-9deg); z-index: 9; width: 300px"
+      >
+        <div class="card-title">DirectionSwitch · InputTrade</div>
+        <div class="dir" style="margin-bottom: 10px">
+          <button class="long">开多</button>
+          <button class="short">开空</button>
+        </div>
+        <div class="field">
+          <span class="lab">下单间隔</span>
+          <span class="val">5 <span class="unit">S</span></span>
+        </div>
+        <div class="field" style="margin-bottom: 0">
+          <span class="lab">委托总量</span>
+          <span class="val">1.20 <span class="unit">BTC</span></span>
+        </div>
+      </div>
+
+      <!-- Toggle card -->
+      <div
+        class="piece piece-sm card"
+        style="left: 180px; top: 620px; transform: rotate(8deg); z-index: 6"
+      >
+        <div class="card-title">Switch · Checkbox</div>
+        <div class="toggle-list">
+          <div class="toggle-item">
+            <span>消息通知</span>
+            <div class="switch"></div>
+          </div>
+          <div class="toggle-item">
+            <span>指纹解锁</span>
+            <div class="check">✓</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dialog footer -->
+      <div
+        class="piece piece-sm card"
+        style="left: 1050px; top: 720px; transform: rotate(-4deg); z-index: 5"
+      >
+        <div class="card-title">DialogFooter</div>
+        <div class="footer-btns">
+          <button class="fb-sec">取消</button>
+          <button class="fb-pri">确认</button>
+        </div>
+      </div>
+
+      <!-- Chip strip floating -->
+      <div
+        class="piece piece-sm card-dark"
+        style="left: 480px; top: 780px; transform: rotate(5deg); z-index: 8; width: 320px"
+      >
+        <div class="card-title">RadioChip</div>
+        <div class="chips" style="margin: 0">
+          <span class="chip on">全部</span>
+          <span class="chip">限价</span>
+          <span class="chip">市价</span>
+          <span class="chip">条件单</span>
+          <span class="chip">TWAP</span>
+        </div>
+      </div>
+
+      <div class="brand-mark">
+        <strong>BingX Mobile Design System 4.5</strong>
+        Component Spec · Portfolio Collage
+      </div>
+    </div>
+  </body>
+</html>

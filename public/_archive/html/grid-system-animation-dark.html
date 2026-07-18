@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>栅格自适应 — Dark Editable</title>
+    <!--
+      可编辑说明
+      1. 改视觉：编辑下方 :root CSS 变量
+      2. 改栅格规则 / 文案：编辑底部 CONFIG
+      3. 文章嵌入：?embed=1 隐藏控制条，背景对齐稿件深色区
+      4. 导出：浏览器打开本页 → 截图 / 录屏
+    -->
+    <style>
+      :root {
+        --bg: #171a21;
+        --card: #1e222b;
+        --card-border: rgba(255, 255, 255, 0.06);
+        --text: #f2f4f7;
+        --muted: #8b919a;
+        --column: rgba(255, 138, 31, 0.55);
+        --chrome: #12151b;
+        --chrome-border: rgba(255, 255, 255, 0.08);
+        --content-bg: #0b0d10;
+        --url-bg: #1e222b;
+        --url-text: #c9ced6;
+        --dot-red: #ff5f57;
+        --dot-yellow: #febc2e;
+        --dot-green: #28c840;
+        --icon: #9aa1ab;
+        --page-max: 1080px;
+        --card-radius: 18px;
+        --browser-radius: 14px;
+        --font:
+          "SF Pro Text", "PingFang SC", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--bg);
+        font-family: var(--font);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .page {
+        max-width: var(--page-max);
+        margin: 0 auto;
+        padding: 28px 20px 36px;
+      }
+
+      .specs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .spec {
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: var(--card-radius);
+        padding: 20px 18px 18px;
+        min-height: 112px;
+      }
+
+      .spec-value {
+        margin: 0;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: var(--text);
+      }
+
+      .spec-label {
+        margin: 10px 0 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .spec-desc {
+        margin: 4px 0 0;
+        font-size: 12.5px;
+        line-height: 1.35;
+        color: var(--muted);
+      }
+
+      .stage {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        min-height: 480px;
+        padding: 4px 0;
+      }
+
+      .browser {
+        width: var(--browser-width, 100%);
+        max-width: 100%;
+        background: var(--chrome);
+        border-radius: var(--browser-radius);
+        border: 1px solid var(--chrome-border);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: width 0.05s linear;
+      }
+
+      .toolbar {
+        display: grid;
+        grid-template-columns: 1fr minmax(180px, 42%) 1fr;
+        align-items: center;
+        gap: 12px;
+        height: 46px;
+        padding: 0 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        background: #151922;
+      }
+
+      .traffic {
+        display: flex;
+        gap: 7px;
+        align-items: center;
+      }
+
+      .traffic i {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        display: block;
+      }
+
+      .traffic .r {
+        background: var(--dot-red);
+      }
+      .traffic .y {
+        background: var(--dot-yellow);
+      }
+      .traffic .g {
+        background: var(--dot-green);
+      }
+
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .icon-btn {
+        width: 16px;
+        height: 16px;
+        opacity: 0.7;
+        color: var(--icon);
+      }
+
+      .url {
+        height: 28px;
+        border-radius: 999px;
+        background: var(--url-bg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-size: 12.5px;
+        color: var(--url-text);
+        padding: 0 14px;
+      }
+
+      .url svg {
+        width: 11px;
+        height: 11px;
+        opacity: 0.65;
+      }
+
+      .nav-right {
+        display: flex;
+        justify-content: flex-end;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .content {
+        position: relative;
+        flex: 1;
+        min-height: 520px;
+        background: var(--content-bg);
+        padding: 0 var(--margin-px, 80px);
+      }
+
+      .columns {
+        height: 100%;
+        min-height: 520px;
+        display: grid;
+        grid-template-columns: repeat(var(--cols, 24), minmax(0, 1fr));
+        gap: var(--gutter-px, 16px);
+      }
+
+      .columns span {
+        display: block;
+        height: 100%;
+        background: var(--column);
+        border-radius: 1px;
+      }
+
+      .hud {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .hud-left {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        height: 32px;
+        padding: 0 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .pill strong {
+        font-variant-numeric: tabular-nums;
+        color: var(--text);
+      }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        min-width: min(420px, 100%);
+        flex: 1;
+        justify-content: flex-end;
+      }
+
+      button {
+        height: 32px;
+        padding: 0 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: #1e222b;
+        color: var(--text);
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      button.primary {
+        background: #ff8a1f;
+        color: #0b0d10;
+        border-color: #ff8a1f;
+      }
+
+      input[type="range"] {
+        flex: 1;
+        min-width: 140px;
+        accent-color: #ff8a1f;
+      }
+
+      .hint {
+        margin: 12px 0 0;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      html.embed,
+      html.embed body {
+        background: transparent;
+      }
+
+      html.embed .page {
+        max-width: none;
+        padding: 0;
+      }
+
+      html.embed .hud,
+      html.embed .hint {
+        display: none;
+      }
+
+      html.embed .stage {
+        min-height: 0;
+      }
+
+      html.embed .content,
+      html.embed .columns {
+        min-height: 420px;
+      }
+
+      @media (max-width: 900px) {
+        .specs {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .toolbar {
+          grid-template-columns: auto 1fr auto;
+        }
+        .spec-value {
+          font-size: 26px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .specs {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="specs" id="specs"></div>
+
+      <div class="stage">
+        <div class="browser" id="browser">
+          <div class="toolbar">
+            <div class="nav-left">
+              <div class="traffic">
+                <i class="r"></i><i class="y"></i><i class="g"></i>
+              </div>
+              <svg class="icon-btn" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M6 3H4.5A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13H6M10 3h1.5A1.5 1.5 0 0 1 13 4.5v7a1.5 1.5 0 0 1-1.5 1.5H10M6 8h4"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <svg class="icon-btn" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M9.5 3.5 5 8l4.5 4.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <svg class="icon-btn" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M6.5 3.5 11 8 6.5 12.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="url">
+              <svg viewBox="0 0 16 16" fill="none">
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="5.25"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path
+                  d="M3 8h10M8 2.75c1.4 1.5 2.1 3.25 2.1 5.25S9.4 11.75 8 13.25M8 2.75C6.6 4.25 5.9 6 5.9 8s.7 3.75 2.1 5.25"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                />
+              </svg>
+              <span id="urlText">xxxxx.com</span>
+            </div>
+            <div class="nav-right">
+              <svg class="icon-btn" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M8 3v7M5.5 7.5 8 10l2.5-2.5M3.5 13h9"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <svg class="icon-btn" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M8 3.5v9M3.5 8h9"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <svg class="icon-btn" viewBox="0 0 16 16" fill="none">
+                <rect
+                  x="3.2"
+                  y="3.2"
+                  width="9.6"
+                  height="9.6"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="content" id="content">
+            <div class="columns" id="columns"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud">
+        <div class="hud-left">
+          <span class="pill">窗宽 <strong id="wVal">—</strong></span>
+          <span class="pill">边距 <strong id="mVal">—</strong></span>
+          <span class="pill">列宽 <strong id="cVal">—</strong></span>
+          <span class="pill">列数 <strong id="nVal">—</strong></span>
+        </div>
+        <div class="controls">
+          <button type="button" id="playBtn" class="primary">Pause</button>
+          <input
+            id="widthSlider"
+            type="range"
+            min="42"
+            max="100"
+            step="0.1"
+            value="100"
+            aria-label="Browser width"
+          />
+        </div>
+      </div>
+      <p class="hint">
+        深色版栅格自适应动效。改 CONFIG 即可调整规则；文章内用
+        <code>?embed=1</code> 嵌入。
+      </p>
+    </div>
+
+    <script>
+      if (new URLSearchParams(location.search).has("embed")) {
+        document.documentElement.classList.add("embed");
+      }
+
+      const CONFIG = {
+        url: "xxxxx.com",
+        gutter: 16,
+        maxMargin: 80,
+        minColumn: 36,
+        maxColumns: 24,
+        columnStep: 4,
+        minColumns: 12,
+        widthMinPct: 58,
+        widthMaxPct: 100,
+        duration: 2.5,
+        autoplay: true,
+        specs: [
+          {
+            id: "gutter",
+            value: "16px",
+            label: "Gutter Width",
+            desc: "Fixed and unchanging",
+          },
+          {
+            id: "margin",
+            value: "80px",
+            label: "Max Margin",
+            desc: "Changes based on resolution breakpoints",
+          },
+          {
+            id: "minCol",
+            value: "36px",
+            label: "Minimum Column Width",
+            desc: "Fixed and unchanging",
+          },
+          {
+            id: "cols",
+            value: "24col",
+            label: "Number of Columns",
+            desc: "Reduces by 4 Columns as the Window Size Decreases",
+            live: true,
+          },
+        ],
+      };
+
+      const specsEl = document.getElementById("specs");
+      const browser = document.getElementById("browser");
+      const columnsEl = document.getElementById("columns");
+      const slider = document.getElementById("widthSlider");
+      const playBtn = document.getElementById("playBtn");
+      const urlText = document.getElementById("urlText");
+
+      urlText.textContent = CONFIG.url;
+      slider.min = String(CONFIG.widthMinPct);
+      slider.max = String(CONFIG.widthMaxPct);
+
+      function renderSpecs() {
+        specsEl.innerHTML = CONFIG.specs
+          .map(
+            (s) => `
+          <article class="spec" data-id="${s.id}">
+            <p class="spec-value" data-role="value">${s.value}</p>
+            <p class="spec-label">${s.label}</p>
+            <p class="spec-desc">${s.desc}</p>
+          </article>`
+          )
+          .join("");
+      }
+
+      function fitColumns(innerWidth) {
+        let cols = CONFIG.maxColumns;
+        while (cols > CONFIG.minColumns) {
+          const gutters = (cols - 1) * CONFIG.gutter;
+          const colW = (innerWidth - gutters) / cols;
+          if (colW >= CONFIG.minColumn - 0.01) break;
+          cols -= CONFIG.columnStep;
+        }
+        const gutters = (cols - 1) * CONFIG.gutter;
+        const colW = Math.max(0, (innerWidth - gutters) / cols);
+        return { cols, colW };
+      }
+
+      function minInnerFor(cols) {
+        return cols * CONFIG.minColumn + (cols - 1) * CONFIG.gutter;
+      }
+
+      function marginFor(browserW, preferredCols) {
+        const t =
+          (browserW / stageWidth() - CONFIG.widthMinPct / 100) /
+          (CONFIG.widthMaxPct / 100 - CONFIG.widthMinPct / 100);
+        const ease = Math.max(0, Math.min(1, t));
+        let margin = Math.round(
+          Math.max(16, CONFIG.maxMargin * (0.28 + 0.72 * ease))
+        );
+        const need = minInnerFor(preferredCols);
+        const maxMarginAllowed = Math.max(16, Math.floor((browserW - need) / 2));
+        return Math.min(margin, maxMarginAllowed);
+      }
+
+      function stageWidth() {
+        return browser.parentElement.getBoundingClientRect().width;
+      }
+
+      function paint(widthPct) {
+        const bw = (stageWidth() * widthPct) / 100;
+        browser.style.setProperty("--browser-width", `${bw}px`);
+
+        let margin = Math.min(
+          CONFIG.maxMargin,
+          Math.max(16, Math.round(CONFIG.maxMargin * 0.35))
+        );
+        let inner = Math.max(0, bw - margin * 2);
+        let { cols } = fitColumns(inner);
+        margin = marginFor(bw, cols);
+        inner = Math.max(0, bw - margin * 2);
+        ({ cols } = fitColumns(inner));
+        margin = marginFor(bw, cols);
+        inner = Math.max(0, bw - margin * 2);
+        const fitted = fitColumns(inner);
+        cols = fitted.cols;
+        const colW = fitted.colW;
+
+        browser.style.setProperty("--margin-px", `${margin}px`);
+        browser.style.setProperty("--gutter-px", `${CONFIG.gutter}px`);
+        browser.style.setProperty("--cols", String(cols));
+
+        if (columnsEl.children.length !== cols) {
+          columnsEl.innerHTML = Array.from(
+            { length: cols },
+            () => "<span></span>"
+          ).join("");
+        }
+
+        const live = specsEl.querySelector('[data-id="cols"] [data-role="value"]');
+        if (live) live.textContent = `${cols}col`;
+
+        document.getElementById("wVal").textContent = `${Math.round(bw)}px`;
+        document.getElementById("mVal").textContent = `${margin}px`;
+        document.getElementById("cVal").textContent = `${colW.toFixed(1)}px`;
+        document.getElementById("nVal").textContent = String(cols);
+      }
+
+      let playing = CONFIG.autoplay;
+      let start = performance.now();
+      let manualPct = CONFIG.widthMaxPct;
+
+      function loop(now) {
+        if (playing) {
+          const cycle = CONFIG.duration * 1000;
+          const p = ((now - start) % cycle) / cycle;
+          const tri = p < 0.5 ? p * 2 : (1 - p) * 2;
+          const eased =
+            tri < 0.5 ? 2 * tri * tri : 1 - Math.pow(-2 * tri + 2, 2) / 2;
+          manualPct =
+            CONFIG.widthMaxPct -
+            (CONFIG.widthMaxPct - CONFIG.widthMinPct) * eased;
+          slider.value = String(manualPct);
+        }
+        paint(manualPct);
+        requestAnimationFrame(loop);
+      }
+
+      slider.addEventListener("input", () => {
+        playing = false;
+        playBtn.textContent = "Play";
+        playBtn.classList.remove("primary");
+        manualPct = Number(slider.value);
+        paint(manualPct);
+      });
+
+      playBtn.addEventListener("click", () => {
+        playing = !playing;
+        playBtn.textContent = playing ? "Pause" : "Play";
+        playBtn.classList.toggle("primary", playing);
+        if (playing) start = performance.now();
+      });
+
+      window.addEventListener("resize", () => paint(manualPct));
+
+      renderSpecs();
+      requestAnimationFrame(loop);
+    </script>
+  </body>
+</html>

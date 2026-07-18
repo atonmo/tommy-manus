@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380">
+  <rect width="1200" height="380" fill="#070708"/>
+  <text x="48" y="48" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.22em" fill="#5B9FFF">WORKFLOW</text>
+  <text x="48" y="80" font-family="PingFang SC, Inter, system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.55)">接需求 → 生成 → 验证 → 验收 → Handoff → 集成</text>
+  <g font-family="PingFang SC, Inter, system-ui, sans-serif">
+    <rect x="40" y="120" width="160" height="200" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <circle cx="120" cy="166" r="16" fill="#5B9FFF"/>
+    <text x="115" y="171" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="#141414">1</text>
+    <text x="86" y="220" font-size="15" font-weight="500" fill="#FFFFFF">接需求</text>
+    <text x="72" y="250" font-size="12" fill="rgba(255,255,255,0.4)">产品 / 设计</text>
+
+    <rect x="228" y="120" width="160" height="200" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <circle cx="308" cy="166" r="16" fill="#5B9FFF"/>
+    <text x="303" y="171" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="#141414">2</text>
+    <text x="270" y="220" font-size="15" font-weight="500" fill="#FFFFFF">AI 生成</text>
+    <text x="264" y="250" font-size="12" fill="rgba(255,255,255,0.4)">在 Starter 中</text>
+
+    <rect x="416" y="120" width="160" height="200" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <circle cx="496" cy="166" r="16" fill="#5B9FFF"/>
+    <text x="491" y="171" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="#141414">3</text>
+    <text x="462" y="220" font-size="15" font-weight="500" fill="#FFFFFF">编译验证</text>
+    <text x="470" y="250" font-size="12" fill="rgba(255,255,255,0.4)">本地预览</text>
+
+    <rect x="604" y="120" width="160" height="200" rx="14" fill="#131318" stroke="rgba(255,255,255,0.08)"/>
+    <circle cx="684" cy="166" r="16" fill="#5B9FFF"/>
+    <text x="679" y="171" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="#141414">4</text>
+    <text x="650" y="220" font-size="15" font-weight="500" fill="#FFFFFF">视觉验收</text>
+    <text x="648" y="250" font-size="12" fill="rgba(255,255,255,0.4)">不通过回改</text>
+
+    <rect x="792" y="120" width="160" height="200" rx="14" fill="rgba(91,159,255,0.1)" stroke="rgba(91,159,255,0.3)"/>
+    <circle cx="872" cy="166" r="16" fill="#5B9FFF"/>
+    <text x="867" y="171" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="#141414">5</text>
+    <text x="832" y="220" font-size="15" font-weight="500" fill="#FFFFFF">Handoff</text>
+    <text x="836" y="250" font-size="12" fill="rgba(255,255,255,0.5)">交付研发</text>
+
+    <rect x="980" y="120" width="176" height="200" rx="14" fill="#5B9FFF"/>
+    <circle cx="1068" cy="166" r="16" fill="#070708"/>
+    <text x="1063" y="171" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="#5B9FFF">6</text>
+    <text x="1038" y="220" font-size="15" font-weight="600" fill="#141414">集成</text>
+    <text x="1030" y="250" font-size="12" fill="#3D6FBF">业务仓</text>
+  </g>
+</svg>

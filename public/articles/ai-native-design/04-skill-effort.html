@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Skill Effort · Dark</title>
+    <style>
+      :root {
+        --bg: #070708;
+        --ink: #f2f3f5;
+        --ink-2: rgba(255, 255, 255, 0.42);
+        --rule: rgba(255, 255, 255, 0.16);
+        --acc: #5b9fff;
+        --font: 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        padding: 8px 0 12px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(32px, 6vw, 72px);
+        width: 100%;
+      }
+
+      .col {
+        position: relative;
+        padding-left: 18px;
+        min-width: 0;
+      }
+
+      .col::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 4px;
+        bottom: 4px;
+        width: 1px;
+        background: var(--rule);
+      }
+
+      .label {
+        margin: 0 0 14px;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+      }
+
+      .value {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 12px;
+        font-size: clamp(40px, 5.5vw, 56px);
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        color: var(--ink);
+      }
+
+      .value .unit {
+        font-size: 0.92em;
+      }
+
+      .value .down {
+        display: inline-flex;
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        color: rgba(255, 255, 255, 0.72);
+        transform: translateY(1px);
+      }
+
+      .note {
+        margin: 0;
+        max-width: 28em;
+        font-size: 13px;
+        line-height: 1.65;
+        color: var(--ink-2);
+      }
+
+      @media (max-width: 720px) {
+        .grid {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+
+        .value {
+          font-size: 42px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <div class="col">
+        <p class="label">PRD → Prompt Skill</p>
+        <p class="value">
+          <span>0.5～2<span class="unit">pd</span></span>
+          <svg class="down" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 3.5v14.5M6.5 13.5 12 19l5.5-5.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </p>
+        <p class="note">区间随需求成熟度、业务复杂度与设计投入变化</p>
+      </div>
+
+      <div class="col">
+        <p class="label">Design Review Skill</p>
+        <p class="value">
+          <span>0.5～1<span class="unit">pd</span></span>
+          <svg class="down" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 3.5v14.5M6.5 13.5 12 19l5.5-5.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </p>
+        <p class="note">区间随方案难度与评审覆盖深度变化</p>
+      </div>
+    </div>
+
+    <script>
+      function postHeight() {
+        const h = Math.ceil(document.documentElement.scrollHeight)
+        parent.postMessage({ type: 'embed-height', height: h }, '*')
+      }
+      window.addEventListener('load', postHeight)
+      new ResizeObserver(postHeight).observe(document.body)
+    </script>
+  </body>
+</html>

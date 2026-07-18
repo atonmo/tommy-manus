@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Monitor Flip · Scroll then Slide</title>
+    <style>
+      :root {
+        --bg: #070708;
+        --dwell: 3000ms;
+        --slide: 900ms;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        overflow: hidden;
+        scrollbar-width: none;
+      }
+
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      body {
+        padding: 0;
+      }
+
+      .stage {
+        position: relative;
+        width: min(100%, 920px);
+        margin: 0 auto;
+        aspect-ratio: 1200 / 969;
+      }
+
+      .frame {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        pointer-events: none;
+        z-index: 3;
+        transform: none;
+      }
+
+      .screen {
+        position: absolute;
+        left: 9.42%;
+        top: 14.76%;
+        width: 80.83%;
+        height: 58.1%;
+        border-radius: 0.6% / 0.9%;
+        overflow: hidden;
+        background: #000;
+        z-index: 1;
+        scrollbar-width: none;
+      }
+
+      .screen::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      .stack {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .page {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        transform: translateX(100%);
+        background: #000;
+        scrollbar-width: none;
+      }
+
+      .page::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      .page-inner {
+        width: 100%;
+        will-change: transform;
+        transform: translateY(0);
+      }
+
+      .page-inner img {
+        width: 102%;
+        margin-left: -1%;
+        height: auto;
+        display: block;
+        vertical-align: top;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      .page.is-current {
+        transform: translateX(0);
+        z-index: 2;
+      }
+
+      .page.is-exit-left {
+        z-index: 2;
+        animation: exitLeft var(--slide) cubic-bezier(0.33, 0, 0.2, 1) forwards;
+      }
+
+      .page.is-enter-right {
+        z-index: 1;
+        animation: enterRight var(--slide) cubic-bezier(0.33, 0, 0.2, 1) forwards;
+      }
+
+      .page.is-hidden {
+        visibility: hidden;
+        transform: translateX(100%);
+      }
+
+      @keyframes exitLeft {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+      }
+
+      @keyframes enterRight {
+        from {
+          transform: translateX(100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .page.is-exit-left,
+        .page.is-enter-right {
+          animation-duration: 1ms;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <div class="screen" id="screen" aria-live="polite">
+        <div class="stack">
+          <div class="page is-current" data-i="0">
+            <div class="page-inner">
+              <img src="./slide-01.jpg?v=4" alt="画面 1" draggable="false" />
+            </div>
+          </div>
+          <div class="page is-hidden" data-i="1">
+            <div class="page-inner">
+              <img src="./slide-02.jpg?v=4" alt="画面 2" draggable="false" />
+            </div>
+          </div>
+          <div class="page is-hidden" data-i="2">
+            <div class="page-inner">
+              <img src="./slide-03.jpg?v=4" alt="画面 3" draggable="false" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <img class="frame" src="./frame.png?v=4" alt="电脑屏幕" />
+    </div>
+
+    <script>
+      const screen = document.getElementById('screen')
+      const pages = [...document.querySelectorAll('.page')]
+      const N = pages.length
+      const DWELL_TOP = 1200
+      const DWELL_BOTTOM = 1400
+      const DWELL_SIMPLE = 3000
+      const SLIDE = 900
+      const SCROLL_PX_PER_SEC = 220
+
+      let i = 0
+      let busy = false
+
+      function inner(page) {
+        return page.querySelector('.page-inner')
+      }
+
+      function img(page) {
+        return page.querySelector('img')
+      }
+
+      function maxScroll(page) {
+        const el = inner(page)
+        const overflow = el.scrollHeight - screen.clientHeight
+        return Math.max(0, overflow)
+      }
+
+      function resetScroll(page) {
+        const el = inner(page)
+        el.style.transition = 'none'
+        el.style.transform = 'translateY(0)'
+      }
+
+      function idle() {
+        pages.forEach((p, n) => {
+          p.classList.remove('is-current', 'is-exit-left', 'is-enter-right', 'is-hidden')
+          if (n === i) {
+            p.classList.add('is-current')
+            resetScroll(p)
+          } else {
+            p.classList.add('is-hidden')
+            resetScroll(p)
+          }
+        })
+      }
+
+      function wait(ms) {
+        return new Promise((r) => setTimeout(r, ms))
+      }
+
+      function scrollDown(page) {
+        const dist = maxScroll(page)
+        if (dist < 8) return Promise.resolve(false)
+        const el = inner(page)
+        const duration = Math.max(1600, Math.min(4200, (dist / SCROLL_PX_PER_SEC) * 1000))
+        return new Promise((resolve) => {
+          requestAnimationFrame(() => {
+            el.style.transition = `transform ${duration}ms cubic-bezier(0.33, 0, 0.2, 1)`
+            el.style.transform = `translateY(${-dist}px)`
+            window.setTimeout(() => resolve(true), duration)
+          })
+        })
+      }
+
+      function slideToNext() {
+        return new Promise((resolve) => {
+          const from = pages[i]
+          const toIndex = (i + 1) % N
+          const to = pages[toIndex]
+          resetScroll(to)
+
+          from.classList.remove('is-current')
+          from.classList.add('is-exit-left')
+          to.classList.remove('is-hidden')
+          to.classList.add('is-enter-right')
+
+          window.setTimeout(() => {
+            i = toIndex
+            from.classList.remove('is-exit-left')
+            to.classList.remove('is-enter-right')
+            idle()
+            resolve()
+          }, SLIDE)
+        })
+      }
+
+      async function cycle() {
+        if (busy) return
+        busy = true
+        try {
+          const page = pages[i]
+          const tall = maxScroll(page) >= 8
+
+          if (tall) {
+            await wait(DWELL_TOP)
+            await scrollDown(page)
+            await wait(DWELL_BOTTOM)
+          } else {
+            await wait(DWELL_SIMPLE)
+          }
+
+          await slideToNext()
+        } finally {
+          busy = false
+        }
+        cycle()
+      }
+
+      function whenImagesReady() {
+        const imgs = pages.map(img)
+        return Promise.all(
+          imgs.map(
+            (im) =>
+              im.complete
+                ? Promise.resolve()
+                : new Promise((res) => {
+                    im.addEventListener('load', res, { once: true })
+                    im.addEventListener('error', res, { once: true })
+                  }),
+          ),
+        )
+      }
+
+      idle()
+      whenImagesReady().then(() => {
+        // force layout so scrollHeight is correct
+        pages.forEach((p) => {
+          p.classList.remove('is-hidden')
+          p.style.visibility = 'hidden'
+          void inner(p).scrollHeight
+          p.style.visibility = ''
+          if (Number(p.dataset.i) !== i) p.classList.add('is-hidden')
+        })
+        idle()
+        cycle()
+      })
+
+      function postHeight() {
+        parent.postMessage(
+          { type: 'embed-height', height: Math.ceil(document.documentElement.scrollHeight) },
+          '*',
+        )
+      }
+      window.addEventListener('load', postHeight)
+      new ResizeObserver(postHeight).observe(document.body)
+    </script>
+  </body>
+</html>
