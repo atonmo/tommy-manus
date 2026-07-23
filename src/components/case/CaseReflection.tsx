@@ -9,6 +9,11 @@ const components: Components = {
   ul: ({ children }) => <ul className="gf-list">{children}</ul>,
   blockquote: ({ children }) => <blockquote className="wt-callout">{children}</blockquote>,
   strong: ({ children }) => <strong>{children}</strong>,
+  table: ({ children }) => (
+    <div className="gf-table-wrap">
+      <table className="gf-table">{children}</table>
+    </div>
+  ),
 }
 
 export function CaseReflection({

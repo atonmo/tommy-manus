@@ -39,18 +39,24 @@ export function Myself() {
             <p className="text-h1-light myself-intro-text">Hi, I'm Tommy</p>
           </div>
           <div className="myself-intro-line">
-            <p className="text-h1-light myself-intro-text">产品体验设计师，深耕金融、效率类与云服务等复杂产品。</p>
+            <p className="text-h1-light myself-intro-text">
+            产品体验设计师，深耕金融、效率类与云服务等复杂产品。
+            </p>
           </div>
           <div className="myself-intro-line">
-            <p className="text-h1-light myself-intro-text">用设计方法拆解复杂产品，把体验设计做成可度量的业务结果。</p>
+            <p className="text-h1-light myself-intro-text">
+            用设计方法拆解复杂产品，把体验设计做成可度量的业务结果。
+            </p>
           </div>
           <div className="myself-intro-line myself-intro-meta-wrap">
             <p className="myself-intro-meta myself-intro-text">
-              <a href="mailto:fengzhao@vip.qq.com">fengzhao@vip.qq.com</a>
+              
+          
+              <a href="tel:18066880020">180 6688 0020</a>
               <span className="myself-intro-dot" aria-hidden="true">
                 ·
               </span>
-              <a href="tel:18066880020">18066880020</a>
+              <a href="mailto:fengzhao@vip.qq.com">fengzhao@vip.qq.com</a>
             </p>
           </div>
         </header>

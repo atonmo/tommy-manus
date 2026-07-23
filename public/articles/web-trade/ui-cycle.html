@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>界面切换循环</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+      }
+      .stage {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+      }
+      .shot {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+        display: block;
+        opacity: 0;
+        transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        user-select: none;
+      }
+      .shot.is-on {
+        opacity: 1;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage" id="stage">
+      <img
+        class="shot is-on"
+        data-id="a"
+        src="/articles/web-trade/sgxt1.png?v=1"
+        width="4320"
+        height="2859"
+        alt="布局界面 A"
+        decoding="async"
+        fetchpriority="high"
+      />
+      <img
+        class="shot"
+        data-id="b"
+        src="/articles/web-trade/sgxt2.png?v=1"
+        width="4320"
+        height="2859"
+        alt="布局界面 B"
+        decoding="async"
+      />
+    </div>
+    <script>
+      const HOLD_MS = 3000
+      const FADE_MS = 550
+      const shots = {
+        a: document.querySelector('.shot[data-id="a"]'),
+        b: document.querySelector('.shot[data-id="b"]'),
+      }
+      let current = 'a'
+
+      function wait(ms) {
+        return new Promise((r) => setTimeout(r, ms))
+      }
+
+      function apply(next) {
+        current = next
+        shots.a.classList.toggle('is-on', next === 'a')
+        shots.b.classList.toggle('is-on', next === 'b')
+      }
+
+      async function loop() {
+        ;[shots.a, shots.b].forEach((img) => {
+          if (!img.complete) {
+            const warm = new Image()
+            warm.src = img.src
+          }
+        })
+        apply('a')
+        while (true) {
+          await wait(HOLD_MS)
+          apply(current === 'a' ? 'b' : 'a')
+          await wait(FADE_MS)
+        }
+      }
+
+      loop()
+    </script>
+  </body>
+</html>

@@ -100,6 +100,12 @@
   min-height: 520px;
 }
 
+/* UI cycle demo — sgxt1/sgxt2 4320×2859, 3s crossfade */
+.wt-embed-wrap.is-frame:has(iframe[src*='ui-cycle']) .wt-embed-frame {
+  aspect-ratio: 4320 / 2859;
+  min-height: 480px;
+}
+
 .wt-embed.is-frame-embed {
   position: absolute;
   inset: 0;

@@ -18,7 +18,7 @@ export const webTradeMedia: Record<string, ArticleMediaItem> = {
     caption: 'Research · Persona · Scenario · Advantage',
   },
   competitor: {
-    src: '/articles/web-trade/03-competitor.png',
+    src: '/articles/web-trade/03-competitor.svg',
     alt: '竞品屏效对比',
     caption: 'Benchmark · Screen Efficiency',
   },
@@ -26,6 +26,11 @@ export const webTradeMedia: Record<string, ArticleMediaItem> = {
     src: '/articles/web-trade/04-layout-demo.png',
     alt: '布局框架演示',
     caption: 'Layout · Framework Demo',
+  },
+  sgxt1: {
+    src: '/articles/web-trade/sgxt1.png',
+    alt: '栅格化交易页布局',
+    caption: 'Layout · Grid Framework',
   },
   mkhf: {
     src: '/articles/web-trade/mkhf.png',
@@ -154,6 +159,16 @@ export const webTradeMedia: Record<string, ArticleMediaItem> = {
     caption: 'Theme · Dark ↔ Light',
     embed: true,
     frame: true,
+  },
+  'ui-cycle': {
+    src: '/articles/web-trade/ui-cycle.html?embed=1&frame=1',
+    alt: '布局框架演示：两套界面循环切换，各停留 3 秒',
+    embed: true,
+    frame: true,
+  },
+  'grid-specs': {
+    src: '/articles/web-trade/grid-specs.svg',
+    alt: '栅格系统参数：gutter、margin、列宽与列数',
   },
   'visual-2': {
     src: '/articles/web-trade/21-visual-2.svg',

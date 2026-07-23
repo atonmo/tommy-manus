@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="320" viewBox="0 0 2400 320" fill="none" role="img" aria-label="Grid system specs">
+  <rect width="2400" height="320" fill="#000000"/>
+  <defs>
+    <style type="text/css"><![CDATA[
+      .v { fill:#F2F4F7; font:700 52px Inter, SF Pro Display, -apple-system, Helvetica Neue, Arial, sans-serif; }
+      .t { fill:#F2F4F7; font:600 28px Inter, SF Pro Text, -apple-system, Helvetica Neue, Arial, sans-serif; }
+      .d { fill:#8B919A; font:400 20px Inter, SF Pro Text, -apple-system, Helvetica Neue, Arial, sans-serif; }
+    ]]></style>
+  </defs>
+
+  <rect x="0" y="0" width="576" height="320" rx="24" fill="#1A1B20"/>
+  <text x="40" y="100" class="v">4px</text>
+  <text x="40" y="164" class="t">Gutter Width</text>
+  <text x="40" y="218" class="d">Fixed and unchanging</text>
+
+  <rect x="608" y="0" width="576" height="320" rx="24" fill="#1A1B20"/>
+  <text x="648" y="100" class="v">80px</text>
+  <text x="648" y="164" class="t">Max Margin</text>
+  <text x="648" y="218" class="d">Changes based on resolution</text>
+  <text x="648" y="246" class="d">breakpoints</text>
+
+  <rect x="1216" y="0" width="576" height="320" rx="24" fill="#1A1B20"/>
+  <text x="1256" y="100" class="v">14px</text>
+  <text x="1256" y="164" class="t">Minimum Column Width</text>
+  <text x="1256" y="218" class="d">Fixed and unchanging</text>
+
+  <rect x="1824" y="0" width="576" height="320" rx="24" fill="#1A1B20"/>
+  <text x="1864" y="100" class="v">80col</text>
+  <text x="1864" y="164" class="t">Number of Columns</text>
+  <text x="1864" y="218" class="d">Reduces by 4 Columns as the</text>
+  <text x="1864" y="246" class="d">Window Size Decreases</text>
+</svg>
