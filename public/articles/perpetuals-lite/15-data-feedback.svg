@@ -1,83 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 620" font-family="Inter, PingFang SC, Noto Sans SC, Hiragino Sans GB, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 420" font-family="Inter, PingFang SC, Noto Sans SC, Hiragino Sans GB, sans-serif">
   <defs>
-    <radialGradient id="mtn" cx="20%" cy="90%" r="58%">
-      <stop offset="0%" stop-color="#1c1f18" stop-opacity="0.85"/>
-      <stop offset="60%" stop-color="#0a0b09" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#060607" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="cg" cx="50%" cy="38%" r="60%">
-      <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
-      <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
-    </radialGradient>
-    <filter id="glow" x="-12%" y="-8%" width="124%" height="116%">
-      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#B8F53A" flood-opacity="0.18"/>
-    </filter>
-    <linearGradient id="pillBg" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="rgba(184,245,58,0.16)"/>
-      <stop offset="100%" stop-color="rgba(184,245,58,0.05)"/>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.045)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.018)"/>
     </linearGradient>
   </defs>
 
-  <rect width="1280" height="620" fill="#070708"/>
-  <rect width="600" height="620" fill="url(#mtn)"/>
-  <path d="M0 530 L90 445 L170 485 L270 370 L380 460 L500 400 L600 475 L600 620 L0 620 Z" fill="rgba(255,255,255,0.028)"/>
-  <path d="M0 570 L130 495 L230 545 L350 465 L470 525 L580 480 L600 520 L600 620 L0 620 Z" fill="rgba(255,255,255,0.02)"/>
+  <!-- Metric 01 -->
+  <rect x="0" y="0" width="408" height="320" rx="16" fill="url(#card)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="204" y="132" text-anchor="middle" fill="#B8F53A" font-size="64" font-weight="600" letter-spacing="-0.04em" font-family="JetBrains Mono, ui-monospace, monospace">78%</text>
+  <text x="204" y="178" text-anchor="middle" fill="rgba(255,255,255,0.88)" font-size="16" font-weight="500">首交完成率</text>
+  <text x="204" y="208" text-anchor="middle" fill="rgba(255,255,255,0.38)" font-size="13">灰度两周 · 环比提升</text>
 
-  <circle cx="275" cy="220" r="118" fill="url(#cg)" stroke="rgba(255,255,255,0.13)" stroke-width="1.2"/>
-  <circle cx="275" cy="220" r="118" fill="none" stroke="rgba(184,245,58,0.16)" stroke-width="1"/>
-  <text x="275" y="214" text-anchor="middle" fill="#B8F53A" font-size="38" font-weight="700">38%<tspan font-size="22" dx="3">↑</tspan></text>
-  <text x="275" y="250" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="13">首交完成率</text>
+  <!-- Metric 02 -->
+  <rect x="436" y="0" width="408" height="320" rx="16" fill="url(#card)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="640" y="132" text-anchor="middle" fill="#B8F53A" font-size="64" font-weight="600" letter-spacing="-0.04em" font-family="JetBrains Mono, ui-monospace, monospace">2.1×</text>
+  <text x="640" y="178" text-anchor="middle" fill="rgba(255,255,255,0.88)" font-size="16" font-weight="500">止盈止损设置率</text>
+  <text x="640" y="208" text-anchor="middle" fill="rgba(255,255,255,0.38)" font-size="13">风控触达 · 同步抬升</text>
 
-  <circle cx="180" cy="370" r="118" fill="url(#cg)" stroke="rgba(255,255,255,0.13)" stroke-width="1.2"/>
-  <circle cx="180" cy="370" r="118" fill="none" stroke="rgba(184,245,58,0.16)" stroke-width="1"/>
-  <text x="180" y="364" text-anchor="middle" fill="#B8F53A" font-size="38" font-weight="700">2.1倍<tspan font-size="22" dx="3">↑</tspan></text>
-  <text x="180" y="400" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="13">止盈止损设置率</text>
+  <!-- Metric 03 -->
+  <rect x="872" y="0" width="408" height="320" rx="16" fill="url(#card)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="1076" y="132" text-anchor="middle" fill="#B8F53A" font-size="64" font-weight="600" letter-spacing="-0.04em" font-family="JetBrains Mono, ui-monospace, monospace">27%</text>
+  <text x="1076" y="178" text-anchor="middle" fill="rgba(255,255,255,0.88)" font-size="16" font-weight="500">新手开仓转化提升</text>
+  <text x="1076" y="208" text-anchor="middle" fill="rgba(255,255,255,0.38)" font-size="13">从观望到完成首交</text>
 
-  <circle cx="370" cy="370" r="118" fill="url(#cg)" stroke="rgba(255,255,255,0.13)" stroke-width="1.2"/>
-  <circle cx="370" cy="370" r="118" fill="none" stroke="rgba(184,245,58,0.16)" stroke-width="1"/>
-  <text x="370" y="364" text-anchor="middle" fill="#B8F53A" font-size="38" font-weight="700">27%<tspan font-size="22" dx="3">↑</tspan></text>
-  <text x="370" y="400" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="13">新手开仓转化</text>
-
-  <text x="48" y="508" fill="rgba(255,255,255,0.36)" font-size="12">*取灰度上线两周后数据对比</text>
-  <text x="48" y="538" fill="rgba(255,255,255,0.82)" font-size="14">在设计驱动下，首交完成率与止盈止损触达同步抬升，</text>
-  <text x="48" y="562" fill="rgba(255,255,255,0.82)" font-size="14">验证设计对业务转化的直接贡献。</text>
-
-  <!-- Right panel -->
-  <rect x="620" y="40" width="612" height="540" rx="20" fill="#111214" filter="url(#glow)"/>
-  <rect x="620" y="40" width="612" height="540" rx="20" fill="none" stroke="rgba(184,245,58,0.22)" stroke-width="1"/>
-
-  <text x="656" y="88" fill="#FFFFFF" font-size="18" font-weight="700">探索项目中的设计价值</text>
-  <line x1="656" y1="108" x2="1196" y2="108" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-
-  <g transform="translate(656 128)">
-    <rect width="36" height="22" rx="6" fill="url(#pillBg)" stroke="rgba(184,245,58,0.28)" stroke-width="0.8"/>
-    <text x="18" y="15" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#B8F53A" font-weight="700">01</text>
-    <text x="48" y="16" fill="#FFFFFF" font-size="14" font-weight="600">对齐目标</text>
-    <text x="0" y="42" fill="rgba(255,255,255,0.5)" font-size="13">以「首交可完成」为北极星，拆成可验收指标。</text>
-  </g>
-  <g transform="translate(656 210)">
-    <rect width="36" height="22" rx="6" fill="url(#pillBg)" stroke="rgba(184,245,58,0.28)" stroke-width="0.8"/>
-    <text x="18" y="15" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#B8F53A" font-weight="700">02</text>
-    <text x="48" y="16" fill="#FFFFFF" font-size="14" font-weight="600">用数据说话</text>
-    <text x="0" y="42" fill="rgba(255,255,255,0.5)" font-size="13">走查 + 埋点定位断点，灰度验证路径是否打通。</text>
-  </g>
-  <g transform="translate(656 292)">
-    <rect width="36" height="22" rx="6" fill="url(#pillBg)" stroke="rgba(184,245,58,0.28)" stroke-width="0.8"/>
-    <text x="18" y="15" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#B8F53A" font-weight="700">03</text>
-    <text x="48" y="16" fill="#FFFFFF" font-size="14" font-weight="600">小步放量</text>
-    <text x="0" y="42" fill="rgba(255,255,255,0.5)" font-size="13">先收敛 MVP，看完成率与风控触达，再决定扩面。</text>
-  </g>
-  <g transform="translate(656 374)">
-    <rect width="36" height="22" rx="6" fill="url(#pillBg)" stroke="rgba(184,245,58,0.28)" stroke-width="0.8"/>
-    <text x="18" y="15" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#B8F53A" font-weight="700">04</text>
-    <text x="48" y="16" fill="#FFFFFF" font-size="14" font-weight="600">排优先级</text>
-    <text x="0" y="42" fill="rgba(255,255,255,0.5)" font-size="13">方向优于参数；止盈止损前置到开仓现场。</text>
-  </g>
-  <g transform="translate(656 456)">
-    <rect width="36" height="22" rx="6" fill="url(#pillBg)" stroke="rgba(184,245,58,0.28)" stroke-width="0.8"/>
-    <text x="18" y="15" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" fill="#B8F53A" font-weight="700">05</text>
-    <text x="48" y="16" fill="#FFFFFF" font-size="14" font-weight="600">AI辅助提速</text>
-    <text x="0" y="42" fill="rgba(255,255,255,0.5)" font-size="13">动效与方案探索用 AI 压缩周期。</text>
-  </g>
+  <!-- Footer -->
+  <line x1="0" y1="360" x2="1280" y2="360" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="0" y="396" fill="rgba(255,255,255,0.32)" font-size="12">* 取灰度上线两周后数据对比</text>
 </svg>

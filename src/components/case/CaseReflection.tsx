@@ -2,9 +2,18 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { Components } from 'react-markdown'
 import type { CaseReflectionPoint } from './types'
+import { MediaBlock } from './MediaBlock'
 
 const components: Components = {
-  p: ({ children }) => <p className="gf-prose">{children}</p>,
+  p: ({ node, children }) => {
+    const kids = node?.children ?? []
+    const onlyImg =
+      kids.length === 1 &&
+      kids[0]?.type === 'element' &&
+      (kids[0] as { tagName?: string }).tagName === 'img'
+    if (onlyImg) return <>{children}</>
+    return <p className="gf-prose">{children}</p>
+  },
   ol: ({ children }) => <ol className="gf-list">{children}</ol>,
   ul: ({ children }) => <ul className="gf-list">{children}</ul>,
   blockquote: ({ children }) => <blockquote className="wt-callout">{children}</blockquote>,
@@ -14,6 +23,10 @@ const components: Components = {
       <table className="gf-table">{children}</table>
     </div>
   ),
+  img: ({ src, alt, title }) => {
+    if (!src) return null
+    return <MediaBlock src={src} alt={alt || ''} caption={title || undefined} />
+  },
 }
 
 export function CaseReflection({

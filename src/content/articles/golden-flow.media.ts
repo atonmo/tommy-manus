@@ -26,7 +26,7 @@ export const goldenFlowMedia: Record<string, ArticleMediaItem> = {
     caption: 'Quantitative · Register / KYC / Landing',
   },
   'register-retain': {
-    src: '/articles/golden-flow/06-register-retain.jpg',
+    src: '/articles/golden-flow/18-zhuce2.svg',
     alt: '注册退出挽留',
     caption: 'Retain · Rewards + Time cost',
   },
@@ -36,12 +36,12 @@ export const goldenFlowMedia: Record<string, ArticleMediaItem> = {
     caption: 'Focus · Registration reward task',
   },
   safety: {
-    src: '/articles/golden-flow/07-safety.jpg',
+    src: '/articles/golden-flow/18-zhuce3.png',
     alt: '安全教育',
     caption: 'Trust · Safety reserve education',
   },
   'kyc-progress': {
-    src: '/articles/golden-flow/08-kyc-progress.jpg',
+    src: '/articles/golden-flow/18-zhuce1.svg',
     alt: 'KYC 进度可视化',
     caption: 'Progress · KYC visible + incentivized',
   },
@@ -51,7 +51,7 @@ export const goldenFlowMedia: Record<string, ArticleMediaItem> = {
     caption: 'Insight · Where deposit intent happens',
   },
   rujin: {
-    src: '/articles/golden-flow/19-rujin.png',
+    src: '/articles/golden-flow/19-rujin.svg',
     alt: '入金引导方案',
     caption: 'UX · Deposit guidance',
   },

@@ -3,6 +3,7 @@ import { aiNativeMedia } from './ai-native.media'
 import { perpetualsLiteMedia } from './perpetuals-lite.media'
 import { goldenFlowMedia } from './golden-flow.media'
 import { tencentMeetingMedia } from './tencent-meeting.media'
+import { tencentCloudMedia } from './tencent-cloud.media'
 
 export type { ArticleMediaItem }
 
@@ -12,6 +13,7 @@ const mediaBySlug: Record<string, Record<string, ArticleMediaItem>> = {
   'perpetuals-lite': perpetualsLiteMedia,
   'golden-flow': goldenFlowMedia,
   'tencent-meeting': tencentMeetingMedia,
+  'tencent-cloud': tencentCloudMedia,
 }
 
 export function getArticleMedia(

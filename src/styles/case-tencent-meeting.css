@@ -25,6 +25,24 @@
   transform: none;
 }
 
+/* Step number — solid rounded badge with white digits (match pl / wt) */
+.tm-case .gf-step-label {
+  align-items: center;
+  gap: 10px;
+}
+
+.tm-case .gf-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--gf-acc) 78%, #0a0a0a 22%);
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
 /* User segmentation table: tighten number cols, give meaning room */
 .tm-case .gf-table th:nth-child(1),
 .tm-case .gf-table td:nth-child(1) {

@@ -471,8 +471,14 @@ function parseDoc(markdown: string, slug?: string): DocPart[] {
         )
       const toMd = (list: BodyBlock[]) =>
         list
-          .filter((b) => b.kind === 'md')
-          .map((b) => (b as Extract<BodyBlock, { kind: 'md' }>).source)
+          .map((b) => {
+            if (b.kind === 'md') return b.source
+            if (b.kind === 'media' && !b.embed) {
+              const title = b.caption ? ` "${b.caption}"` : ''
+              return `![${b.alt}](${b.src}${title})`
+            }
+            return null
+          })
           .filter(Boolean)
           .join('\n\n')
       const body = [lead, toMd(before)].filter(Boolean).join('\n\n')

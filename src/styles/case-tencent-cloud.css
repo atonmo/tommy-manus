@@ -75,8 +75,55 @@
   }
 }
 
+.tc-case .gf-target-card {
+  transition: none;
+}
+
 .tc-case .gf-target-card:hover {
-  border-color: color-mix(in srgb, var(--gf-acc) 40%, transparent);
+  border-color: var(--gf-hair);
+  background: rgba(255, 255, 255, 0.025);
+  transform: none;
+}
+
+.tc-case .gf-prose {
+  letter-spacing: 0.02em;
+  line-height: 1.85;
+}
+
+.tc-case .gf-list li::before {
+  box-shadow: 0 0 10px color-mix(in srgb, var(--gf-acc) 45%, transparent);
+}
+
+/* Step number — solid rounded badge with white digits (match tm / pl / wt) */
+.tc-case .gf-step-label {
+  align-items: center;
+  gap: 10px;
+}
+
+.tc-case .gf-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--gf-acc) 78%, #0a0a0a 22%);
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+/* §03 五条控制台：一排铺开 */
+.tc-case .gf-sec-03 .gf-subgrid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.tc-case .gf-subcard {
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.tc-case .gf-subcard h4 {
+  font-family: var(--gf-font-zh);
 }
 
 .tc-pill-row {
@@ -88,7 +135,7 @@
 
 .tc-pill {
   padding: 6px 12px;
-  border-radius: 999px;
+  border-radius: 4px;
   border: 1px solid color-mix(in srgb, var(--gf-acc) 28%, transparent);
   background: color-mix(in srgb, var(--gf-acc) 10%, transparent);
   font-family: var(--gf-font-zh);
@@ -113,19 +160,19 @@
 
 .tc-chip-card:hover {
   border-color: color-mix(in srgb, var(--gf-acc) 36%, transparent);
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .tc-chip-tag {
   display: inline-block;
   margin-bottom: 10px;
   padding: 3px 8px;
-  border-radius: 999px;
+  border-radius: 4px;
   font-family: var(--gf-font-mono);
   font-size: 9.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #7db1ff;
+  color: var(--gf-acc);
   background: color-mix(in srgb, var(--gf-acc) 14%, transparent);
   border: 1px solid color-mix(in srgb, var(--gf-acc) 22%, transparent);
 }
@@ -173,7 +220,7 @@
   font-size: clamp(22px, 2.4vw, 28px);
   font-weight: 500;
   letter-spacing: -0.02em;
-  color: #7db1ff;
+  color: var(--gf-acc);
 }
 
 .tc-zones {
@@ -197,7 +244,7 @@
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #7db1ff;
+  color: var(--gf-acc);
 }
 
 .tc-zone h4 {
@@ -220,7 +267,8 @@
 }
 
 @media (max-width: 1100px) {
-  .tc-chip-grid {
+  .tc-chip-grid,
+  .tc-case .gf-sec-03 .gf-subgrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -228,7 +276,8 @@
 @media (max-width: 900px) {
   .tc-chip-grid,
   .tc-growth,
-  .tc-zones {
+  .tc-zones,
+  .tc-case .gf-sec-03 .gf-subgrid {
     grid-template-columns: 1fr;
   }
 }
