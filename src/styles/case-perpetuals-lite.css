@@ -198,14 +198,16 @@
   background: color-mix(in srgb, #f05c78 55%, transparent);
 }
 
-/* Remove the dividers between sections 01/02 and 02/03, and tighten the gaps */
+/* Remove the dividers between sections 01/02, 02/03, 03/04, and tighten the gaps */
 .pl-case .gf-section.gf-sec-01,
-.pl-case .gf-section.gf-sec-02 {
+.pl-case .gf-section.gf-sec-02,
+.pl-case .gf-section.gf-sec-03 {
   padding-bottom: 40px;
 }
 
 .pl-case .gf-section.gf-sec-01 + .gf-section,
-.pl-case .gf-section.gf-sec-02 + .gf-section {
+.pl-case .gf-section.gf-sec-02 + .gf-section,
+.pl-case .gf-section.gf-sec-03 + .gf-section {
   border-top: none;
   padding-top: 28px;
 }
@@ -223,8 +225,37 @@
   font-size: 13px;
 }
 
+.pl-case .gf-target-grid {
+  gap: 14px;
+}
+
+.pl-case .gf-target-card {
+  padding: 20px 22px 22px;
+  border-radius: 12px;
+}
+
+.pl-case .gf-target-id {
+  margin: 0 0 8px;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+}
+
+.pl-case .gf-target-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.pl-case .gf-title-sep {
+  color: rgba(255, 255, 255, 0.28);
+  font-weight: 400;
+  margin: 0 0.35em;
+  letter-spacing: 0;
+}
+
 .pl-case .gf-target-body {
   font-size: 13px;
+  line-height: 1.65;
 }
 
 .pl-case .gf-reflection-body {
@@ -238,6 +269,8 @@
 
 .pl-case .gf-table {
   font-size: 12.5px;
+  table-layout: fixed;
+  width: 100%;
 }
 
 .pl-case .gf-table th,
@@ -266,7 +299,18 @@
 
 .pl-case .gf-table th:first-child,
 .pl-case .gf-table td:first-child {
-  width: 22%;
+  width: 28%;
+}
+
+.pl-case .gf-table th:nth-child(2),
+.pl-case .gf-table td:nth-child(2) {
+  width: 10%;
+  white-space: nowrap;
+}
+
+.pl-case .gf-table th:last-child,
+.pl-case .gf-table td:last-child {
+  width: 62%;
 }
 
 .pl-case .gf-table td:first-child {
@@ -279,6 +323,32 @@
 
 .pl-case .gf-table td:last-child {
   color: var(--gf-ink-2);
+}
+
+/* 新手引导：步骤 / 概念 按内容收窄，叙事占满剩余 */
+.pl-case .gf-table.pl-guide-table th:first-child,
+.pl-case .gf-table.pl-guide-table td:first-child {
+  width: 4.75rem;
+  padding-right: 12px;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
+.pl-case .gf-table.pl-guide-table th:nth-child(2),
+.pl-case .gf-table.pl-guide-table td:nth-child(2) {
+  width: 4.75rem;
+  padding-left: 12px;
+  padding-right: 16px;
+  white-space: nowrap;
+}
+
+.pl-case .gf-table.pl-guide-table th:last-child,
+.pl-case .gf-table.pl-guide-table td:last-child {
+  width: auto;
+}
+
+.pl-case .gf-table.pl-guide-table td:nth-child(2) {
+  color: var(--gf-ink-0);
 }
 
 .pl-target-grid {
@@ -317,34 +387,68 @@
 }
 
 .pl-timeline {
+  --pl-tl-gap: 16px;
+  --pl-tl-axis: 22px;
+  position: relative;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
+  gap: var(--pl-tl-gap);
+  margin: 8px 0 0;
+  padding: var(--pl-tl-axis) 0 0;
+  list-style: none;
+}
+
+/* Continuous axis above the cards — spans first→last node centers */
+.pl-timeline::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: calc((100% - 4 * var(--pl-tl-gap)) / 10);
+  right: calc((100% - 4 * var(--pl-tl-gap)) / 10);
+  height: 1px;
+  border-radius: 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--gf-acc) 8%, transparent),
+    var(--gf-acc) 18%,
+    var(--gf-acc) 82%,
+    color-mix(in srgb, var(--gf-acc) 8%, transparent)
+  );
+  opacity: 1;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .pl-timeline-item {
   position: relative;
-  padding: 20px 16px;
-  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 16px 14px 18px;
+  border-radius: 12px;
   border: 1px solid var(--gf-hair);
   background: rgba(255, 255, 255, 0.025);
-  min-height: 148px;
+  min-height: 0;
+  list-style: none;
 }
 
 .pl-timeline-item::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 16px;
-  right: 16px;
-  height: 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--gf-acc), transparent);
-  opacity: 0.7;
+  top: calc(-1 * var(--pl-tl-axis) + 4px);
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--gf-acc);
+  box-shadow: none;
+  z-index: 1;
 }
 
 .pl-timeline-phase {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   font-family: var(--gf-font-mono);
   font-size: 11px;
   letter-spacing: 0.16em;
@@ -363,22 +467,32 @@
 .pl-timeline-title {
   margin: 0 0 8px;
   font-family: var(--gf-font-zh);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
+  line-height: 1.35;
   color: var(--gf-ink-0);
   letter-spacing: -0.01em;
 }
 
 .pl-timeline-items {
   margin: 0;
-  font-size: 12px;
-  line-height: 1.55;
+  font-size: 12.5px;
+  line-height: 1.6;
   color: var(--gf-ink-2);
 }
 
 @media (max-width: 1100px) {
   .pl-timeline {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-top: 0;
+  }
+
+  .pl-timeline::before {
+    display: none;
+  }
+
+  .pl-timeline-item::before {
+    display: none;
   }
 }
 
@@ -416,5 +530,279 @@
 @media (max-width: 720px) {
   .pl-timeline {
     grid-template-columns: 1fr;
+    gap: 0;
+    padding-left: 18px;
   }
+
+  .pl-timeline::before {
+    display: block;
+    top: 12px;
+    bottom: 12px;
+    left: 3px;
+    right: auto;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--gf-acc) 8%, transparent),
+      var(--gf-acc) 20%,
+      var(--gf-acc) 80%,
+      color-mix(in srgb, var(--gf-acc) 8%, transparent)
+    );
+    opacity: 1;
+  }
+
+  .pl-timeline-item {
+    padding: 16px 16px 16px 20px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--gf-hair);
+    background: transparent;
+  }
+
+  .pl-timeline-item:last-child {
+    border-bottom: none;
+  }
+
+  .pl-timeline-item::before {
+    display: block;
+    top: 22px;
+    left: -15px;
+    transform: none;
+  }
+}
+
+/* Leverage + TP/SL 并排：各自独立画幅，互不裁切叠压 */
+.pl-case .pl-media-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px 40px;
+  margin: 8px 0 4px;
+  width: 100%;
+}
+
+.pl-case .pl-media-row .wt-embed-wrap.is-frame {
+  flex: 0 0 240px;
+  width: 240px;
+  max-width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+}
+
+.pl-case .pl-media-row .wt-embed-frame {
+  width: 240px;
+  height: calc(240px * 844 / 390);
+  aspect-ratio: auto;
+  min-height: 0;
+  max-height: none;
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+}
+
+.pl-case .pl-media-row .wt-embed-caption {
+  width: 100%;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 560px) {
+  .pl-case .pl-media-row .wt-embed-wrap.is-frame {
+    flex-basis: min(280px, 100%);
+    width: min(280px, 100%);
+    max-width: 280px;
+  }
+
+  .pl-case .pl-media-row .wt-embed-frame {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 390 / 844;
+  }
+}
+
+/* Solo phone embeds（单独使用时仍保持大画幅；并排 / split 内除外） */
+.pl-case .wt-embed-wrap.is-frame:has(iframe[src*='19-leverage-slider']):not(:where(.pl-media-row *, .pl-media-split *)),
+.pl-case .wt-embed-wrap.is-frame:has(iframe[src*='20-tpsl-drag']):not(:where(.pl-media-row *, .pl-media-split *)),
+.pl-case .wt-embed-wrap.is-frame:has(iframe[src*='22-guide-long']):not(:where(.pl-media-row *, .pl-media-split *)),
+.pl-case .wt-embed-wrap.is-frame:has(iframe[src*='23-guide-short']):not(:where(.pl-media-row *, .pl-media-split *)),
+.pl-case .wt-embed-wrap.is-frame:has(iframe[src*='24-guide-leverage']):not(:where(.pl-media-row *, .pl-media-split *)),
+.pl-case .wt-embed-wrap.is-frame:has(iframe[src*='25-guide-liquidation']):not(:where(.pl-media-row *, .pl-media-split *)) {
+  align-items: center;
+}
+
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='19-leverage-slider']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-frame,
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='20-tpsl-drag']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-frame,
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='22-guide-long']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-frame,
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='23-guide-short']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-frame,
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='24-guide-leverage']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-frame,
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='25-guide-liquidation']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-frame {
+  width: min(390px, 100%);
+  aspect-ratio: 390 / 844;
+  min-height: 560px;
+  max-height: 844px;
+}
+
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='19-leverage-slider']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-caption,
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='20-tpsl-drag']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-caption,
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='22-guide-long']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-caption,
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='23-guide-short']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-caption,
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='24-guide-leverage']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-caption,
+.pl-case
+  .wt-embed-wrap.is-frame:has(iframe[src*='25-guide-liquidation']):not(:where(.pl-media-row *, .pl-media-split *))
+  .wt-embed-caption {
+  width: min(390px, 100%);
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 0.08em;
+}
+
+/* 新手引导：左侧四屏 2×2，右侧数据反馈 */
+.pl-case .pl-media-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+  gap: 28px 32px;
+  align-items: center;
+  margin: 16px 0 8px;
+  width: 100%;
+}
+
+.pl-case .pl-media-split-main {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 12px;
+  align-items: start;
+  justify-items: center;
+}
+
+.pl-case .pl-media-split-main .wt-embed-wrap.is-frame {
+  flex: none;
+  width: 100%;
+  max-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+  gap: 0;
+  border-radius: 16px;
+}
+
+.pl-case .pl-media-split-main .wt-embed-frame {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 390 / 844;
+  min-height: 0;
+  max-height: none;
+  border-radius: 0;
+  overflow: hidden;
+  margin: 0;
+}
+
+.pl-case .pl-media-split-main .wt-embed-caption {
+  width: 100%;
+  margin: 0;
+  padding: 12px 14px 14px;
+  box-sizing: border-box;
+  line-height: 1.2;
+  font-size: 10.5px;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 0.08em;
+  color: var(--gf-ink-3);
+  border-top: 1px solid var(--gf-hair);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.pl-case .pl-media-split-aside {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  min-width: 0;
+}
+
+.pl-case .pl-media-split-aside .gf-media {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+}
+
+.pl-case .pl-media-split-aside .gf-media img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 12px;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .pl-case .pl-media-split {
+    grid-template-columns: 1fr;
+  }
+
+  .pl-case .pl-media-split-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pl-case .pl-media-split-main .wt-embed-wrap.is-frame {
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 560px) {
+  .pl-case .pl-media-split-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .pl-case .pl-media-split-main .wt-embed-wrap.is-frame {
+    max-width: none;
+  }
+}
+
+/* 新手引导四屏并排：略收窄以尽量一排放下 */
+.pl-case .pl-media-row:has(iframe[src*='22-guide-long']) .wt-embed-wrap.is-frame {
+  flex: 0 0 200px;
+  width: 200px;
+  max-width: 200px;
+}
+
+.pl-case .pl-media-row:has(iframe[src*='22-guide-long']) .wt-embed-frame {
+  width: 200px;
+  height: calc(200px * 844 / 390);
 }

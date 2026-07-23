@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body {
+        width: 2304px;
+        height: 1296px;
+        overflow: hidden;
+        background: #070708;
+        font-family: 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .board {
+        position: relative;
+        width: 2304px;
+        height: 1296px;
+        background:
+          radial-gradient(ellipse 45% 40% at 78% 28%, rgba(125, 211, 252, 0.08), transparent 70%),
+          #0a0a0c;
+        color: rgba(255, 255, 255, 0.88);
+      }
+      .title {
+        position: absolute;
+        left: 96px;
+        top: 72px;
+        font-size: 56px;
+        font-weight: 560;
+        letter-spacing: 0.04em;
+        color: #fff;
+      }
+      .axes {
+        position: absolute;
+        left: 160px;
+        top: 220px;
+        width: 1980px;
+        height: 920px;
+      }
+      .axis-y,
+      .axis-x {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.72);
+      }
+      .axis-y {
+        left: 0;
+        top: 0;
+        width: 3px;
+        height: 860px;
+      }
+      .axis-x {
+        left: 0;
+        bottom: 40px;
+        width: 1880px;
+        height: 3px;
+      }
+      .axis-y::before,
+      .axis-x::after {
+        content: '';
+        position: absolute;
+        border-style: solid;
+      }
+      .axis-y::before {
+        top: -2px;
+        left: -7px;
+        border-width: 0 8px 16px 8px;
+        border-color: transparent transparent rgba(255, 255, 255, 0.72) transparent;
+      }
+      .axis-x::after {
+        right: -2px;
+        top: -7px;
+        border-width: 8px 0 8px 16px;
+        border-color: transparent transparent transparent rgba(255, 255, 255, 0.72);
+      }
+      .label-y {
+        position: absolute;
+        left: 28px;
+        top: -8px;
+        font-size: 34px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.82);
+      }
+      .label-x {
+        position: absolute;
+        right: 40px;
+        bottom: 58px;
+        font-size: 34px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.82);
+      }
+      .photo {
+        position: absolute;
+        right: 120px;
+        top: 168px;
+        width: 700px;
+        height: 372px;
+        object-fit: cover;
+        border-radius: 4px;
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .seg {
+        position: absolute;
+        max-width: 520px;
+      }
+      .seg .name {
+        font-size: 36px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        margin-bottom: 10px;
+      }
+      .seg .desc {
+        font-size: 24px;
+        line-height: 1.45;
+        color: rgba(255, 255, 255, 0.62);
+        margin-bottom: 8px;
+      }
+      .seg .meta {
+        font-size: 22px;
+        color: rgba(255, 255, 255, 0.48);
+      }
+      .c-social { color: #7dcea0; left: 920px; top: 280px; }
+      .c-teacher { color: #e06b6b; left: 420px; top: 480px; }
+      .c-student { color: #b794f6; left: 280px; top: 760px; }
+      .c-foreign { color: #f28ca8; left: 1280px; top: 620px; }
+      .c-office { color: #f0b45a; left: 860px; top: 820px; }
+    </style>
+  </head>
+  <body>
+    <div class="board">
+      <h1 class="title">核心用户分层</h1>
+      <img
+        class="photo"
+        src="file:///Users/tommy/Tommy-manus/public/articles/tencent-meeting/04-users-photo.jpg"
+        alt=""
+      />
+      <div class="axes">
+        <div class="axis-y"></div>
+        <div class="axis-x"></div>
+        <div class="label-y">职业</div>
+        <div class="label-x">在线会议参与度</div>
+
+        <div class="seg c-social">
+          <div class="name">社交达人</div>
+          <p class="desc">安居乐业的顾家人士，喜欢交友，追求面子</p>
+          <p class="meta">平均年龄：41岁 / 参与度：2.21</p>
+        </div>
+        <div class="seg c-teacher">
+          <div class="name">培训老师</div>
+          <p class="desc">每天必须利用网络完成对学生的授课，依赖性强</p>
+          <p class="meta">平均年龄：32岁 / 参与度：1.86</p>
+        </div>
+        <div class="seg c-student">
+          <div class="name">网课学生</div>
+          <p class="desc">需要通过网络会议完成学业，并与同学老师交流</p>
+          <p class="meta">平均年龄：25岁 / 参与度：1.26</p>
+        </div>
+        <div class="seg c-foreign">
+          <div class="name">外企白领</div>
+          <p class="desc">常常需要与国外同事线上沟通工作，外语优秀</p>
+          <p class="meta">平均年龄：30岁 / 参与度：2.48</p>
+        </div>
+        <div class="seg c-office">
+          <div class="name">普通上班族</div>
+          <p class="desc">工作所需，会议较多，沟通能力强</p>
+          <p class="meta">平均年龄：29岁 / 参与度：2.32</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

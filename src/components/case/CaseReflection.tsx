@@ -12,23 +12,29 @@ const components: Components = {
 }
 
 export function CaseReflection({
+  label = 'Design Reflection',
   title,
   body,
+  footer,
   points,
 }: {
+  label?: string
   title: React.ReactNode
   body: string
+  footer?: string
   points: CaseReflectionPoint[]
 }) {
   return (
     <section className="gf-reflection">
-      <p className="gf-mono-label">Design Reflection</p>
+      <p className="gf-mono-label">{label}</p>
       <h2 className="gf-reflection-title">{title}</h2>
-      <div className="gf-reflection-content">
-        <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
-          {body}
-        </ReactMarkdown>
-      </div>
+      {body ? (
+        <div className="gf-reflection-content">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+            {body}
+          </ReactMarkdown>
+        </div>
+      ) : null}
       {points.length > 0 ? (
         <div className="gf-points">
           {points.map((point) => (
@@ -40,6 +46,13 @@ export function CaseReflection({
               </div>
             </div>
           ))}
+        </div>
+      ) : null}
+      {footer ? (
+        <div className="gf-reflection-content gf-reflection-footer">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+            {footer}
+          </ReactMarkdown>
         </div>
       ) : null}
     </section>

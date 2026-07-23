@@ -1,1 +1,19 @@
 @import './case-base.css';
+@import './case-perpetuals-lite.css';
+
+/* 切入点三：与上节同节奏，无分割线 + 收紧顶距 */
+.gf-sec-切入点三 {
+  border-top: none;
+  padding-top: 28px;
+}
+
+/* Design Method 等卡片：去掉 hover 位移与描边变化 */
+.pl-case .gf-target-card {
+  transition: none;
+}
+
+.pl-case .gf-target-card:hover {
+  border-color: var(--gf-hair);
+  background: rgba(255, 255, 255, 0.025);
+  transform: none;
+}

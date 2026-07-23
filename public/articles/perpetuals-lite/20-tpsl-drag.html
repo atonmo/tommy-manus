@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>TP / SL · Drag to set</title>
+    <style>
+      /* Figma ARwIdP79NpNXclLoYtDQKZ · 430:46891 / 430:47371 */
+      :root {
+        --bg: #020202;
+        --fg: #ffffff;
+        --fg-2: rgba(255, 255, 255, 0.64);
+        --fg-3: rgba(255, 255, 255, 0.48);
+        --tp: #35c272;
+        --tp-bg: rgba(53, 194, 114, 0.16);
+        --sl: #f36672;
+        --sl-bg: rgba(243, 102, 114, 0.16);
+        /* 设计稿 font-mono → BingX Sans；Web 用 SF Pro 等宽数字对齐 */
+        --num:
+          'SF Pro Text',
+          'SF Pro Display',
+          -apple-system,
+          'Helvetica Neue',
+          'PingFang SC',
+          system-ui,
+          sans-serif;
+        --sans:
+          'SF Pro Text',
+          'SF Pro Display',
+          'PingFang SC',
+          system-ui,
+          sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        font-family: var(--sans);
+        color: var(--fg);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .stage {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+        overflow: hidden;
+      }
+
+      /* 由 JS 按容器缩放，避免 iframe 内 CSS vw 缩放失效导致裁切叠层 */
+      .phone-fit {
+        position: relative;
+        flex-shrink: 0;
+        width: 390px;
+        height: 844px;
+        overflow: hidden;
+      }
+
+      .phone {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 390px;
+        height: 844px;
+        background: var(--bg);
+        border: 4px solid #737373;
+        border-radius: 40px;
+        box-sizing: border-box;
+        overflow: hidden;
+        transform-origin: top left;
+        user-select: none;
+        touch-action: none;
+      }
+
+      /* StatusBar y=0 */
+      .status {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 390px;
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 154px;
+        padding: 21px 24px 19px;
+        z-index: 10;
+      }
+
+      .status-time {
+        flex: 1;
+        text-align: center;
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 22px;
+      }
+
+      .status-levels {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+
+      .status-levels img {
+        display: block;
+      }
+      .status-levels .cell {
+        width: 19.2px;
+        height: 12.23px;
+      }
+      .status-levels .wifi {
+        width: 17.14px;
+        height: 12.33px;
+      }
+      .status-levels .batt {
+        width: 27.33px;
+        height: 13px;
+      }
+
+      /* NavigationBar y=62 h=56 */
+      .nav {
+        position: absolute;
+        left: 0;
+        top: 62px;
+        width: 390px;
+        height: 56px;
+        z-index: 10;
+        background: var(--bg);
+      }
+
+      .nav-back {
+        position: absolute;
+        left: 4px;
+        top: 4px;
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border: 0;
+        background: transparent;
+        padding: 0;
+      }
+
+      .nav-back img {
+        width: 24px;
+        height: 24px;
+      }
+
+      .nav-title {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        pointer-events: none;
+      }
+
+      .btc-icon {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+      }
+
+      .btc-icon img {
+        position: absolute;
+        display: block;
+      }
+
+      .btc-icon .bg {
+        inset: 0;
+        width: 24px;
+        height: 24px;
+      }
+
+      .btc-icon .mark {
+        left: 24.5%;
+        top: 16.34%;
+        width: 51.08%;
+        height: 67.33%;
+      }
+
+      .nav-title span {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+      }
+
+      .hint {
+        position: absolute;
+        left: 0;
+        top: 118px;
+        width: 390px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 16px;
+        color: var(--fg-3);
+        z-index: 10;
+      }
+
+      /* K线区域 top=154 */
+      .chart {
+        position: absolute;
+        left: 0;
+        top: 154px;
+        width: 390px;
+        height: 428px;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .chart-grid {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 390px;
+        height: 412px;
+        margin-top: -205.5px;
+        pointer-events: none;
+      }
+
+      .chart-line {
+        position: absolute;
+        right: 58px;
+        top: calc(50% + 13px);
+        width: 561px;
+        height: 274px;
+        margin-top: -137px;
+        pointer-events: none;
+      }
+
+      .chart-line img,
+      .chart-grid img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .y-axis {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 64px;
+        padding: 10px 20px 10px 0;
+        pointer-events: none;
+        font-family: var(--num);
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 12px;
+        color: var(--fg-3);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .band {
+        position: absolute;
+        left: 0;
+        width: 390px;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .band.tp {
+        background: var(--tp-bg);
+      }
+
+      .band.sl {
+        background: var(--sl-bg);
+      }
+
+      /* 左侧拖动手柄竖轨 — 圆点不随高度拉伸 */
+      .rail {
+        position: absolute;
+        left: 4px;
+        width: 8px;
+        z-index: 4;
+        pointer-events: none;
+      }
+
+      .rail-dot {
+        position: absolute;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff;
+        box-sizing: border-box;
+      }
+
+      .rail.tp .rail-dot {
+        top: 0;
+        border: 1px solid var(--tp);
+      }
+
+      .rail.sl .rail-dot {
+        bottom: 0;
+        border: 1px solid var(--sl);
+      }
+
+      .rail-line {
+        position: absolute;
+        left: 3.5px;
+        width: 1px;
+      }
+
+      .rail.tp .rail-line {
+        top: 8px;
+        bottom: 0;
+        background: var(--tp);
+      }
+
+      .rail.sl .rail-line {
+        top: 0;
+        bottom: 8px;
+        background: var(--sl);
+      }
+
+      .rail.entry-dot {
+        top: 337px; /* ENTRY_Y - 4 */
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      /* 水平线行 — phone 绝对坐标 */
+      .hline {
+        position: absolute;
+        left: 0;
+        width: 389px;
+        height: 28px;
+        margin-top: -14px;
+        display: flex;
+        align-items: center;
+        padding-right: 12px;
+        z-index: 5;
+        cursor: ns-resize;
+        touch-action: none;
+      }
+
+      .hline.entry {
+        cursor: default;
+        pointer-events: none;
+        z-index: 4;
+      }
+
+      .hline.is-dragging {
+        filter: brightness(1.08);
+      }
+
+      .hline .seg {
+        height: 0;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      /* 虚线：与设计稿 / 网格 stroke-dasharray="2 2" 一致 */
+      .hline .seg::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 1px;
+        background: transparent;
+        border: 0;
+      }
+
+      .hline .seg-16 {
+        width: 16px;
+      }
+      .hline .seg-37 {
+        width: 37px;
+      }
+      .hline .seg-flex {
+        flex: 1 0 0;
+        min-width: 1px;
+      }
+
+      .hline.tp .seg::after {
+        background-image: repeating-linear-gradient(
+          to right,
+          var(--tp) 0 2px,
+          transparent 2px 4px
+        );
+      }
+      .hline.sl .seg::after {
+        background-image: repeating-linear-gradient(
+          to right,
+          var(--sl) 0 2px,
+          transparent 2px 4px
+        );
+      }
+      .hline.entry .seg::after {
+        background-image: repeating-linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0.9) 0 2px,
+          transparent 2px 4px
+        );
+      }
+
+      .pill {
+        display: flex;
+        align-items: center;
+        height: 28px;
+        border-radius: 99px;
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-family: var(--num);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .pill-pct {
+        gap: 8px;
+        padding: 8px;
+        background: #000;
+        border: 1px solid currentColor;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+      }
+
+      .pill-pct .divider {
+        width: 1px;
+        height: 12px;
+        background: currentColor;
+        opacity: 0.45;
+      }
+
+      .pill-pct .close {
+        width: 16px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .pill-pct .close img {
+        width: 8px;
+        height: 8px;
+        display: block;
+      }
+
+      .hline.tp .pill-pct {
+        color: var(--tp);
+      }
+      .hline.sl .pill-pct {
+        color: var(--sl);
+      }
+
+      .pill-size {
+        padding: 0 8px;
+        background: #000;
+        border: 1px solid #fff;
+      }
+
+      .pill-size span {
+        display: block;
+        padding: 8px;
+        font-family: var(--num);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        color: #fff;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .pill-price {
+        padding: 8px 12px;
+        font-family: var(--num);
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 14px;
+        color: #000;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .hline.tp .pill-price {
+        background: var(--tp);
+      }
+      .hline.sl .pill-price {
+        background: var(--sl);
+      }
+      .hline.entry .pill-price {
+        background: #fff;
+      }
+
+      .tag {
+        position: absolute;
+        left: 180px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        padding: 2px 8px;
+        border-radius: 6px;
+        background: #000;
+        border: 1px solid currentColor;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        pointer-events: none;
+      }
+
+      .hline.tp .tag {
+        color: var(--tp);
+      }
+      .hline.sl .tag {
+        color: var(--sl);
+      }
+
+      /* unset TP：开仓线上方绿色虚线 + 中心 TP 标签 */
+      .hline.tp.is-unset .pill-pct,
+      .hline.tp.is-unset .pill-price {
+        display: none;
+      }
+
+      .hline.tp.is-unset {
+        width: 390px;
+        padding-right: 0;
+      }
+
+      .hline.tp.is-unset .seg-16 {
+        display: none;
+      }
+
+      .hline.tp.is-unset .seg-flex {
+        display: block;
+        flex: 1;
+        width: 100%;
+      }
+
+      .hline.tp.is-unset .seg-flex::after {
+        background-image: repeating-linear-gradient(
+          to right,
+          var(--tp) 0 2px,
+          transparent 2px 4px
+        );
+      }
+
+      .hline.tp.is-unset .tag {
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .ghost-hand {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        margin: -6px 0 0 -6px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.85);
+        background: rgba(15, 95, 255, 0.28);
+        box-shadow: 0 0 0 6px rgba(15, 95, 255, 0.12);
+        pointer-events: none;
+        z-index: 8;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .ghost-hand.is-on {
+        opacity: 1;
+      }
+
+      /* 底部面板 */
+      .panel {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 390px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 10;
+        background: var(--bg);
+      }
+
+      .rows {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding: 8px 20px;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+      .row .label {
+        color: var(--fg-2);
+        font-weight: 400;
+      }
+
+      .row .val {
+        font-family: var(--num);
+        font-weight: 500;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 6%;
+        color: var(--fg);
+        font-variant-numeric: tabular-nums;
+        transition: color 0.15s ease;
+      }
+
+      .row .val.is-tp {
+        color: var(--tp);
+      }
+      .row .val.is-sl {
+        color: var(--sl);
+      }
+
+      .btns {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        background: #000;
+      }
+
+      .confirm {
+        width: 350px;
+        height: 52px;
+        border: 0;
+        border-radius: 9999px;
+        background: #fff;
+        color: #000;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        cursor: pointer;
+      }
+
+      .help {
+        width: 350px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        border: 0;
+        background: transparent;
+        color: var(--fg-3);
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 6%;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage" id="stage">
+      <div class="phone-fit" id="phoneFit">
+      <div class="phone" id="phone">
+        <div class="status">
+          <div class="status-time">9:41</div>
+          <div class="status-levels">
+            <img class="cell" src="./tpsl/cellular.svg" alt="" />
+            <img class="wifi" src="./tpsl/wifi.svg" alt="" />
+            <img class="batt" src="./tpsl/battery.svg" alt="" />
+          </div>
+        </div>
+
+        <div class="nav">
+          <button class="nav-back" type="button" aria-label="Back">
+            <img src="./tpsl/chevron-left.svg" alt="" />
+          </button>
+          <div class="nav-title">
+            <div class="btc-icon">
+              <img class="bg" src="./tpsl/btc-bg.svg" alt="" />
+              <img class="mark" src="./tpsl/btc-mark.svg" alt="" />
+            </div>
+            <span>BTCUSDT · Long</span>
+          </div>
+        </div>
+
+        <div class="hint">Drag the lines to set TP&amp;SL prices</div>
+
+        <div class="chart" id="chart" aria-hidden="true">
+          <div class="chart-grid">
+            <img src="./tpsl/chart-grid.svg" alt="" />
+          </div>
+          <div class="chart-line">
+            <img src="./tpsl/chart-line.svg" alt="" />
+          </div>
+          <div class="y-axis">
+            <span>130.5K</span>
+            <span>120.5K</span>
+            <span>110.5K</span>
+            <span>100.5K</span>
+            <span>95.5K</span>
+            <span>85.5K</span>
+          </div>
+        </div>
+
+        <div class="band tp" id="bandTp"></div>
+        <div class="band sl" id="bandSl"></div>
+
+        <div class="rail tp" id="railTp">
+          <span class="rail-dot"></span>
+          <span class="rail-line"></span>
+        </div>
+        <div class="rail entry-dot" id="railEntry"></div>
+        <div class="rail sl" id="railSl">
+          <span class="rail-dot"></span>
+          <span class="rail-line"></span>
+        </div>
+
+        <div class="hline tp is-unset" id="lineTp" data-kind="tp">
+          <div class="seg seg-16"></div>
+          <div class="pill pill-pct">
+            <span id="tpPctChip">+23.00%</span>
+            <span class="divider"></span>
+            <button class="close" type="button" aria-label="Clear TP" data-clear="tp">
+              <img src="./tpsl/close.svg" alt="" />
+            </button>
+          </div>
+          <div class="seg seg-16"></div>
+          <div class="seg seg-flex"></div>
+          <div class="pill pill-price" id="tpPrice">109,450.0</div>
+          <span class="tag">TP</span>
+        </div>
+
+        <div class="hline entry" id="lineEntry">
+          <div class="seg seg-16"></div>
+          <div class="pill pill-size"><span>0.05</span></div>
+          <div class="seg seg-37"></div>
+          <div class="seg seg-flex"></div>
+          <div class="pill pill-price">70,845.2</div>
+        </div>
+
+        <div class="hline sl" id="lineSl" data-kind="sl">
+          <div class="seg seg-16"></div>
+          <div class="pill pill-pct">
+            <span id="slPctChip">-20.00%</span>
+            <span class="divider"></span>
+            <button class="close" type="button" aria-label="Clear SL" data-clear="sl">
+              <img src="./tpsl/close-sl.svg" alt="" />
+            </button>
+          </div>
+          <div class="seg seg-16"></div>
+          <div class="seg seg-flex"></div>
+          <div class="pill pill-price" id="slPrice">59,450.0</div>
+          <span class="tag">SL</span>
+        </div>
+
+        <div class="ghost-hand" id="hand"></div>
+
+        <div class="panel">
+          <div class="rows">
+            <div class="row">
+              <span class="label">Take Profit</span>
+              <span class="val" id="tpVal">Not Set</span>
+            </div>
+            <div class="row">
+              <span class="label">Stop Loss</span>
+              <span class="val is-sl" id="slVal">-20.00%</span>
+            </div>
+          </div>
+          <div class="btns">
+            <button class="confirm" type="button" id="confirm">Confirm</button>
+            <button class="help" type="button">What is TP/SL?</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <script>
+      /* Figma 锚定：Entry 341 / TP 227(+23% · 109450) / SL 426(-20% · 59450) */
+      const ENTRY = 70845.2
+      const ENTRY_Y = 341
+      const DESIGN_TP_Y = 227
+      const DESIGN_SL_Y = 426
+      const DESIGN_TP_PCT = 23
+      const DESIGN_SL_PCT = -20
+      const DESIGN_TP_PRICE = 109450
+      const DESIGN_SL_PRICE = 59450
+      const UNSET_TP_Y = 313
+
+      const lineTp = document.getElementById('lineTp')
+      const lineSl = document.getElementById('lineSl')
+      const lineEntry = document.getElementById('lineEntry')
+      const bandTp = document.getElementById('bandTp')
+      const bandSl = document.getElementById('bandSl')
+      const railTp = document.getElementById('railTp')
+      const railSl = document.getElementById('railSl')
+      const tpVal = document.getElementById('tpVal')
+      const slVal = document.getElementById('slVal')
+      const tpPctChip = document.getElementById('tpPctChip')
+      const slPctChip = document.getElementById('slPctChip')
+      const tpPrice = document.getElementById('tpPrice')
+      const slPrice = document.getElementById('slPrice')
+      const hand = document.getElementById('hand')
+      const confirmBtn = document.getElementById('confirm')
+
+      let tpPct = null
+      let slPct = -20
+      let dragging = null
+      let autoPlaying = true
+      let raf = 0
+      let startTs = 0
+
+      function pctToY(pct) {
+        if (pct == null) return UNSET_TP_Y
+        if (pct >= 0) {
+          return ENTRY_Y - (pct / DESIGN_TP_PCT) * (ENTRY_Y - DESIGN_TP_Y)
+        }
+        return ENTRY_Y + (Math.abs(pct) / Math.abs(DESIGN_SL_PCT)) * (DESIGN_SL_Y - ENTRY_Y)
+      }
+
+      function yToPct(y, kind) {
+        if (kind === 'tp') {
+          const t = (ENTRY_Y - y) / (ENTRY_Y - DESIGN_TP_Y)
+          return Math.max(0.5, t * DESIGN_TP_PCT)
+        }
+        const t = (y - ENTRY_Y) / (DESIGN_SL_Y - ENTRY_Y)
+        return -Math.max(0.5, t * Math.abs(DESIGN_SL_PCT))
+      }
+
+      function pctToPrice(pct) {
+        if (pct == null) return ENTRY
+        if (pct >= 0) {
+          return ENTRY + (pct / DESIGN_TP_PCT) * (DESIGN_TP_PRICE - ENTRY)
+        }
+        return ENTRY + (Math.abs(pct) / Math.abs(DESIGN_SL_PCT)) * (DESIGN_SL_PRICE - ENTRY)
+      }
+
+      function formatPct(pct) {
+        if (pct == null) return 'Not Set'
+        const sign = pct > 0 ? '+' : ''
+        return sign + pct.toFixed(2) + '%'
+      }
+
+      function formatPrice(p) {
+        return p.toLocaleString('en-US', {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1,
+        })
+      }
+
+      function clampTpY(y) {
+        return Math.max(DESIGN_TP_Y - 40, Math.min(ENTRY_Y - 16, y))
+      }
+
+      function clampSlY(y) {
+        return Math.max(ENTRY_Y + 16, Math.min(DESIGN_SL_Y + 40, y))
+      }
+
+      function paint() {
+        lineEntry.style.top = ENTRY_Y + 'px'
+
+        if (tpPct == null) {
+          lineTp.classList.add('is-unset')
+          lineTp.style.top = UNSET_TP_Y + 'px'
+          bandTp.style.display = 'none'
+          railTp.style.display = 'none'
+          tpVal.textContent = 'Not Set'
+          tpVal.className = 'val'
+        } else {
+          const y = pctToY(tpPct)
+          lineTp.classList.remove('is-unset')
+          lineTp.style.top = y + 'px'
+          tpPctChip.textContent = formatPct(tpPct)
+          tpPrice.textContent = formatPrice(pctToPrice(tpPct))
+          tpVal.textContent = formatPct(tpPct)
+          tpVal.className = 'val is-tp'
+          bandTp.style.display = 'block'
+          bandTp.style.top = y + 'px'
+          bandTp.style.height = ENTRY_Y - y + 'px'
+          /* 圆点中心对齐 TP 线；竖线接到开仓点 */
+          railTp.style.display = 'block'
+          railTp.style.top = y - 4 + 'px'
+          railTp.style.height = ENTRY_Y - y + 'px'
+        }
+
+        document.getElementById('railEntry').style.top = ENTRY_Y - 4 + 'px'
+
+        if (slPct == null) {
+          lineSl.style.opacity = '0.4'
+          lineSl.style.top = ENTRY_Y + 40 + 'px'
+          bandSl.style.display = 'none'
+          railSl.style.display = 'none'
+          slVal.textContent = 'Not Set'
+          slVal.className = 'val'
+        } else {
+          const y = pctToY(slPct)
+          lineSl.style.opacity = '1'
+          lineSl.style.top = y + 'px'
+          slPctChip.textContent = formatPct(slPct)
+          slPrice.textContent = formatPrice(pctToPrice(slPct))
+          slVal.textContent = formatPct(slPct)
+          slVal.className = 'val is-sl'
+          bandSl.style.display = 'block'
+          bandSl.style.top = ENTRY_Y + 'px'
+          bandSl.style.height = y - ENTRY_Y + 'px'
+          /* 圆点在底部对齐 SL 线；竖线自开仓点下方接到 SL */
+          railSl.style.display = 'block'
+          railSl.style.top = ENTRY_Y + 4 + 'px'
+          railSl.style.height = y - ENTRY_Y + 'px'
+        }
+      }
+
+      function easeInOut(t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2
+      }
+
+      const demo = [
+        { t: 0, tp: null, sl: -20, hand: false },
+        { t: 0.1, tp: null, sl: -20, hand: true, focus: 'tp' },
+        { t: 0.16, tp: 2, sl: -20, hand: true, focus: 'tp' },
+        { t: 0.48, tp: 23, sl: -20, hand: true, focus: 'tp' },
+        { t: 0.56, tp: 23, sl: -20, hand: false },
+        { t: 0.64, tp: 23, sl: -20, hand: true, focus: 'sl' },
+        { t: 0.78, tp: 23, sl: -28, hand: true, focus: 'sl' },
+        { t: 0.88, tp: 23, sl: -20, hand: true, focus: 'sl' },
+        { t: 1, tp: 23, sl: -20, hand: false },
+      ]
+      const CYCLE = 8200
+
+      function lerp(a, b, t) {
+        if (a == null && b == null) return null
+        if (a == null) return b * t
+        if (b == null) return a * (1 - t)
+        return a + (b - a) * t
+      }
+
+      function demoAt(p) {
+        for (let i = 0; i < demo.length - 1; i++) {
+          const a = demo[i]
+          const b = demo[i + 1]
+          if (p >= a.t && p <= b.t) {
+            const local = easeInOut((p - a.t) / (b.t - a.t || 1))
+            return {
+              tp: lerp(a.tp, b.tp, local),
+              sl: lerp(a.sl, b.sl, local),
+              hand: local < 0.95 ? b.hand || a.hand : b.hand,
+              focus: b.focus || a.focus || 'tp',
+            }
+          }
+        }
+        return { tp: 23, sl: -20, hand: false, focus: 'tp' }
+      }
+
+      function tick(ts) {
+        if (!autoPlaying) return
+        if (!startTs) startTs = ts
+        const p = ((ts - startTs) % CYCLE) / CYCLE
+        const q = p < 0.88 ? p / 0.88 : 1
+        const state = demoAt(q)
+        tpPct = state.tp == null ? null : state.tp
+        slPct = state.sl
+        paint()
+
+        if (state.hand) {
+          hand.classList.add('is-on')
+          const y =
+            state.focus === 'sl'
+              ? pctToY(slPct)
+              : tpPct == null
+                ? UNSET_TP_Y
+                : pctToY(tpPct)
+          hand.style.left = '196px'
+          hand.style.top = y + 'px'
+        } else {
+          hand.classList.remove('is-on')
+        }
+
+        raf = requestAnimationFrame(tick)
+      }
+
+      function startAuto() {
+        autoPlaying = true
+        startTs = 0
+        cancelAnimationFrame(raf)
+        raf = requestAnimationFrame(tick)
+      }
+
+      function stopAuto() {
+        autoPlaying = false
+        cancelAnimationFrame(raf)
+        hand.classList.remove('is-on')
+      }
+
+      function scheduleResume() {
+        clearTimeout(scheduleResume._t)
+        scheduleResume._t = setTimeout(startAuto, 2600)
+      }
+
+      function phoneScale() {
+        return window.__phoneScale || 1
+      }
+
+      function fitPhone() {
+        const stage = document.getElementById('stage')
+        const fit = document.getElementById('phoneFit')
+        const phone = document.getElementById('phone')
+        if (!stage || !fit || !phone) return
+        const s = Math.min(stage.clientWidth / 390, stage.clientHeight / 844, 1)
+        window.__phoneScale = s
+        phone.style.transform = `scale(${s})`
+        fit.style.width = `${390 * s}px`
+        fit.style.height = `${844 * s}px`
+      }
+
+      function clientY(e) {
+        return e.touches ? e.touches[0].clientY : e.clientY
+      }
+
+      function onDown(e) {
+        const el = e.currentTarget
+        const kind = el.dataset.kind
+        if (!kind) return
+        if (e.target.closest('[data-clear]')) return
+        stopAuto()
+        dragging = kind
+        el.classList.add('is-dragging')
+        e.preventDefault()
+      }
+
+      function onMove(e) {
+        if (!dragging) return
+        const rect = document.getElementById('phone').getBoundingClientRect()
+        const scale = phoneScale()
+        const y = (clientY(e) - rect.top) / scale
+        if (dragging === 'tp') {
+          tpPct = yToPct(clampTpY(y), 'tp')
+        } else {
+          slPct = yToPct(clampSlY(y), 'sl')
+        }
+        paint()
+        e.preventDefault()
+      }
+
+      function onUp() {
+        if (!dragging) return
+        lineTp.classList.remove('is-dragging')
+        lineSl.classList.remove('is-dragging')
+        dragging = null
+        scheduleResume()
+      }
+
+      lineTp.addEventListener('mousedown', onDown)
+      lineSl.addEventListener('mousedown', onDown)
+      lineTp.addEventListener('touchstart', onDown, { passive: false })
+      lineSl.addEventListener('touchstart', onDown, { passive: false })
+      window.addEventListener('mousemove', onMove, { passive: false })
+      window.addEventListener('touchmove', onMove, { passive: false })
+      window.addEventListener('mouseup', onUp)
+      window.addEventListener('touchend', onUp)
+
+      document.querySelectorAll('[data-clear]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation()
+          stopAuto()
+          if (btn.dataset.clear === 'tp') tpPct = null
+          else slPct = null
+          paint()
+          scheduleResume()
+        })
+      })
+
+      confirmBtn.addEventListener('click', () => {
+        stopAuto()
+        scheduleResume()
+      })
+
+      fitPhone()
+      window.addEventListener('resize', fitPhone)
+      if (window.ResizeObserver) {
+        new ResizeObserver(fitPhone).observe(document.getElementById('stage'))
+      }
+
+      paint()
+      startAuto()
+    </script>
+  </body>
+</html>

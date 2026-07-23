@@ -36,6 +36,7 @@ export type ArticleData = {
   platform?: string
   focus?: string
   style?: string
+  theme?: 'light' | 'dark'
   hero: ArticleHeroMode
   heroImage?: string
   heroImageAlt?: string
@@ -139,6 +140,7 @@ export function getArticleBySlug(slug: string): ArticleData | null {
     platform: data.platform || undefined,
     focus: data.focus || undefined,
     style: data.style || undefined,
+    theme: data.theme === 'light' ? 'light' : undefined,
     hero,
     heroImage: data.heroImage || data.cover || work.cover,
     heroImageAlt: data.heroImageAlt || data.title || work.title,

@@ -8,8 +8,47 @@
     radial-gradient(ellipse 35% 35% at 55% 75%, color-mix(in srgb, var(--gf-acc) 6%, transparent), transparent 70%);
 }
 
+.tm-case.gf-case--light .tm-hero-glow {
+  background:
+    radial-gradient(ellipse 55% 50% at 28% 40%, rgba(14, 165, 233, 0.18), transparent 70%),
+    radial-gradient(ellipse 40% 45% at 78% 18%, rgba(56, 189, 248, 0.12), transparent 65%),
+    radial-gradient(ellipse 35% 35% at 55% 75%, color-mix(in srgb, var(--gf-acc) 8%, transparent), transparent 70%);
+}
+
+.tm-case .gf-target-card {
+  transition: none;
+}
+
 .tm-case .gf-target-card:hover {
-  border-color: color-mix(in srgb, var(--gf-acc) 32%, transparent);
+  border-color: var(--gf-hair);
+  background: rgba(255, 255, 255, 0.025);
+  transform: none;
+}
+
+/* User segmentation table: tighten number cols, give meaning room */
+.tm-case .gf-table th:nth-child(1),
+.tm-case .gf-table td:nth-child(1) {
+  width: 16%;
+  white-space: nowrap;
+}
+
+.tm-case .gf-table th:nth-child(2),
+.tm-case .gf-table td:nth-child(2) {
+  width: 14%;
+  white-space: nowrap;
+}
+
+.tm-case .gf-table th:nth-child(3),
+.tm-case .gf-table td:nth-child(3) {
+  width: 12%;
+  white-space: nowrap;
+  font-family: var(--gf-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tm-case .gf-table th:nth-child(4),
+.tm-case .gf-table td:nth-child(4) {
+  width: 62%;
 }
 
 .tm-growth {
@@ -62,6 +101,32 @@
   border: 1px solid var(--gf-hair);
   background: rgba(255, 255, 255, 0.025);
   min-height: 160px;
+}
+
+.tm-case.gf-case--light .tm-timeline-item,
+.tm-case.gf-case--light .tm-zone,
+.tm-case.gf-case--light .tm-ia-row,
+.tm-case.gf-case--light .tm-metric-shift-block,
+.tm-case.gf-case--light .tm-goal-col,
+.tm-case.gf-case--light .tm-inv-card {
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.tm-case.gf-case--light .tm-ia-row.is-core {
+  background:
+    linear-gradient(90deg, rgba(14, 165, 233, 0.12), rgba(14, 165, 233, 0.03)),
+    #fff;
+}
+
+.tm-case.gf-case--light .tm-metric-shift-block.is-accent {
+  background:
+    linear-gradient(135deg, rgba(14, 165, 233, 0.1), transparent 60%),
+    #fff;
+}
+
+.tm-case.gf-case--light .tm-goal-chip {
+  background: color-mix(in srgb, var(--gf-acc) 8%, #fff);
 }
 
 .tm-timeline-item::before {

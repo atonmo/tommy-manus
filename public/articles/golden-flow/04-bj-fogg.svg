@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" font-family="Inter, PingFang SC, Noto Sans SC, Hiragino Sans GB, sans-serif">
+  <defs>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="400" fill="#070708" rx="18"/>
+
+  <text x="80" y="38" fill="#FFFFFF" font-size="20" font-weight="600">注册行为拆解</text>
+  <text x="80" y="62" fill="rgba(255,255,255,0.38)" font-size="12">动机 × 能力 × 刺激 = 注册行为</text>
+
+  <rect x="80" y="100" width="352" height="252" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="108" y="134" fill="rgba(255,255,255,0.34)" font-size="10" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.14em">01 · MOTIVATION</text>
+  <text x="108" y="166" fill="#FFFFFF" font-size="22" font-weight="600">动机</text>
+  <text x="108" y="192" fill="rgba(255,255,255,0.45)" font-size="13">增强动机</text>
+  <line x1="108" y1="210" x2="404" y2="210" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <line x1="108" y1="228" x2="108" y2="328" stroke="#FF8A1F" stroke-width="1.5" stroke-opacity="0.45" stroke-linecap="round"/>
+  <text x="124" y="244" fill="rgba(255,255,255,0.62)" font-size="13.5">奖励丰富，提升注册吸引力</text>
+  <text x="124" y="280" fill="rgba(255,255,255,0.62)" font-size="13.5">动态插画，降低认知负担</text>
+  <text x="124" y="316" fill="rgba(255,255,255,0.62)" font-size="13.5">新人专属，制造错过成本</text>
+  <rect x="464" y="100" width="352" height="252" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="492" y="134" fill="rgba(255,255,255,0.34)" font-size="10" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.14em">02 · ABILITY</text>
+  <text x="492" y="166" fill="#FFFFFF" font-size="22" font-weight="600">能力</text>
+  <text x="492" y="192" fill="rgba(255,255,255,0.45)" font-size="13">降低门槛</text>
+  <line x1="492" y1="210" x2="788" y2="210" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <line x1="492" y1="228" x2="492" y2="328" stroke="#FF8A1F" stroke-width="1.5" stroke-opacity="0.45" stroke-linecap="round"/>
+  <text x="508" y="244" fill="rgba(255,255,255,0.62)" font-size="13.5">信息精简，降低理解成本</text>
+  <text x="508" y="280" fill="rgba(255,255,255,0.62)" font-size="13.5">聚焦核心，提高一屏效率</text>
+  <text x="508" y="316" fill="rgba(255,255,255,0.62)" font-size="13.5">流程压缩，减少操作步骤</text>
+  <rect x="848" y="100" width="352" height="252" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="876" y="134" fill="rgba(255,255,255,0.34)" font-size="10" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.14em">03 · PROMPT</text>
+  <text x="876" y="166" fill="#FFFFFF" font-size="22" font-weight="600">刺激</text>
+  <text x="876" y="192" fill="rgba(255,255,255,0.45)" font-size="13">增加刺激</text>
+  <line x1="876" y1="210" x2="1172" y2="210" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <line x1="876" y1="228" x2="876" y2="328" stroke="#FF8A1F" stroke-width="1.5" stroke-opacity="0.45" stroke-linecap="round"/>
+  <text x="892" y="244" fill="rgba(255,255,255,0.62)" font-size="13.5">高奖励前置，拉动点击</text>
+  <text x="892" y="280" fill="rgba(255,255,255,0.62)" font-size="13.5">进度可见，所见即所得</text>
+  <text x="892" y="316" fill="rgba(255,255,255,0.62)" font-size="13.5">关键节点强化，减少中途流失</text>
+</svg>

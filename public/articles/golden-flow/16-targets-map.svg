@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" font-family="Inter, PingFang SC, Noto Sans SC, Hiragino Sans GB, sans-serif">
+  <defs>
+    <linearGradient id="arrowOut" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF8A1F" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FF8A1F" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="arrowIn" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#FF8A1F" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FF8A1F" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="760" fill="#070708"/>
+
+  <text x="640" y="44" text-anchor="middle" fill="#FFFFFF" font-size="20" font-weight="600">业务 × 用户 × 设计</text>
+  <text x="640" y="70" text-anchor="middle" fill="rgba(255,255,255,0.38)" font-size="12">用设计手段拉动关键转化</text>
+
+
+  <!-- light orbit rings -->
+  <circle cx="640" cy="390" r="296" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <circle cx="640" cy="390" r="268" fill="none" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
+
+  <!-- four corner targets -->
+  <g fill="none">
+    <circle cx="442" cy="192" r="3.5" fill="#FF8A1F"/>
+    <text x="442" y="152" text-anchor="middle" fill="rgba(255,138,31,0.85)" font-size="10" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.14em">TARGET 01</text>
+    <text x="442" y="174" text-anchor="middle" fill="rgba(255,255,255,0.88)" font-size="14" font-weight="500">数据洞察找切口</text>
+
+    <circle cx="838" cy="192" r="3.5" fill="#FF8A1F"/>
+    <text x="838" y="152" text-anchor="middle" fill="rgba(255,138,31,0.85)" font-size="10" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.14em">TARGET 02</text>
+    <text x="838" y="174" text-anchor="middle" fill="rgba(255,255,255,0.88)" font-size="14" font-weight="500">沉淀可复用方法</text>
+
+    <circle cx="442" cy="590" r="3.5" fill="#FF8A1F"/>
+    <text x="442" y="610" text-anchor="middle" fill="rgba(255,138,31,0.85)" font-size="10" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.14em">TARGET 03</text>
+    <text x="442" y="630" text-anchor="middle" fill="rgba(255,255,255,0.88)" font-size="14" font-weight="500">盘点内外提升手段</text>
+
+    <circle cx="838" cy="590" r="3.5" fill="#FF8A1F"/>
+    <text x="838" y="610" text-anchor="middle" fill="rgba(255,138,31,0.85)" font-size="10" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.14em">TARGET 04</text>
+    <text x="838" y="630" text-anchor="middle" fill="rgba(255,255,255,0.88)" font-size="14" font-weight="500">设计赋能业务</text>
+  </g>
+
+  <!-- overlapping orbs: light translucent fill + thin stroke, no glow -->
+  <circle cx="538" cy="390" r="156" fill="rgba(255,138,31,0.14)" stroke="rgba(255,168,80,0.55)" stroke-width="1.5"/>
+  <circle cx="742" cy="390" r="156" fill="rgba(255,138,31,0.14)" stroke="rgba(255,168,80,0.55)" stroke-width="1.5"/>
+
+  <text x="498" y="396" text-anchor="middle" fill="rgba(255,255,255,0.92)" font-size="20" font-weight="600">业务诉求</text>
+  <text x="782" y="396" text-anchor="middle" fill="rgba(255,255,255,0.92)" font-size="20" font-weight="600">用户路径</text>
+
+  <!-- center: outline card, not heavy white blob -->
+  <circle cx="640" cy="390" r="68" fill="rgba(12,12,12,0.92)" stroke="#FF8A1F" stroke-width="1.6"/>
+  <text x="640" y="388" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="600">黄金流程</text>
+  <text x="640" y="408" text-anchor="middle" fill="rgba(255,138,31,0.85)" font-size="11">设计方法</text>
+
+  <!-- LEFT panel -->
+  <g>
+    <rect x="52" y="240" width="156" height="292" rx="12" fill="rgba(255,255,255,0.02)"
+          stroke="rgba(255,255,255,0.14)" stroke-width="1" stroke-dasharray="4 5"/>
+    <text x="130" y="268" text-anchor="middle" fill="rgba(255,138,31,0.9)" font-size="11" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.12em">业务手段</text>
+    <rect x="70" y="296" width="120" height="34" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="130" y="318" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12">SEO 获客</text>
+    <rect x="70" y="336" width="120" height="34" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="130" y="358" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12">运营拉新</text>
+    <rect x="70" y="376" width="120" height="34" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="130" y="398" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12">活动投放</text>
+    <rect x="70" y="416" width="120" height="34" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="130" y="438" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12">关键指标</text>
+    <rect x="70" y="456" width="120" height="34" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="130" y="478" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12">交易量增长</text>
+    <path d="M 212 390 L 268 390" stroke="rgba(255,138,31,0.45)" stroke-width="1.5" fill="none"/>
+    <polygon points="272,390 264,385 264,395" fill="rgba(255,138,31,0.7)"/>
+  </g>
+
+  <!-- RIGHT panel -->
+  <g>
+    <rect x="1072" y="240" width="156" height="292" rx="12" fill="rgba(255,255,255,0.02)"
+          stroke="rgba(255,255,255,0.14)" stroke-width="1" stroke-dasharray="4 5"/>
+    <text x="1150" y="268" text-anchor="middle" fill="rgba(255,138,31,0.9)" font-size="11" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.12em">设计手段</text>
+    <rect x="1080" y="300" width="68" height="36" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="1114" y="323" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">数据洞察</text>
+    <rect x="1154" y="300" width="68" height="36" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="1188" y="323" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">节点归因</text>
+    <rect x="1080" y="354" width="68" height="36" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="1114" y="377" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">体验干预</text>
+    <rect x="1154" y="354" width="68" height="36" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="1188" y="377" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">决策现场</text>
+    <rect x="1080" y="408" width="68" height="36" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="1114" y="431" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">转化回测</text>
+    <rect x="1154" y="408" width="68" height="36" rx="10" fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+    <text x="1188" y="431" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">方法沉淀</text>
+    <path d="M 1012 390 L 1068 390" stroke="rgba(255,138,31,0.45)" stroke-width="1.5" fill="none"/>
+    <polygon points="1072,390 1064,385 1064,395" fill="rgba(255,138,31,0.7)"/>
+  </g>
+
+</svg>

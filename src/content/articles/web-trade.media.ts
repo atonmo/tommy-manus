@@ -61,7 +61,7 @@ export const webTradeMedia: Record<string, ArticleMediaItem> = {
   },
   kline2: {
     src: '/articles/web-trade/kline2.png',
-    alt: 'k线图表分割',
+    alt: 'K 线图表分割',
     caption: 'Split · Multi Layout Modes',
   },
   mkhfxj: {

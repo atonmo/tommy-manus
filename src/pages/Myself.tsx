@@ -36,13 +36,13 @@ export function Myself() {
       <div className="myself-page" ref={listRef}>
         <header className="myself-header">
           <div className="myself-intro-line">
-            <p className="text-h1-light myself-intro-text">Hi, This is Tommy</p>
+            <p className="text-h1-light myself-intro-text">Hi, I'm Tommy</p>
           </div>
           <div className="myself-intro-line">
-            <p className="text-h1-light myself-intro-text">产品体验设计师，深耕交易、会议与政务类复杂产品。</p>
+            <p className="text-h1-light myself-intro-text">产品体验设计师，深耕金融、效率类与云服务等复杂产品。</p>
           </div>
           <div className="myself-intro-line">
-            <p className="text-h1-light myself-intro-text">以用户为中心，把数据洞察做成可落地的体验方案。</p>
+            <p className="text-h1-light myself-intro-text">用设计方法拆解复杂产品，把体验设计做成可度量的业务结果。</p>
           </div>
           <div className="myself-intro-line myself-intro-meta-wrap">
             <p className="myself-intro-meta myself-intro-text">

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 516" font-family="Inter, PingFang SC, Noto Sans SC, Hiragino Sans GB, sans-serif">
+  <defs>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.07)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.03)"/>
+    </linearGradient>
+    <filter id="cardGlow" x="-8%" y="-12%" width="116%" height="130%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#B8F53A" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="640" height="516" fill="#070708" rx="14"/>
+
+  <text x="40" y="52" fill="#FFFFFF" font-size="24" font-weight="700">增加新手引导教学</text>
+
+  <text x="40" y="90" fill="rgba(255,255,255,0.48)" font-size="13">
+    针对合约首交场景中
+    <tspan fill="rgba(255,255,255,0.92)">新手用户占比高、对合约概念</tspan>
+  </text>
+  <text x="40" y="112" fill="rgba(255,255,255,0.92)" font-size="13">
+    认知不足、上手门槛高的问题
+    <tspan fill="rgba(255,255,255,0.48)">，通过增加分步骤的动态引导</tspan>
+  </text>
+  <text x="40" y="134" fill="rgba(255,255,255,0.48)" font-size="13">
+    教学，降低用户理解与操作成本，提升新手转化率。
+  </text>
+
+  <text x="40" y="186" fill="#FFFFFF" font-size="20" font-weight="700">数据验证</text>
+
+  <rect x="40" y="210" width="560" height="248" rx="12" fill="url(#cardBg)" filter="url(#cardGlow)"/>
+  <rect x="40" y="210" width="560" height="248" rx="12" fill="none" stroke="rgba(184,245,58,0.24)" stroke-width="1"/>
+
+  <g transform="translate(320 334)">
+    <text text-anchor="middle" fill="#FFFFFF" font-size="56" font-weight="700" letter-spacing="-0.03em">
+      +18.6%
+      <tspan dx="6" dy="-3" fill="#B8F53A" font-size="28" font-weight="700">↑</tspan>
+    </text>
+    <text y="38" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="15">新手转化提升</text>
+  </g>
+
+  <text x="40" y="486" fill="rgba(255,255,255,0.32)" font-size="11">*取灰度上线两周后数据对比</text>
+</svg>

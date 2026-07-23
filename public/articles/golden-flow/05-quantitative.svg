@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 488" font-family="Inter, PingFang SC, Noto Sans SC, Hiragino Sans GB, sans-serif">
+  <defs>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="488" fill="#070708" rx="18"/>
+
+  <text x="72" y="38" fill="#FFFFFF" font-size="20" font-weight="600">定量分析</text>
+  <text x="72" y="62" fill="rgba(255,255,255,0.38)" font-size="12">注册转化 · 用户关注 · 落地页对比</text>
+
+  <rect x="72" y="88" width="360" height="268" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="96" y="120" fill="rgba(255,255,255,0.34)" font-size="10" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.14em">01 · REGISTER</text>
+  <text x="96" y="148" fill="#FFFFFF" font-size="16" font-weight="600">新用户注册转化率</text>
+  <text x="96" y="176" fill="rgba(255,255,255,0.55)" font-size="12.5">新用户退出注册（点返回）</text>
+  <text x="408" y="176" text-anchor="end" fill="#FF8A1F" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">23.75%</text>
+  <rect x="96" y="186" width="312" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="96" y="186" width="74.1" height="5" rx="2.5" fill="#FF8A1F"/>
+  <text x="96" y="224" fill="rgba(255,255,255,0.55)" font-size="12.5">新用户完成注册</text>
+  <text x="408" y="224" text-anchor="end" fill="rgba(255,255,255,0.72)" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">25.89%</text>
+  <rect x="96" y="234" width="312" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="96" y="234" width="80.8" height="5" rx="2.5" fill="rgba(255,255,255,0.42)"/>
+  <text x="96" y="272" fill="rgba(255,255,255,0.55)" font-size="12.5">新用户完成 KYC</text>
+  <text x="408" y="272" text-anchor="end" fill="rgba(255,255,255,0.72)" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">66.28%</text>
+  <rect x="96" y="282" width="312" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="96" y="282" width="206.8" height="5" rx="2.5" fill="rgba(255,255,255,0.42)"/>
+  <line x1="96" y1="320" x2="408" y2="320" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="96" y="342" fill="rgba(255,255,255,0.32)" font-size="11">6.10 – 7.09  ·  数据均值</text>
+  <text x="96" y="388" fill="rgba(255,255,255,0.88)" font-size="14" font-weight="600">问题分析</text>
+  <text x="96" y="414" fill="rgba(255,255,255,0.48)" font-size="12.5">新用户完成注册比例偏低，注册过程中</text>
+  <text x="96" y="436" fill="rgba(255,255,255,0.48)" font-size="12.5">近四分之一用户退出，需重点治理。</text>
+  <rect x="460" y="88" width="360" height="268" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="484" y="120" fill="rgba(255,255,255,0.34)" font-size="10" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.14em">02 · CONCERNS</text>
+  <text x="484" y="148" fill="#FFFFFF" font-size="16" font-weight="600">新用户关注前三</text>
+  <text x="484" y="176" fill="rgba(255,255,255,0.55)" font-size="12.5">平台是否安全</text>
+  <text x="796" y="176" text-anchor="end" fill="#FF8A1F" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">41.12%</text>
+  <rect x="484" y="186" width="312" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="484" y="186" width="128.3" height="5" rx="2.5" fill="#FF8A1F"/>
+  <text x="484" y="224" fill="rgba(255,255,255,0.55)" font-size="12.5">注册奖励</text>
+  <text x="796" y="224" text-anchor="end" fill="rgba(255,255,255,0.72)" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">29.23%</text>
+  <rect x="484" y="234" width="312" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="484" y="234" width="91.2" height="5" rx="2.5" fill="rgba(255,255,255,0.42)"/>
+  <text x="484" y="272" fill="rgba(255,255,255,0.55)" font-size="12.5">KYC 便捷程度</text>
+  <text x="796" y="272" text-anchor="end" fill="rgba(255,255,255,0.72)" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">20.13%</text>
+  <rect x="484" y="282" width="312" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="484" y="282" width="62.8" height="5" rx="2.5" fill="rgba(255,255,255,0.42)"/>
+  <line x1="484" y1="320" x2="796" y2="320" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="484" y="342" fill="rgba(255,255,255,0.32)" font-size="11">30 名用户访谈</text>
+  <text x="484" y="388" fill="rgba(255,255,255,0.88)" font-size="14" font-weight="600">机会点</text>
+  <text x="484" y="414" fill="rgba(255,255,255,0.48)" font-size="12.5">当期平台安全事件影响下，安全性关注</text>
+  <text x="484" y="436" fill="rgba(255,255,255,0.48)" font-size="12.5">最高；加强安全曝光有望拉动转化。</text>
+  <rect x="848" y="88" width="360" height="268" rx="12" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="872" y="120" fill="rgba(255,255,255,0.34)" font-size="10" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.14em">03 · LANDING</text>
+  <text x="872" y="148" fill="#FFFFFF" font-size="16" font-weight="600">落地页注册转化对比</text>
+  <text x="872" y="176" fill="rgba(255,255,255,0.55)" font-size="12.5">注册送 U</text>
+  <text x="1184" y="176" text-anchor="end" fill="#FF8A1F" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">8.75%</text>
+  <rect x="872" y="186" width="312" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="872" y="186" width="27.3" height="5" rx="2.5" fill="#FF8A1F"/>
+  <text x="872" y="224" fill="rgba(255,255,255,0.55)" font-size="12.5">注册送仓位券</text>
+  <text x="1184" y="224" text-anchor="end" fill="rgba(255,255,255,0.72)" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">5.62%</text>
+  <rect x="872" y="234" width="312" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="872" y="234" width="17.5" height="5" rx="2.5" fill="rgba(255,255,255,0.42)"/>
+  <text x="872" y="272" fill="rgba(255,255,255,0.55)" font-size="12.5">注册瓜分 BTC</text>
+  <text x="1184" y="272" text-anchor="end" fill="rgba(255,255,255,0.72)" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="500">6.79%</text>
+  <rect x="872" y="282" width="312" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="872" y="282" width="21.2" height="5" rx="2.5" fill="rgba(255,255,255,0.42)"/>
+  <line x1="872" y1="320" x2="1184" y2="320" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="872" y="342" fill="rgba(255,255,255,0.32)" font-size="11">6.12 – 7.15  ·  数据均值</text>
+  <text x="872" y="388" fill="rgba(255,255,255,0.88)" font-size="14" font-weight="600">机会点</text>
+  <text x="872" y="414" fill="rgba(255,255,255,0.48)" font-size="12.5">活动页转化差距不大；送 USDT / 瓜分</text>
+  <text x="872" y="436" fill="rgba(255,255,255,0.48)" font-size="12.5">BTC 等实惠型奖励更值得加强刺激。</text>
+</svg>

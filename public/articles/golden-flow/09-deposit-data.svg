@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 600" font-family="Inter, PingFang SC, Noto Sans SC, Hiragino Sans GB, sans-serif">
+  <defs>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+    <marker id="arrL" markerWidth="7" markerHeight="7" refX="1.5" refY="3.5" orient="auto">
+      <path d="M6,1 L1.5,3.5 L6,6" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrR" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+      <path d="M1,1 L5.5,3.5 L1,6" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="600" fill="#070708" rx="18"/>
+  <text x="56" y="40" fill="#FFFFFF" font-size="20" font-weight="600">可增加入金的场景</text>
+  <text x="56" y="64" fill="rgba(255,255,255,0.38)" font-size="12">黄金流程 · 数据洞察 · 点击分布 → 触点切入</text>
+
+  <rect x="56" y="96" width="400" height="450" rx="14" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="82" y="140" fill="#FFFFFF" font-size="16" font-weight="600">各模块点击人数对比</text>
+  <text x="82" y="194" fill="rgba(255,255,255,0.55)" font-size="13">首页</text>
+  <text x="430" y="194" text-anchor="end" fill="rgba(255,255,255,0.72)" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace">29.13%</text>
+  <text x="430" y="212" text-anchor="end" fill="rgba(255,255,255,0.28)" font-size="11">62,157 人</text>
+  <rect x="82" y="220" width="348" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="82" y="220" width="101.4" height="5" rx="2.5" fill="rgba(255,255,255,0.42)"/>
+  <text x="82" y="256" fill="rgba(255,255,255,0.55)" font-size="13">行情</text>
+  <text x="430" y="256" text-anchor="end" fill="#FF8A1F" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace">31.58%</text>
+  <text x="430" y="274" text-anchor="end" fill="rgba(255,255,255,0.28)" font-size="11">67,384 人</text>
+  <rect x="82" y="282" width="348" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="82" y="282" width="109.9" height="5" rx="2.5" fill="#FF8A1F"/>
+  <text x="82" y="318" fill="rgba(255,255,255,0.55)" font-size="13">现货</text>
+  <text x="430" y="318" text-anchor="end" fill="rgba(255,255,255,0.72)" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace">9.45%</text>
+  <text x="430" y="336" text-anchor="end" fill="rgba(255,255,255,0.28)" font-size="11">20,163 人</text>
+  <rect x="82" y="344" width="348" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="82" y="344" width="32.9" height="5" rx="2.5" fill="rgba(255,255,255,0.42)"/>
+  <text x="82" y="380" fill="rgba(255,255,255,0.55)" font-size="13">合约</text>
+  <text x="430" y="380" text-anchor="end" fill="rgba(255,255,255,0.72)" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace">12.02%</text>
+  <text x="430" y="398" text-anchor="end" fill="rgba(255,255,255,0.28)" font-size="11">25,641 人</text>
+  <rect x="82" y="406" width="348" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="82" y="406" width="41.8" height="5" rx="2.5" fill="rgba(255,255,255,0.42)"/>
+  <text x="82" y="442" fill="rgba(255,255,255,0.55)" font-size="13">资产</text>
+  <text x="430" y="442" text-anchor="end" fill="rgba(255,255,255,0.72)" font-size="12.5" font-family="JetBrains Mono, ui-monospace, monospace">17.82%</text>
+  <text x="430" y="460" text-anchor="end" fill="rgba(255,255,255,0.28)" font-size="11">38,029 人</text>
+  <rect x="82" y="468" width="348" height="5" rx="2.5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="82" y="468" width="62.0" height="5" rx="2.5" fill="rgba(255,255,255,0.42)"/>
+  <line x1="82" y1="504" x2="430" y2="504" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="82" y="530" fill="rgba(255,255,255,0.32)" font-size="11">6.20 – 6.26  ·  注册 156,892</text>
+  <text x="504" y="140" fill="#FFFFFF" font-size="16" font-weight="600">模块内可切入的入金区</text>
+  <text x="504" y="180" fill="rgba(255,255,255,0.38)" font-size="12">橙色为优先强化触点</text>
+  <line x1="530" y1="350" x2="1210" y2="350" stroke="rgba(255,255,255,0.22)" stroke-width="1.3" marker-start="url(#arrL)" marker-end="url(#arrR)"/>
+  <line x1="598.0" y1="350" x2="598.0" y2="332.0" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/>
+  <circle cx="598.0" cy="280.0" r="52" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.22)" stroke-width="1.3"/>
+  <text x="598.0" y="265.0" text-anchor="middle" fill="#FF8A1F" font-size="11.5" font-weight="600">运营区</text>
+  <text x="598.0" y="281.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">金刚区</text>
+  <text x="598.0" y="297.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">活动位</text>
+  <text x="598.0" y="216.0" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="12" font-weight="500">首页</text>
+  <line x1="870.0" y1="350" x2="870.0" y2="332.0" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/>
+  <circle cx="870.0" cy="280.0" r="52" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.22)" stroke-width="1.3"/>
+  <text x="870.0" y="265.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">通知区</text>
+  <text x="870.0" y="281.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">下单面板</text>
+  <text x="870.0" y="297.0" text-anchor="middle" fill="#FF8A1F" font-size="11.5" font-weight="600">持仓区</text>
+  <text x="870.0" y="216.0" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="12" font-weight="500">现货</text>
+  <line x1="1142.0" y1="350" x2="1142.0" y2="332.0" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/>
+  <circle cx="1142.0" cy="280.0" r="52" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.22)" stroke-width="1.3"/>
+  <text x="1142.0" y="265.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">通知区</text>
+  <text x="1142.0" y="281.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">资产区</text>
+  <text x="1142.0" y="297.0" text-anchor="middle" fill="#FF8A1F" font-size="11.5" font-weight="600">充值入口</text>
+  <text x="1142.0" y="216.0" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="12" font-weight="500">资产</text>
+  <line x1="734.0" y1="350" x2="734.0" y2="368.0" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/>
+  <circle cx="734.0" cy="420.0" r="52" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.22)" stroke-width="1.3"/>
+  <text x="734.0" y="405.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">通知区</text>
+  <text x="734.0" y="421.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">新币区</text>
+  <text x="734.0" y="437.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">币对列表</text>
+  <text x="734.0" y="490.0" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="12" font-weight="500">行情</text>
+  <line x1="1006.0" y1="350" x2="1006.0" y2="368.0" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/>
+  <circle cx="1006.0" cy="420.0" r="52" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.22)" stroke-width="1.3"/>
+  <text x="1006.0" y="405.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">通知区</text>
+  <text x="1006.0" y="421.0" text-anchor="middle" fill="rgba(255,255,255,0.68)" font-size="11.5" font-weight="400">下单面板</text>
+  <text x="1006.0" y="437.0" text-anchor="middle" fill="#FF8A1F" font-size="11.5" font-weight="600">持仓区</text>
+  <text x="1006.0" y="490.0" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="12" font-weight="500">合约</text>
+</svg>

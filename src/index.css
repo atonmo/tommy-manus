@@ -38,28 +38,28 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Light theme — AI-Native Design case study */
+/* Light theme — case studies (e.g. Tencent Meeting) */
 html.theme-light {
-  --bg: #f7f8f6;
+  --bg: #f5f7fa;
   --bg-elevated: #ffffff;
-  --bg-soft: #eef0eb;
-  --bg-hover: #e4e6e1;
-  --border: rgba(26, 28, 24, 0.08);
-  --border-strong: rgba(26, 28, 24, 0.14);
-  --text: #3d403a;
-  --text-strong: #141414;
-  --text-muted: #6d726c;
-  --text-faint: #9a9e97;
-  --cta-bg: #1a1c18;
+  --bg-soft: #eef2f6;
+  --bg-hover: #e4e9ef;
+  --border: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.14);
+  --text: #334155;
+  --text-strong: #0f172a;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+  --cta-bg: #0f172a;
   --cta-text: #ffffff;
-  --accent: #7c5cff;
+  --accent: #0284c7;
   color-scheme: light;
 }
 
 html.theme-light .app-atmosphere {
   background:
-    radial-gradient(ellipse 70% 45% at 85% 8%, rgba(124, 92, 255, 0.14), transparent 55%),
-    radial-gradient(ellipse 50% 35% at 12% 90%, rgba(124, 92, 255, 0.07), transparent 50%),
+    radial-gradient(ellipse 70% 45% at 85% 8%, rgba(14, 165, 233, 0.12), transparent 55%),
+    radial-gradient(ellipse 50% 35% at 12% 90%, rgba(56, 189, 248, 0.08), transparent 50%),
     var(--bg);
 }
 
@@ -99,8 +99,8 @@ html.theme-light .btn-ghost:hover {
 }
 
 html.theme-light ::selection {
-  background: rgba(124, 92, 255, 0.28);
-  color: #141414;
+  background: rgba(14, 165, 233, 0.28);
+  color: #0f172a;
 }
 
 html,

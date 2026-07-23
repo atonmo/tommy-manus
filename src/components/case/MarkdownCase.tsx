@@ -1,9 +1,9 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { Components } from 'react-markdown'
-import { createContext, useContext } from 'react'
+import { Children, createContext, isValidElement, useContext, type ReactNode } from 'react'
 import type { ArticleData } from '../../lib/articles'
-import { getArticleMedia } from '../../content/articles/mediaRegistry'
+import { getArticleMedia, getArticleMediaByAlt, splitConcatenatedMediaAlts } from '../../content/articles/mediaRegistry'
 import { CaseShell } from './CaseShell'
 import { CaseHero } from './CaseHero'
 import { MediaBlock } from './MediaBlock'
@@ -26,6 +26,7 @@ type BodyBlock =
   | { kind: 'subcards'; items: { title: string; body: string }[] }
   | { kind: 'stats'; items: { value: string; label: string }[] }
   | { kind: 'problem-cards'; items: { title: string; body: string; phase?: string }[] }
+  | { kind: 'timeline'; items: { id: string; title: string; body: string }[] }
   | {
       kind: 'media'
       src: string
@@ -38,15 +39,28 @@ type BodyBlock =
       flush?: boolean
       frame?: boolean
     }
+  | {
+      kind: 'media-row'
+      items: Extract<BodyBlock, { kind: 'media' }>[]
+    }
+  | {
+      kind: 'media-split'
+      main: Extract<BodyBlock, { kind: 'media' }>[]
+      aside: Extract<BodyBlock, { kind: 'media' }>
+    }
 
 const IMAGE_LINE_RE =
   /^!\[([^\]]*)\]\((embed:)?([^)\s]+)(?:\s+(?:"([^"]*)"|'([^']*)'))?\)\s*$/
 const IMG_COMMENT_RE =
   /^<!--\s*(img|embed):\s*(\S+)\s*(?:\|\s*([^|]*?))?\s*(?:\|\s*([^|]*?))?\s*(?:\|\s*([\s\S]*?))?\s*-->$/
 const MEDIA_REF_RE = /^\[\[(img|embed):([\w-]+)\]\]$/
+const MEDIA_ROW_RE = /^\[\[media-row:([\w,-]+)\]\]$/
+const MEDIA_SPLIT_RE = /^\[\[media-split:([\w,-]+)\|([\w-]+)\]\]$/
 const STATS_RE = /^\[\[stats:([\s\S]+)\]\]$/
 const PROBLEM_CARDS_RE = /^\[\[problem-cards\]\]$/
 const PROBLEM_CARD_ITEM_RE = /^-\s+\*\*(.+?)\*\*\s*(?:\{(.+?)\}\s*)?(.*)$/
+const TIMELINE_RE = /^\[\[timeline\]\]$/
+const TIMELINE_ITEM_RE = /^-\s+\*\*(.+?)\*\*\s*(.*)$/
 type CaseSectionModel = {
   kind: 'section'
   variant: 'head' | 'step'
@@ -58,8 +72,10 @@ type CaseSectionModel = {
 
 type ReflectionModel = {
   kind: 'reflection'
+  label: string
   title: string
   body: string
+  footer?: string
   points: { idx: string; title: string; body: string }[]
 }
 
@@ -105,8 +121,9 @@ const STYLE_MAP: Record<
     media: 'an-media',
   },
   'golden-flow': {
-    page: '',
-    caseName: '',
+    page: 'pl-page',
+    caseName: 'pl-case',
+    glow: 'pl-hero-glow',
     visual: 'gf-hero-gradient',
   },
   endoscope: {
@@ -114,6 +131,7 @@ const STYLE_MAP: Record<
     caseName: 'endo-case',
     glow: 'endo-hero-glow',
     visual: 'gf-hero-gradient',
+    media: 'endo-media',
   },
 }
 
@@ -153,6 +171,35 @@ function extractLead(body: string): { lead?: string; rest: string } {
   }
 }
 
+function mediaItemToBlock(
+  item: NonNullable<ReturnType<typeof getArticleMedia>>,
+): Extract<BodyBlock, { kind: 'media' }> {
+  const isEmbed = item.embed || /\.html(?:[?#]|$)/i.test(item.src)
+  if (isEmbed) {
+    const { src, tall, flush, frame } = parseEmbedSrc(
+      item.src.startsWith('embed:') ? item.src : `embed:${item.src}`,
+    )
+    return {
+      kind: 'media',
+      src,
+      alt: item.alt,
+      caption: item.caption,
+      lead: item.lead,
+      embed: true,
+      tall: item.tall ?? tall,
+      flush: item.flush ?? flush,
+      frame: item.frame ?? frame,
+    }
+  }
+  return {
+    kind: 'media',
+    src: item.src,
+    alt: item.alt,
+    caption: item.caption,
+    lead: item.lead,
+  }
+}
+
 function parseImageLine(
   line: string,
   slug?: string,
@@ -165,30 +212,11 @@ function parseImageLine(
     const id = ref[2]
     const item = getArticleMedia(slug, id)
     if (!item) return null
-    const isEmbed = kind === 'embed' || item.embed || /\.html(?:[?#]|$)/i.test(item.src)
-    if (isEmbed) {
-      const { src, tall, flush, frame } = parseEmbedSrc(
-        item.src.startsWith('embed:') ? item.src : `embed:${item.src}`,
-      )
-      return {
-        kind: 'media',
-        src,
-        alt: item.alt,
-        caption: item.caption,
-        lead: item.lead,
-        embed: true,
-        tall: item.tall ?? tall,
-        flush: item.flush ?? flush,
-        frame: item.frame ?? frame,
-      }
+    const block = mediaItemToBlock(item)
+    if (kind === 'embed') {
+      return { ...block, embed: true }
     }
-    return {
-      kind: 'media',
-      src: item.src,
-      alt: item.alt,
-      caption: item.caption,
-      lead: item.lead,
-    }
+    return block
   }
 
   const comment = trimmed.match(IMG_COMMENT_RE)
@@ -208,21 +236,29 @@ function parseImageLine(
   }
 
   const match = trimmed.match(IMAGE_LINE_RE)
-  if (!match) return null
+  if (match) {
+    const alt = match[1] ?? ''
+    const isEmbedPrefix = Boolean(match[2])
+    const rawSrc = match[3] ?? ''
+    const caption = match[4] || match[5] || undefined
+    const isEmbed = isEmbedPrefix || /\.html(?:[?#]|$)/i.test(rawSrc)
 
-  const alt = match[1] ?? ''
-  const isEmbedPrefix = Boolean(match[2])
-  const rawSrc = match[3] ?? ''
-  const caption = match[4] || match[5] || undefined
-  const isEmbed = isEmbedPrefix || /\.html(?:[?#]|$)/i.test(rawSrc)
+    if (isEmbed) {
+      const raw = isEmbedPrefix ? `embed:${rawSrc}` : `embed:${rawSrc}`
+      const { src, tall, flush, frame } = parseEmbedSrc(raw)
+      return { kind: 'media', src, alt, caption, embed: true, tall, flush, frame }
+    }
 
-  if (isEmbed) {
-    const raw = isEmbedPrefix ? `embed:${rawSrc}` : `embed:${rawSrc}`
-    const { src, tall, flush, frame } = parseEmbedSrc(raw)
-    return { kind: 'media', src, alt, caption, embed: true, tall, flush, frame }
+    return { kind: 'media', src: rawSrc, alt, caption }
   }
 
-  return { kind: 'media', src: rawSrc, alt, caption }
+  // Safety net: plain alt text left after an editor stripped ![alt](src)
+  if (slug) {
+    const byAlt = getArticleMediaByAlt(slug, trimmed)
+    if (byAlt) return mediaItemToBlock(byAlt)
+  }
+
+  return null
 }
 
 function tokenizeBody(source: string, slug?: string): BodyBlock[] {
@@ -246,6 +282,46 @@ function tokenizeBody(source: string, slug?: string): BodyBlock[] {
     if (image) {
       flushMd()
       blocks.push(image)
+      i += 1
+      continue
+    }
+
+    // Safety net: several alts glued into one line
+    if (slug) {
+      const glued = splitConcatenatedMediaAlts(slug, line)
+      if (glued.length) {
+        flushMd()
+        for (const item of glued) blocks.push(mediaItemToBlock(item))
+        i += 1
+        continue
+      }
+    }
+
+    const mediaRow = line.trim().match(MEDIA_ROW_RE)
+    if (mediaRow && slug) {
+      flushMd()
+      const items = mediaRow[1]
+        .split(',')
+        .map((id) => id.trim())
+        .filter(Boolean)
+        .map((id) => parseImageLine(`[[img:${id}]]`, slug))
+        .filter((item): item is Extract<BodyBlock, { kind: 'media' }> => item != null)
+      if (items.length) blocks.push({ kind: 'media-row', items })
+      i += 1
+      continue
+    }
+
+    const mediaSplit = line.trim().match(MEDIA_SPLIT_RE)
+    if (mediaSplit && slug) {
+      flushMd()
+      const main = mediaSplit[1]
+        .split(',')
+        .map((id) => id.trim())
+        .filter(Boolean)
+        .map((id) => parseImageLine(`[[img:${id}]]`, slug))
+        .filter((item): item is Extract<BodyBlock, { kind: 'media' }> => item != null)
+      const aside = parseImageLine(`[[img:${mediaSplit[2].trim()}]]`, slug)
+      if (main.length && aside) blocks.push({ kind: 'media-split', main, aside })
       i += 1
       continue
     }
@@ -281,6 +357,26 @@ function tokenizeBody(source: string, slug?: string): BodyBlock[] {
         i += 1
       }
       if (items.length) blocks.push({ kind: 'problem-cards', items })
+      continue
+    }
+
+    if (TIMELINE_RE.test(line.trim())) {
+      flushMd()
+      i += 1
+      while (i < lines.length && lines[i].trim() === '') i += 1
+      const items: { id: string; title: string; body: string }[] = []
+      while (i < lines.length) {
+        const itemMatch = lines[i].match(TIMELINE_ITEM_RE)
+        if (!itemMatch) break
+        const { label: id, title } = splitLabelTitle(itemMatch[1].trim())
+        items.push({
+          id,
+          title: title === id ? '' : title,
+          body: itemMatch[2].trim(),
+        })
+        i += 1
+      }
+      if (items.length) blocks.push({ kind: 'timeline', items })
       continue
     }
 
@@ -354,10 +450,17 @@ function parseDoc(markdown: string, slug?: string): DocPart[] {
     const rawBody = nl === -1 ? '' : chunk.slice(nl + 1).trim()
     const { label, title } = splitLabelTitle(header)
 
-    if (/^design reflection$/i.test(label) || /^reflection$/i.test(label)) {
+    if (
+      /^design reflection$/i.test(label) ||
+      /^reflection$/i.test(label) ||
+      /^project summary$/i.test(label)
+    ) {
       const { lead, rest } = extractLead(rawBody)
       const blocks = tokenizeBody(rest, slug)
-      const points = blocks
+      const firstCards = blocks.findIndex((b) => b.kind === 'cards')
+      const before = firstCards === -1 ? blocks : blocks.slice(0, firstCards)
+      const after = firstCards === -1 ? [] : blocks.slice(firstCards)
+      const points = after
         .filter((b): b is Extract<BodyBlock, { kind: 'cards' }> => b.kind === 'cards')
         .flatMap((b) =>
           b.items.map((item) => ({
@@ -366,14 +469,20 @@ function parseDoc(markdown: string, slug?: string): DocPart[] {
             body: item.body,
           })),
         )
-      const bodyParts = blocks
-        .filter((b) => b.kind === 'md')
-        .map((b) => (b as Extract<BodyBlock, { kind: 'md' }>).source)
-      const body = [lead, ...bodyParts].filter(Boolean).join('\n\n')
+      const toMd = (list: BodyBlock[]) =>
+        list
+          .filter((b) => b.kind === 'md')
+          .map((b) => (b as Extract<BodyBlock, { kind: 'md' }>).source)
+          .filter(Boolean)
+          .join('\n\n')
+      const body = [lead, toMd(before)].filter(Boolean).join('\n\n')
+      const footer = toMd(after)
       return {
         kind: 'reflection',
+        label,
         title,
         body,
+        footer: footer || undefined,
         points,
       } satisfies ReflectionModel
     }
@@ -453,6 +562,16 @@ function caseUrlTransform(url: string) {
 
 const InCalloutContext = createContext(false)
 
+function tableHeaderIncludes(children: ReactNode, needle: string): boolean {
+  return Children.toArray(children).some((child) => {
+    if (typeof child === 'string' || typeof child === 'number') {
+      return String(child).includes(needle)
+    }
+    if (!isValidElement<{ children?: ReactNode }>(child)) return false
+    return tableHeaderIncludes(child.props.children, needle)
+  })
+}
+
 function MarkdownChunk({
   source,
   mediaClassName,
@@ -496,11 +615,14 @@ function MarkdownChunk({
         <blockquote className="wt-callout">{children}</blockquote>
       </InCalloutContext.Provider>
     ),
-    table: ({ children }) => (
-      <div className="gf-table-wrap">
-        <table className="gf-table">{children}</table>
-      </div>
-    ),
+    table: ({ children }) => {
+      const isGuide = tableHeaderIncludes(children, '步骤')
+      return (
+        <div className={`gf-table-wrap${isGuide ? ' pl-guide-table-wrap' : ''}`}>
+          <table className={`gf-table${isGuide ? ' pl-guide-table' : ''}`}>{children}</table>
+        </div>
+      )
+    },
   }
 
   return (
@@ -551,7 +673,22 @@ function SectionBlocks({
                 ) : (
                   <article className="gf-target-card" key={`${item.id}-${item.title}`}>
                     <p className="gf-target-id">{item.id}</p>
-                    {item.title ? <h3 className="gf-target-title">{item.title}</h3> : null}
+                    {item.title ? (
+                      <h3 className="gf-target-title">
+                        {item.title.includes(' | ')
+                          ? item.title.split(' | ').flatMap((part, i, arr) =>
+                              i < arr.length - 1
+                                ? [
+                                    <span key={`t-${i}`}>{part}</span>,
+                                    <span key={`s-${i}`} className="gf-title-sep" aria-hidden="true">
+                                      |
+                                    </span>,
+                                  ]
+                                : [<span key={`t-${i}`}>{part}</span>],
+                            )
+                          : item.title}
+                      </h3>
+                    ) : null}
                     {item.body ? <p className="gf-target-body">{item.body}</p> : null}
                   </article>
                 ),
@@ -584,6 +721,19 @@ function SectionBlocks({
             </ul>
           )
         }
+        if (block.kind === 'timeline') {
+          return (
+            <ol className="pl-timeline" key={`timeline-${index}`}>
+              {block.items.map((item) => (
+                <li className="pl-timeline-item" key={`${item.id}-${item.title}`}>
+                  <p className="pl-timeline-phase">{item.id}</p>
+                  {item.title ? <h3 className="pl-timeline-title">{item.title}</h3> : null}
+                  {item.body ? <p className="pl-timeline-items">{item.body}</p> : null}
+                </li>
+              ))}
+            </ol>
+          )
+        }
         if (block.kind === 'subcards') {
           return (
             <div className="gf-subgrid" key={`sub-${index}`}>
@@ -593,6 +743,81 @@ function SectionBlocks({
                   {item.body ? <p>{item.body}</p> : null}
                 </div>
               ))}
+            </div>
+          )
+        }
+        if (block.kind === 'media-row') {
+          return (
+            <div className="pl-media-row" key={`media-row-${index}`}>
+              {block.items.map((item) =>
+                item.embed ? (
+                  <EmbedBlock
+                    key={item.src}
+                    src={item.src}
+                    title={item.alt || 'Embed'}
+                    caption={item.caption}
+                    tall={item.tall}
+                    flush={item.flush}
+                    frame={item.frame}
+                  />
+                ) : (
+                  <MediaBlock
+                    key={item.src}
+                    src={item.src}
+                    alt={item.alt}
+                    caption={item.caption}
+                    className={mediaClassName}
+                  />
+                ),
+              )}
+            </div>
+          )
+        }
+        if (block.kind === 'media-split') {
+          return (
+            <div className="pl-media-split" key={`media-split-${index}`}>
+              <div className="pl-media-split-main">
+                {block.main.map((item) =>
+                  item.embed ? (
+                    <EmbedBlock
+                      key={item.src}
+                      src={item.src}
+                      title={item.alt || 'Embed'}
+                      caption={item.caption}
+                      tall={item.tall}
+                      flush={item.flush}
+                      frame={item.frame}
+                    />
+                  ) : (
+                    <MediaBlock
+                      key={item.src}
+                      src={item.src}
+                      alt={item.alt}
+                      caption={item.caption}
+                      className={mediaClassName}
+                    />
+                  ),
+                )}
+              </div>
+              <div className="pl-media-split-aside">
+                {block.aside.embed ? (
+                  <EmbedBlock
+                    src={block.aside.src}
+                    title={block.aside.alt || 'Embed'}
+                    caption={block.aside.caption}
+                    tall={block.aside.tall}
+                    flush={block.aside.flush}
+                    frame={block.aside.frame}
+                  />
+                ) : (
+                  <MediaBlock
+                    src={block.aside.src}
+                    alt={block.aside.alt}
+                    caption={block.aside.caption}
+                    className={mediaClassName}
+                  />
+                )}
+              </div>
             </div>
           )
         }
@@ -642,6 +867,7 @@ export function MarkdownCase({ article }: { article: ArticleData }) {
       pageClassName={style.page || undefined}
       caseClassName={style.caseName || undefined}
       accent={article.work.accent}
+      theme={article.theme}
     >
       <CaseHero
         kicker={formatCaseKicker(article.slug, kickerLabel)}
@@ -663,16 +889,21 @@ export function MarkdownCase({ article }: { article: ArticleData }) {
           return (
             <CaseReflection
               key={`ref-${index}`}
+              label={part.label}
               title={part.title}
               body={part.body}
+              footer={part.footer}
               points={part.points}
             />
           )
         }
 
         const secSlug = part.label
+          .trim()
           .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/\s+/g, '-')
+          .replace(/[^\w\u4e00-\u9fff-]+/g, '-')
+          .replace(/-+/g, '-')
           .replace(/^-|-$/g, '')
 
         return (

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" font-family="Inter, PingFang SC, Noto Sans SC, Hiragino Sans GB, sans-serif">
+  <defs>
+    <linearGradient id="band0" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.07)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+    <linearGradient id="band1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,138,31,0.12)"/>
+      <stop offset="100%" stop-color="rgba(255,138,31,0.04)"/>
+    </linearGradient>
+    <linearGradient id="band2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,138,31,0.18)"/>
+      <stop offset="100%" stop-color="rgba(255,138,31,0.06)"/>
+    </linearGradient>
+    <linearGradient id="band3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,138,31,0.30)"/>
+      <stop offset="100%" stop-color="rgba(255,138,31,0.12)"/>
+    </linearGradient>
+    <linearGradient id="band4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF9A3D"/>
+      <stop offset="100%" stop-color="#FF8A1F"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="520" fill="#070708" rx="18"/>
+
+  <text x="640" y="40" text-anchor="middle" fill="#FFFFFF" font-size="20" font-weight="600">首交黄金链路</text>
+  <text x="640" y="64" text-anchor="middle" fill="rgba(255,255,255,0.38)" font-size="12">注册 → KYC → 入金 → 下单 → 首笔成功交易</text>
+
+  <polygon points="310.0,92.0 970.0,92.0 931.1,154.0 348.9,154.0" fill="url(#band0)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+  <text x="640" y="128.0" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="600">注册</text>
+  <line x1="976.0" y1="123.0" x2="998" y2="123.0" stroke="rgba(255,138,31,0.28)" stroke-width="1"/>
+  <circle cx="998" cy="123.0" r="2.2" fill="#FF8A1F"/>
+  <text x="1008" y="127.0" fill="rgba(255,255,255,0.55)" font-size="12">入口转化</text>
+  <polygon points="353.3,161.0 926.7,161.0 887.8,223.0 392.2,223.0" fill="url(#band1)" stroke="rgba(255,138,31,0.32)" stroke-width="1"/>
+  <text x="640" y="197.0" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="600">KYC 认证</text>
+  <line x1="932.7" y1="192.0" x2="998" y2="192.0" stroke="rgba(255,138,31,0.28)" stroke-width="1"/>
+  <circle cx="998" cy="192.0" r="2.2" fill="#FF8A1F"/>
+  <text x="1008" y="196.0" fill="rgba(255,255,255,0.55)" font-size="12">身份通过</text>
+  <polygon points="396.6,230.0 883.4,230.0 844.6,292.0 435.4,292.0" fill="url(#band2)" stroke="rgba(255,138,31,0.42)" stroke-width="1"/>
+  <text x="640" y="266.0" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="600">入金（eFTD）</text>
+  <line x1="889.4" y1="261.0" x2="998" y2="261.0" stroke="rgba(255,138,31,0.28)" stroke-width="1"/>
+  <circle cx="998" cy="261.0" r="2.2" fill="#FF8A1F"/>
+  <text x="1008" y="265.0" fill="rgba(255,255,255,0.55)" font-size="12">资金到位</text>
+  <polygon points="439.8,299.0 840.2,299.0 801.3,361.0 478.7,361.0" fill="url(#band3)" stroke="rgba(255,138,31,0.55)" stroke-width="1"/>
+  <text x="640" y="335.0" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="600">委托下单</text>
+  <line x1="846.2" y1="330.0" x2="998" y2="330.0" stroke="rgba(255,138,31,0.28)" stroke-width="1"/>
+  <circle cx="998" cy="330.0" r="2.2" fill="#FF8A1F"/>
+  <text x="1008" y="334.0" fill="rgba(255,255,255,0.55)" font-size="12">交易动作</text>
+  <polygon points="483.1,368.0 796.9,368.0 758.0,430.0 522.0,430.0" fill="url(#band4)" stroke="rgba(255,200,120,0.9)" stroke-width="1"/>
+  <text x="640" y="404.0" text-anchor="middle" fill="#1A0F05" font-size="15" font-weight="600">首笔成功交易</text>
+  <line x1="802.9" y1="399.0" x2="998" y2="399.0" stroke="rgba(255,138,31,0.28)" stroke-width="1"/>
+  <circle cx="998" cy="399.0" r="2.2" fill="#FF8A1F"/>
+  <text x="1008" y="403.0" fill="rgba(255,255,255,0.55)" font-size="12">业务目标</text>
+
+  <text x="640" y="478" text-anchor="middle" fill="rgba(255,255,255,0.32)" font-size="12">每一层转化抬升，都会放大末端交易量</text>
+</svg>

@@ -1,21 +1,17 @@
-/* Endoscope case — violet accent */
+/* Endoscope case — clinical cyan accent; keep shared silk hero */
 
+.endo-case {
+  --endo-well: #f4f6f8;
+  --endo-well-edge: rgba(255, 255, 255, 0.14);
+}
+
+/* Soft clinical tint on shared hero atmosphere */
 .endo-hero-glow {
   background:
-    radial-gradient(ellipse 55% 50% at 28% 40%, color-mix(in srgb, var(--gf-acc) 18%, transparent), transparent 70%),
-    radial-gradient(ellipse 40% 45% at 82% 18%, rgba(192, 132, 252, 0.12), transparent 65%),
-    radial-gradient(ellipse 35% 35% at 55% 72%, color-mix(in srgb, var(--gf-acc) 7%, transparent), transparent 70%);
+    radial-gradient(ellipse 55% 50% at 28% 40%, color-mix(in srgb, var(--gf-acc) 16%, transparent), transparent 70%),
+    radial-gradient(ellipse 40% 45% at 82% 18%, rgba(148, 163, 184, 0.1), transparent 65%),
+    radial-gradient(ellipse 35% 35% at 55% 72%, color-mix(in srgb, var(--gf-acc) 6%, transparent), transparent 70%);
 }
-
-.endo-case .gf-target-card:hover {
-  border-color: color-mix(in srgb, var(--gf-acc) 32%, transparent);
-}
-
-.endo-case .gf-list li::before {
-  box-shadow: 0 0 10px color-mix(in srgb, var(--gf-acc) 45%, transparent);
-}
-
-/* —— 对齐参考版（endoscope-project/index.html）的宽度与间距 —— */
 
 .endo-case .gf-hero-body {
   padding-bottom: 36px;
@@ -24,15 +20,14 @@
 .endo-case .gf-hero-title {
   white-space: normal;
   font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.28;
 }
 
-/* 强调词整体换行，避免「产品形态」被折断 */
 .endo-case .gf-hero-title em {
-  display: inline-block;
+  display: inline;
   white-space: nowrap;
 }
 
-/* Metrics 条：更紧凑的行高与内边距 */
 .endo-case .gf-metric {
   padding: 18px 28px;
   gap: 6px;
@@ -47,6 +42,132 @@
 }
 
 .endo-case .gf-metric-value {
-  font-size: clamp(22px, 2.4vw, 26px);
   white-space: normal;
+}
+
+.endo-case .gf-target-card:hover {
+  border-color: color-mix(in srgb, var(--gf-acc) 32%, transparent);
+}
+
+.endo-case .gf-list li::before {
+  box-shadow: 0 0 10px color-mix(in srgb, var(--gf-acc) 45%, transparent);
+}
+
+.endo-case .gf-prose {
+  letter-spacing: 0.015em;
+  line-height: 1.85;
+}
+
+.endo-case .gf-target-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 18px;
+  background:
+    linear-gradient(165deg, color-mix(in srgb, var(--gf-acc) 7%, transparent), transparent 42%),
+    rgba(255, 255, 255, 0.028);
+}
+
+.endo-case .gf-target-id,
+.endo-case .gf-target-title,
+.endo-case .gf-target-body {
+  margin: 0;
+}
+
+.endo-case .gf-target-id {
+  line-height: 1.5;
+}
+
+.endo-case .gf-target-title {
+  line-height: 1.45;
+}
+
+.endo-case .gf-subcard:hover {
+  border-color: color-mix(in srgb, var(--gf-acc) 28%, transparent);
+}
+
+.endo-case .gf-subcard h4::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 10px;
+  margin-bottom: 2px;
+  border-radius: 50%;
+  background: var(--gf-acc);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--gf-acc) 55%, transparent);
+  vertical-align: middle;
+}
+
+/* Product media: clinical white wells */
+.endo-case .endo-media,
+.endo-case .gf-media.endo-media {
+  margin-top: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--endo-well-edge);
+  background: var(--endo-well);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 24px 48px rgba(0, 0, 0, 0.35);
+}
+
+.endo-case .endo-media img,
+.endo-case .gf-media.endo-media img {
+  background: var(--endo-well);
+  object-fit: contain;
+  width: 100%;
+  padding: clamp(20px, 4vw, 48px);
+  box-sizing: border-box;
+}
+
+/* Annotated diagram already has its own frame — no clinical well padding */
+.endo-case .endo-media:has(img[src*='annotated']),
+.endo-case .gf-media.endo-media:has(img[src*='annotated']) {
+  background: #070708;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.endo-case .endo-media:has(img[src*='annotated']) img,
+.endo-case .gf-media.endo-media:has(img[src*='annotated']) img {
+  padding: 0;
+  background: #070708;
+}
+
+.endo-case .endo-media .gf-caption,
+.endo-case .gf-media.endo-media figcaption {
+  margin: 0;
+  padding: 14px 20px 16px;
+  background: #0a0c10;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--gf-ink-3);
+  font-family: var(--gf-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.endo-case .gf-table th {
+  color: var(--gf-acc);
+  background: color-mix(in srgb, var(--gf-acc) 6%, transparent);
+}
+
+.endo-case .gf-table-wrap {
+  margin-bottom: 32px;
+}
+
+.endo-case .gf-target-grid {
+  margin-top: 24px;
+  gap: 16px;
+}
+
+.endo-case .gf-section .gf-table-wrap ~ .gf-target-grid {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .endo-case .endo-media img,
+  .endo-case .gf-media.endo-media img {
+    padding: 16px;
+  }
 }

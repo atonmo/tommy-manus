@@ -25,3 +25,8 @@ dist-ssr
 
 # Scratch / local tooling
 tmp-figma/
+*.orig.png
+*.orig.jpg
+
+# Deploy secrets
+deploy/.env

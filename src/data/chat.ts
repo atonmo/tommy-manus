@@ -16,7 +16,7 @@ export const welcomeMessage = welcomeParagraphs.join('\n\n')
 
 export const suggestedQuestions = [
   '先介绍一下你自己？',
-  '你最代表作的项目是什么？',
+  '你最具代表性的项目是什么？',
   '你怎么做体验设计？',
   '为什么值得和你聊聊？',
   '你怎么看 AI 和设计？',
@@ -51,7 +51,7 @@ export const chatKnowledge: ChatQA[] = [
   },
   {
     id: 'signature-work',
-    question: '你最代表作的项目是什么？',
+    question: '你最具代表性的项目是什么？',
     keywords: [
       '代表作',
       '腾讯会议',
@@ -178,7 +178,7 @@ export const chatKnowledge: ChatQA[] = [
       '哪里',
     ],
     answer: [
-      '大致四段：腾讯电脑管家高级交互（PC 安全产品 Redesign）→ 腾讯云政务 / 健康码 / 领事馆等设计负责人 → 腾讯会议设计负责人 → 现在 Web3 衍生品交易所交易线体验与团队管理。',
+      '大致四段：腾讯电脑管家高级交互（PC 安全产品 Redesign）→ 腾讯云政务 / 健康码 / 国务院客户端等设计负责人 → 腾讯会议设计负责人 → 现在 Web3 衍生品交易所交易线体验与团队管理。',
       '其间我也在 CSIG 技术委员会参与云行业设计质量标准与适老化等标准相关工作，做过知识沉淀和外部分享。',
       '时间线更完整的版本在 About 页；如果你关心某一段，我可以单独展开。',
     ],
@@ -226,7 +226,7 @@ export const chatKnowledge: ChatQA[] = [
     answer: [
       'Email：fengzhao@vip.qq.com',
       '微信：atonmo0020',
-      '合作、内推，或只是想聊聊体验设计 / AI，随时打招呼。页脚 Wechat / Email 悬停也能看到。',
+      '合作、内推，或只是想聊聊体验设计 / AI，随时打招呼。页脚 WeChat / Email 悬停也能看到。',
     ],
   },
 ]

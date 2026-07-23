@@ -14,6 +14,22 @@ npm install
 npm run dev
 ```
 
+## 部署（阿里云 ECS + Nginx）
+
+静态站构建产物在 `dist/`。用 Nginx 托管，并配置 SPA 回退（`try_files`），否则刷新 `/myself` 等路由会 404。
+
+```bash
+cp deploy/env.example deploy/.env   # 填写 ECS IP、SSH 用户、域名
+chmod +x deploy.sh deploy/setup-server.sh
+SETUP_SERVER=1 ./deploy.sh          # 首次：安装 Nginx + 上传站点
+# DNS A 记录指向 ECS 后：
+ENABLE_SSL=1 ./deploy.sh            # Let's Encrypt HTTPS
+# 日常更新：
+./deploy.sh
+```
+
+详情见 [deploy/DNS-HTTPS.md](deploy/DNS-HTTPS.md)。Nginx 模板：`deploy/nginx.conf.template`。
+
 ## 路由
 
 | 路径 | 页面 |

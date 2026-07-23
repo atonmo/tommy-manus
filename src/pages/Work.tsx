@@ -29,11 +29,11 @@ export function Work() {
     <main className="page">
       <div className="work-page">
         <header className="work-header">
-          <p className="work-kicker">01 / Selected Works</p>
+          <p className="work-kicker">Selected Works</p>
           <h1 className="work-heading">设计是规划未来。</h1>
           <div className="work-meta text-muted">
             <span>{works.length} cases</span>
-            <span>Update 26.07.15</span>
+            <span>Update 26.07.22</span>
           </div>
         </header>
 

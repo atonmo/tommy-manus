@@ -8,7 +8,7 @@ export function Footer() {
         <span>© 2026 Made by Tommy</span>
         <span className="footer-dot" />
         <button type="button" className="footer-link footer-tip" data-tip="atonmo0020">
-          Wechat
+          WeChat
         </button>
         <span className="footer-dot" />
         <a

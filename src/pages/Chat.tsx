@@ -121,7 +121,6 @@ export function Chat() {
                 <p className="chat-subtitle">资深体验设计师替身 · 在线</p>
               </div>
             </div>
-            <p className="chat-header-note">按真实履历与作品回答，像当面聊一样。</p>
           </header>
 
           <div className="chat-body" aria-live="polite" ref={threadRef}>

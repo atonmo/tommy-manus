@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 580" font-family="Inter, PingFang SC, Noto Sans SC, Hiragino Sans GB, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0B0B0C"/>
+      <stop offset="100%" stop-color="#070708"/>
+    </linearGradient>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(255,138,31,0.00)"/>
+      <stop offset="40%" stop-color="rgba(255,138,31,0.10)"/>
+      <stop offset="60%" stop-color="rgba(255,138,31,0.10)"/>
+      <stop offset="100%" stop-color="rgba(255,138,31,0.00)"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.045)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.015)"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="580" fill="url(#bg)" rx="16"/>
+
+  <!-- Result -->
+  <rect x="280" y="48" width="720" height="96" rx="16" fill="url(#hero)" stroke="rgba(255,138,31,0.28)" stroke-width="1"/>
+  <text x="640" y="90" text-anchor="middle" fill="#FFFFFF" font-size="26" font-weight="600">交易量提升</text>
+  <text x="640" y="118" text-anchor="middle" fill="rgba(255,255,255,0.42)" font-size="13">以首交转化为杠杆，放大末端成交</text>
+
+  <!-- Metrics row -->
+  <g font-family="JetBrains Mono, ui-monospace, monospace">
+    <text x="280" y="200" text-anchor="middle" fill="#FF8A1F" font-size="28" font-weight="700">25.89%</text>
+    <text x="640" y="200" text-anchor="middle" fill="#FFFFFF" font-size="28" font-weight="700">66.28%</text>
+    <text x="1000" y="200" text-anchor="middle" fill="#FFFFFF" font-size="28" font-weight="700">42.5%</text>
+  </g>
+  <text x="280" y="228" text-anchor="middle" fill="rgba(255,255,255,0.38)" font-size="12">新用户完成注册</text>
+  <text x="640" y="228" text-anchor="middle" fill="rgba(255,255,255,0.38)" font-size="12">新用户完成 KYC</text>
+  <text x="1000" y="228" text-anchor="middle" fill="rgba(255,255,255,0.38)" font-size="12">快捷下单转化 (面板 43.2%)</text>
+
+  <!-- subtle separators between metrics -->
+  <line x1="460" y1="178" x2="460" y2="232" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <line x1="820" y1="178" x2="820" y2="232" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <!-- Three pillars -->
+  <rect x="56" y="280" width="370" height="240" rx="14" fill="url(#card)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+  <rect x="455" y="280" width="370" height="240" rx="14" fill="url(#card)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+  <rect x="854" y="280" width="370" height="240" rx="14" fill="url(#card)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+
+  <text x="84" y="324" fill="rgba(255,138,31,0.9)" font-size="11" font-weight="600" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.12em">01  USER</text>
+  <text x="84" y="360" fill="#FFFFFF" font-size="18" font-weight="600">降低关键路径成本</text>
+  <text x="84" y="400" fill="rgba(255,255,255,0.5)" font-size="13">注册挽留 / KYC 进度 / 入金触点</text>
+  <text x="84" y="428" fill="rgba(255,255,255,0.5)" font-size="13">K 线同屏下单，缩短决策距离</text>
+  <text x="84" y="470" fill="rgba(255,255,255,0.28)" font-size="12">把犹豫瞬间变成可完成动作</text>
+
+  <text x="483" y="324" fill="rgba(255,138,31,0.9)" font-size="11" font-weight="600" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.12em">02  BUSINESS</text>
+  <text x="483" y="360" fill="#FFFFFF" font-size="18" font-weight="600">用漏斗杠杆拉成交</text>
+  <text x="483" y="400" fill="rgba(255,255,255,0.5)" font-size="13">锚定首交成功为增长定义</text>
+  <text x="483" y="428" fill="rgba(255,255,255,0.5)" font-size="13">注册 - KYC - 入金 - 下单逐层抬升</text>
+  <text x="483" y="470" fill="rgba(255,255,255,0.28)" font-size="12">设计直接对齐平台交易量</text>
+
+  <text x="882" y="324" fill="rgba(255,138,31,0.9)" font-size="11" font-weight="600" font-family="JetBrains Mono, ui-monospace, monospace" letter-spacing="0.12em">03  DESIGN</text>
+  <text x="882" y="360" fill="#FFFFFF" font-size="18" font-weight="600">方法可复用可验收</text>
+  <text x="882" y="400" fill="rgba(255,255,255,0.5)" font-size="13">定量找漏损 / 定性定机制</text>
+  <text x="882" y="428" fill="rgba(255,255,255,0.5)" font-size="13">决策现场干预，转化率闭环</text>
+  <text x="882" y="470" fill="rgba(255,255,255,0.28)" font-size="12">从做界面推进到推指标</text>
+</svg>
