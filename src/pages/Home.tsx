@@ -5,7 +5,7 @@ import '../styles/nav.css'
 import '../styles/home.css'
 
 const LINES = [
-  { text: '清晰，是设计最难的部分。', lead: true },
+  { text: '我是一名有超过10年工作经验的体验设计师。', lead: true },
   { text: '我专注复杂数字产品的体验与结构，', lead: false },
   { text: '让系统逻辑以用户可感知的方式呈现。', lead: false },
 ] as const

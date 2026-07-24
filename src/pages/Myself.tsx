@@ -50,12 +50,6 @@ export function Myself() {
           </div>
           <div className="myself-intro-line myself-intro-meta-wrap">
             <p className="myself-intro-meta myself-intro-text">
-              
-          
-              <a href="tel:18066880020">180 6688 0020</a>
-              <span className="myself-intro-dot" aria-hidden="true">
-                ·
-              </span>
               <a href="mailto:fengzhao@vip.qq.com">fengzhao@vip.qq.com</a>
             </p>
           </div>
