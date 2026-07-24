@@ -13,6 +13,16 @@
   border-color: color-mix(in srgb, var(--gf-acc) 32%, transparent);
 }
 
+/* 项目回顾标题与下方 01 步骤：去掉分割线，收紧间距 */
+.wt-case .gf-reflection:has(+ .gf-section) {
+  padding-bottom: 8px;
+}
+
+.wt-case .gf-reflection + .gf-section {
+  border-top: none;
+  padding-top: 28px;
+}
+
 .wt-case .gf-list li::before {
   box-shadow: 0 0 10px color-mix(in srgb, var(--gf-acc) 45%, transparent);
 }

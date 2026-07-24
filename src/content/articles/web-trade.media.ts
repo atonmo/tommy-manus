@@ -175,4 +175,8 @@ export const webTradeMedia: Record<string, ArticleMediaItem> = {
     alt: '通用交易组件规范',
     caption: 'Visual · Components',
   },
+  shuju: {
+    src: '/articles/web-trade/shuju.svg',
+    alt: '上线效果数据',
+  },
 }
