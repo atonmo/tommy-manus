@@ -27,10 +27,10 @@ export const works: WorkItem[] = [
   {
     id: '2',
     slug: 'perpetuals-lite',
-    title: 'BingX 永续合约轻量版',
+    title: '永续合约轻量版',
     cover: '/work-9.jpg',
     accent: '#b8f53a',
-    start: '2026.06',
+    start: '2026.05',
     end: '2026.07',
     role: '竞品分析 / 交互设计 / 视觉设计',
     description:
@@ -43,7 +43,7 @@ export const works: WorkItem[] = [
     cover: '/work-10.png',
     accent: '#7dd3fc',
     start: '2019.01',
-    end: '2022.06',
+    end: '2022.04',
     role: '主设计师 / 团队管理',
     description:
       '从 0 到 1 定义腾讯会议跨端体验骨架，用研究方法、场景拆解与数据闭环，把产品带到国民级会议工具与腾讯云第一 SaaS。',
@@ -55,8 +55,8 @@ export const works: WorkItem[] = [
     cover: '/work-11.jpg',
     accent: '#0052d9',
     start: '2018.01',
-    end: '2022.06',
-    role: '设计副总监 / 团队管理',
+    end: '2022.04',
+    role: '设计组长 / 团队管理',
     description:
       '统筹政务一线、云控制台、知识平台与设计体系等多条业务线，把团队设计与方法沉淀为可规模化的交付能力。',
   },

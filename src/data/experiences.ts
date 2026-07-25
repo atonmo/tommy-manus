@@ -59,7 +59,7 @@ export const experiences: Experience[] = [
     start: '2010',
     end: '2015',
     position: '高级交互设计师',
-    company: '腾讯电脑管家',
+    company: '腾讯',
     description:
       '负责桌面安全软件（腾讯电脑管家）7.0 全面重构 Redesign，贯穿产品生命周期支持设计与创新；面向项目组制定并推广 UI 设计规范，提升易用性共识与设计效率；深入掌握 PC 端用户习惯与全流程体验设计方法。',
   },
