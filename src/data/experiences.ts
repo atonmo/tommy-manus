@@ -18,8 +18,8 @@ export const experiences: Experience[] = [
   {
     start: '2022',
     end: 'Present',
-    position: '设计专家',
-    company: '某Web3 头部交易平台',
+    position: 'UI负责人',
+    company: '某Web3头部交易平台',
     description:
       '负责交易与资产方向体验设计：围绕高频衍生品开平仓等核心场景，通过信息架构与交互升维交易终端；深度参与全平台核心项目的产品讨论、竞品分析与用户调研，对齐平台目标；将金融逻辑植入设计规范，主导公司级设计标准与组件体系建设，提升落地效率与质量。',
   },
